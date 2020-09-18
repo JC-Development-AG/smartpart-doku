@@ -24,22 +24,98 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 sass:
     sass_dir: assets/css/
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+nav:
+  - title: Willkommen
+    url: /
+  - title: BASIC Referenz
+    url: /basic-referenz.html
+    subnav:
+    - title: Variablen
+      url: /basic-referenz/variablen.html
+    - title: Parameter-Buffer
+      url: /basic-referenz/parameter-stack.html
+    - title: Vergleichsoperatoren
+      url: /basic-referenz/vergleichsoperatoren.html
+    - title: Schleifen
+      url: /basic-referenz/Schleifen.html
+    - title: Verzweigungen
+      url: /basic-referenz/verzweigungen.html
+    - title: Sonstige Kontrollbefehle
+      url: /basic-referenz/sonstige-kontrollbefehle.html
+    - title: Funktionen
+      url: /basic-referenz/funktionen.html
+    - title: Globale Variablen
+      url: /basic-referenz/globale-variablen.html
+  - title: 2D Scripting
+    url: /2d-scripting.html
+    subnav:
+    - title: Polygone
+      url: "/2d-scripting/poly2.html"
+    - title: Pixelbilder
+      url: "/2d-scripting/rect_pict2.html"
+    - title: Grundformen
+      url: "/2d-scripting/grundformen.html"
+    - title: Kurven
+      url: "/2d-scripting/curves.html"
+  - title: 3D Scripting
+    url: "/3d-scripting.html"
+    subnav:
+    - title: Gruppen
+      url: "/3d-scripting/gruppen.html"
+    - title: Schnittoperationen
+      url: "/3d-scripting/Schnittoperationen.html"
+    - title: Oberflächen und Körper aus Polygonen
+      url: "/3d-scripting/oberflaechen-aus-polygonen.html"
+    - title: Flächen und Linien
+      url: "/3d-scripting/flaechen-und-linien.html"
+    - title: Einfache Volumenkörper
+      url: "/3d-scripting/einfache-volumenkoerper.html"
+    - title: Prismen
+      url: "/3d-scripting/prismen.html"
+  - title: Bewehrung
+    url: "/bewehrung.html"
+    subnav:
+    - title: Biegeform
+      url: "/bewehrung/biegeform.html"
+    - title: Verlegung
+      url: "/bewehrung/verlegung.html"
+  - title: Transformationen
+    url: "/transformationen.html"
+  - title: Parameter
+    url: "/parameter.html"
+  - title: Handles
+    url: "/handles.html"
+  - title: Definitionen
+    url: "/definitionen.html"
+    subnav:
+    - title: PATTER_LINE - Musterlinien
+      url: "/definitionen/patter_line.html"
+    - title: HATCHING - Schraffuren
+      url: "/definitionen/hatching.html"
+    - title: FILL - Füllfarbe
+      url: "/definitionen/fill.html"
+    - title: TEXTURE
+      url: "/definitionen/texture.html"
+    - title: FOIL - Folien
+      url: "/definitionen/foil.html"
+    - title: MATERIAL
+      url: "/definitionen/material.html"
+    - title: PATTERN - Musterflächen
+      url: "/definitionen/pattern.html"
+    - title: FACE_STYLE
+      url: "/definitionen/face_style.html"
+    - title: STYLE - Textstil
+      url: "/definitionen/style.html"
+    - title: BITMAP - Pixelfläche
+      url: "/definitionen/bitmap.html"
+  - title: Objekteigenschaften
+    url: "/objekteigenschaften.html"
+  - title: Statuscodes
+    url: "/statuscodes.html"
+  - title: Eingabepalette
+    url: "/palette.html"
+  - title: Ressourcen
+    url: "/ressourcen.html"
+  - title: Dateibefehle
+    url: "/dateibefehle.html"
+
