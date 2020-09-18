@@ -1,0 +1,70 @@
+---
+layout: default
+title: Objekteigenschaften
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Objekteigenschaften</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p>
+Die Eigenschaften eines Objekts (Layer, Farbe, Strichstärke, ...) kann durch die hier folgenden Direktiven gesteuert werden. Den Objekten wird immer der aktuell per Direktive gesetzte Wert zugewiesen. Diese Einstellung bleibt erhalten bis sie durch eine weitere Direktive geändert wird.</p>
+<h2>
+<a name="TOC-COLOR"></a>COLOR</h2>
+<p><code>COLOR id</code> bestimmt die Objektfarbe</p>
+<p>
+<code>id: -1</code> oder <code>CURR</code> die aktuelle Allplan-Farbe wird benutzt, <code>-2</code> oder <code>BY_LAYER</code>, die Farbe des Layers wird benutzt, die Werte von <code>0</code> bis <code>255</code> entsprechen dem Allplan Farbenindex.
+</p>
+<h2>
+<a name="TOC-PEN"></a>PEN</h2>
+<p><code>PEN n</code> bestimmt die Linienstärke
+</p>
+<p>
+<code>id: -1</code> oder <code>CURR</code> die aktuelle Allplan-Linienstärke wird benutzt
+<code>-2</code> oder <code>BY_LAYER</code>, die Linienstärke des Layers wird benutzt, die Werte von <code>0</code> bis <code>255</code> entsprechen dem Allplanindex.
+</p>
+<h2>
+<a name="TOC-STROKE"></a>STROKE</h2>
+<p><code>STROKE id</code> bestimmt den Linientyp (strichliert, duchgezogen, ...)
+</p>
+<p>
+<code>id: -1</code> oder <code>CURR</code> der aktuelle Allplan-Linientyp wird benutzt,<code>-2</code> oder <code>BY_LAYER</code>, der Linientyp des Layers wird benutzt, die Werte von <code>0</code> bis <code>255</code> entsprechen dem Allplanindex.
+</p>
+<h2>
+<a name="TOC-LAYER"></a>LAYER</h2>
+<p><code>LAYER id</code> oder <code>LAYER "Kurzname"</code> setzt den aktuellen Layer.</p>
+<p>
+<code>id: </code><code>CURR</code> setzt den aktuell in Allplan verwendeten Layer, <code>STANDARD </code>setzt den Standard-Layer, die Werte von <code>0</code> bis <code>65565</code> entsprechen dem Allplan-Layerindex.
+</p>
+<p>
+<code>"Kurzname": </code>setzt den Layer anhand des Layerkurznames z.B. <code>LAYER "KO_HK"</code> für den Layer Architektur/Konstruktion/Hilfskonstruktion
+</p>
+<h2>
+<a name="TOC-AUX_MODE---Konstruktionslinien"></a>AUX_MODE - Konstruktionslinien</h2>
+<p><code>AUX_MODE 1:</code> startet den Konstruktionslinienmodus, alle danach erzeugten Elemente werden als Konstruktionslinien gezeichnet.<br>
+<code>AUX_MODE 0:</code> beendet den Konstruktionslinienmodus.
+</p>
+<h2>
+<a name="TOC-DRAW_SEQ---2D-Zeichenpriorit-t"></a>DRAW_SEQ - 2D Zeichenpriorität</h2>
+<p><code>DRAW_SEQ num</code> bestimmt die Darstellungsreihenfolge von 2D Elementen, Elemente mit höhere Priorität, verdecken Objekte mit niedrigerer Priorität.</p>
+<p>
+<code>num:</code> Priorität (1..50), Standard = -1, verwende aktuelle Einstellung
+</p>
+<p>Voreinstellung:</p>
+<ul>
+<li>25 Text</li>
+<li>15 normale Elemente wie Linien und Kurven</li>
+<li>12 Schraffuren, Muster</li>
+<li>11 Flächenstile</li>
+<li>10 Bitmaps</li>
+<li>8 Füllflächen</li>
+</ul>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

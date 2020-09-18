@@ -1,0 +1,158 @@
+---
+layout: default
+title: Parameter
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Parameter</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p>
+Parameter sind Werte die das Aussehen und Verhalten von SmartParts beeinflussen, daher auch die Bezeichnung "parametrisierte Bauteile/Objekte". Die 3 Parameter <code>ref_x</code>, <code>ref_y</code> und <code>ref_z</code> sind vordefiniert und in allen SmartParts vorhanden. Jeder Parameter ist durch einen Namen definiert der im gesamten Script einmalig sein muss. Dieser Name kann im Script als ganz normale Variable verwendet werden. Parameternamen müssen wie Variablennamen mit einem Buchstaben beginnen und dürfen weiters nur Buchstaben, Ziffern und als einziges Sonderzeichen das Zeichen "_" (Underline) enthalten. Außerdem darf der Name des SmartPart-Scripts nicht als Parametername verwendet werden.
+</p>
+<h2>
+<a name="TOC-Parametertypen"></a>Parametertypen</h2>
+<ul>
+<li>
+<code>Bool:</code> kann entweder TRUE (wahr) oder FALSE (falsch) sein, es gilt alle Werte ungleich <code>0</code> werden als TRUE interpretiert.</li>
+<li>
+<code>Integer:</code> Ganzzahl</li>
+<li>
+<code>Decimal:</code> Fließkommazahl</li>
+<li>
+<code>String:</code> Text</li>
+<li>
+<code>Length:</code> eine Länge, immer in Metern</li>
+<li>
+<code>Angle:</code> Winkel, immer in Grad (Kreis = 360°)</li>
+</ul>
+<h2>
+<a name="TOC-Spezialparameter"></a>Spezialparameter</h2>
+<ul>
+<li>
+<code>Color:</code> Farbwert (Ganzzahl)</li>
+<li>
+<code>Pen:</code> Stift (Ganzzahl)</li>
+<li>
+<code>Stroke:</code> Linientyp (Ganzzahl)</li>
+<li>
+<code>Layer:</code> (Ganzzahl)</li>
+<li>
+<code>Surface:</code> Oberflächenmaterial (Text)</li>
+<li>
+<code>Pattern:</code> Muster (Ganzzahl)</li>
+<li>
+<code>Hatching:</code> Schraffur (Ganzzahl)</li>
+<li>
+<code>Facestyle:</code> Flächenstil (Stilfläche) (Ganzzahl)</li>
+</ul>
+<h2>
+<a name="TOC-Allplan-Attribute-mit-SmartParts-verkn-pfen"></a>Allplan Attribute mit SmartParts verknüpfen</h2>
+<p>Man kann Allplan Attribute mit SmartPart Parametern verknüpfen, indem man dem Parameter bereits beim Erstellen ein Allplan Attribute zuweist oder später in der Dialogseite  "Parameter" in der Spalte "Attribut" ein Allpan Attribut auswählt. Aber erst wenn die Option "Alle Attribute" angewählt ist, werden alle Allplan Attribute wählbar, ansonsten sind nur wenige Allplan Attribute und alle benutzerdefinierten Attribute wählbar.
+</p>
+<p>
+Der Parameter enthält den Wert des Allplan Attributes. Bei der Modifikation des Parameters <b>im Parameter Dialog</b>, gilt anscheinend nicht für das Zuweisen eines neuen Wertes während des Progrmmablaufs, wird der neue Wert an das Allplan Attribute weitergegeben und ebenso wird eine Änderung des Allplan Attributes an den Parameter weitergereicht.
+</p>
+<h2>
+<a name="TOC-VALUES:-Wertebereiche"></a>VALUES: Wertebereiche</h2>
+<p>Mit dem Befehl <code>VALUES</code> kann man beliebige gültige Wertebereiche für benannte Parameter definieren. Einem Parameter mit einem definierten Wertebereich kann man nur mehr Werte aus diesem Bereich zuweisen, außer es wird das Schüsselwort <code>CUSTOM</code> angegeben. Der <code>VALUES</code> Befehl muss im Parameter-Script stehen.
+</p>
+<p><code>VALUES "name" value_definition<sub>1</sub> [, ..., value_definition<sub>n</sub>]</code>
+</p>
+<div>
+<code>"name":</code> Name des Parameters, dessen Wertebreich definiert werden soll.</div>
+<div>
+<code>value_definition<sub>i</sub>:</code> es gibt folgende Definitionsmöglichkeiten:</div>
+<div>
+<ul>
+<li>
+<code>expr:</code> eine Zahlenwert oder ein Text</li>
+<li>
+<code>CUSTOM:</code> ein Schlüsselwort, mit der Angabe von <code>CUSTOM</code> kann dem Parameter ein beliebiger Wert zugewiesen werden.</li>
+<li>
+<code>RANGE "["|"(" [lower_limit], [upper_limit] "]"|")" [STEP step_start_value, step_value]</code>, Bereichdefinition mit optionaler Schrittweite</li>
+<ul>
+<li>Grenzsymbole: </li>
+<ul>
+<li>
+<code>"["</code> = Werte größer oder gleich <span style="color:rgb(204,255,102);font-family:monospace">lower_limit</span>
+</li>
+<li>
+<code>"("</code> = Werte größer als <span style="color:rgb(204,255,102);font-family:monospace">lower_limit</span> </li>
+<li>
+<code>"]"</code> = Werte kleiner oder gleich <span style="color:rgb(204,255,102);font-family:monospace">upper_limit</span>
+</li>
+<li>
+<code>")"</code> = Werte kleiner als <span style="color:rgb(204,255,102);font-family:monospace">upper_limit</span>
+</li>
+</ul>
+<li>
+<code>lower_limit:</code> unterer Grenzwert abhängig vom Grenzsymbol</li>
+<li>
+<code>upper_limit:</code> oberer Grenzwert abhängig vom Grenzsymbol</li>
+<li>
+<code>step_start_value:</code> Startwert des der Schrittweite</li>
+<li>
+<code>step_value:</code> die Schrittweite</li>
+</ul>
+</ul>
+<div><b>Beispiele aus der SmartPart Dokumentation:</b></div>
+<div><b><br>
+</b></div>
+<div>
+<code>VALUES "MyParam" 1, 10, RANGE [10, 20), 25, RANGE (, 50] STEP 30, 5, CUSTOM</code>
+<ul>
+<li>1 = 1. Ausdruck, direkte Wertangabe</li>
+<li>10 = 2. Ausdruck, direkte Wertangabe</li>
+<li>10 - 20 ohne 20 = 3. Ausdruck: <span style="color:rgb(204,255,102);font-family:monospace">RANGE [10, 20)</span>, ob nur Ganzahlen oder Fließkommazahlen verwendet werden können hängt vom Parametertyp ab.</li>
+<li><span style="color:rgb(204,255,102);font-family:monospace"><span style="color:rgb(206,219,223);font-family:Helvetica,Arial,Verdana,sans-serif">25 = 4. Ausdruck</span><span style="color:rgb(206,219,223);font-family:Helvetica,Arial,Verdana,sans-serif">, direkte Wertangabe</span></span></li>
+<li>
+<span style="color:rgb(204,255,102);font-family:monospace"><span style="color:rgb(206,219,223);font-family:Helvetica,Arial,Verdana,sans-serif">30, 35, 40, 45, 50 = 5. Ausdruck: </span></span><span style="color:rgb(204,255,102);font-family:monospace">RANGE (, 50] STEP 30, 5</span>
+</li>
+<li>6. Ausdruck, jeder andere beliebige Wert der dem Parametertyp entspricht</li>
+</ul>
+<div><code>VALUES "MyParam" "Office", "Standard", "Private"</code></div>
+<div>
+<br>
+</div>
+<p>Nur die angegeben Werte <code>"Office", "Standard", "Private"</code> sind gültig.
+</p>
+<h2>
+<a name="TOC-PARAMETERS"></a>PARAMETERS</h2>
+<ul>
+<li>Als allein stehender Befehl: Weist einem Parameter in der Parameterliste einen Wert zu. Dieser bleibt anders als bei der Zuweisung <code>name = wert</code> auch nach Abarbeitung des Skriptes erhalten. Er wird nämlich in die 
+Parameterliste des SmartParts übernommen. Vorherige und 
+manuelle Eingaben werden damit überschrieben. Es können auch komplette Arrays mit einer Anweisung übergeben werden. 
+Ist der Zielparameter kein Array, wird nur der erste Wert der ersten 
+Zeile/Spalte übergeben. Der Befehl <code>PARAMETERS</code> sollte <b>nur im Parameter-Script</b> verwendet werden!
+</li>
+<li>Als einleitendes Schlüsselwort innerhalb eines anderen Befehls: z.B. der <code>CALL</code> Befehl ruft andere SmartParts als Unterprogramme auf, denen in Folge des Schlüsselwortes <code>PARAMETERS</code> Werte übergeben werden können.
+</li>
+</ul>
+<p><code>PARAMETERS name<sub>1</sub> = value<sub>1</sub> [, ..., name<sub>n</sub> = value<sub>n</sub>]</code></p>
+<p>
+<code>name<sub>i</sub>:</code> Parametername<br>
+<code>value<sub>i</sub>:</code> neuer Parameterwert<br>
+</p>
+<h2>
+<a name="TOC-HIDEPARAMETER"></a>HIDEPARAMETER</h2>
+<p><code>HIDEPARAMETER name<sub>1</sub> [, ..., name<sub>n</sub>]</code> blendet den oder die angegeben benannten Parameter im Einstellungsdialog des SmartParts aus.
+</p>
+<h2>
+<a name="TOC-HIDE"></a>HIDE</h2>
+<p><code>HIDE</code> ist ein Synonym für <code>HIDEPARAMETER</code></p>
+<h2>
+<a name="TOC-LOCK"></a>LOCK</h2>
+<p><code>LOCK name<sub>1</sub> [, ..., name<sub>n</sub>]</code> deaktiviert die angegeben Parameter im Einstellungsdialog für die Eingabe sie bleiben aber im Dialog sichtbar. Die Parameter können aber weiterhin im Skript verändert werden.
+</p>
+</div>
+</div>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

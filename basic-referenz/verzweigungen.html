@@ -1,0 +1,168 @@
+---
+layout: default
+title: Verzweigungen
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Verzweigungen</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>Unter Verzweigungen versteht man die Unterbrechnung des linearen Programflusses und das Fortsetzen der Programausführung an einer anderen Stelle. Es gibt die unbedingten Verzweigungen <code>GOTO</code> und <code>GOSUB</code>, und die bedingte Verzweigung <code>IF</code>.
+<div>
+<br>
+</div>
+<h2>
+<a name="TOC-SPRUNGMARKE-LABEL-"></a>SPRUNGMARKE (LABEL)</h2>
+<div>Sprungmarken werden entweder als Zahl oder als "String" gefolgt von einem Doppelpunkt angegeben.</div>
+<div>
+<br>
+</div>
+<div>
+<code>1964:</code><br>
+<code>...</code><br>
+<code>"Hell":</code><br>
+<code>...</code><br>
+<code>GOTO 1964</code><br>
+<code>...</code><br>
+<code>GOTO "Hell"</code>
+</div>
+<h2>
+<a name="TOC-GOTO"></a>GOTO</h2>
+<div><code>GOTO "label"</code></div>
+<div>
+<br>
+</div>
+<div>Springt zum angegeben Sprungziel <code>"label"</code>, d.h. die Programmausführung wird nach der Sprungmarke fortgesetzt, wobei diese Sprungziel auch als Variable oder Berechnungsausdruck angegeben werden kann, dadurch ist es möglich das Sprungziel zu berechnen:</div>
+<div>
+<br>
+</div>
+<div><code>choice = 3</code></div>
+<div><code>GOTO 100+choice</code></div>
+<div><code>END</code></div>
+<div><code>101:</code></div>
+<div><code>PRINT "ZIEL 101"</code></div>
+<div><code>END</code></div>
+<div><code>102:</code></div>
+<div>
+<code>PRINT </code><code>"ZIEL 102"</code>
+</div>
+<div><code>END</code></div>
+<div><code>103:</code></div>
+<div>
+<code>PRINT </code><code>"ZIEL 103"</code>
+</div>
+<div><code>END</code></div>
+<p><b>ACHTUNG!</b> Das Sprungziel wird nur einmalig berechnet und dieses Ergebnis bis zum Ende des Skripts gespeichert, d.h. ein innerhalb des Skripts veränderliches Sprungziel ist derzeit nicht möglich (gilt auch für <code>GOSUB</code>).</p>
+<p><code><br>
+FOR i = 1 TO 4 <br>
+   GOSUB i * 100 ! wird nur beim 1. Aufruf berechnet (Ergebnis=100) und bis zum Ende des Skripts gespeichert<br>
+NEXT i <br>END <br>
+<br>
+100: ! wird 4x aufgerufen<br>
+TEXT2 0 , 1 , "i=1" <br>
+RETURN <br>
+<br>
+200: ! wird nie aufgerufen<br>
+TEXT2 0 , 2 , "i=2" <br>
+RETURN <br>
+<br>
+300: ! wird nie aufgerufen<br>
+TEXT2 0 , 3 , "i=3" <br>
+RETURN <br>
+<br>
+400: ! wird nie aufgerufen<br>
+TEXT2 0 , 4 , "i=4" <br>
+RETURN</code></p>
+<p>Dieser Codeabschnitt ruft nicht wie erwartet, die Subroutinen <code>100</code>, <code>200</code>, <code>300</code> und <code>400</code> auf, sondern, da das Sprungziel nur einmal berechnet wird, 4x die Subroutine <code>100</code>.
+</p>
+<h2>
+<a name="TOC-GOSUB"></a>GOSUB</h2>
+<p><code>GOSUB "label"</code></p>
+<p>Springt zum angegebene Sprungziel "<code>label"</code>, legt aber den Absprungpunkt auf den <a href="http://de.wikipedia.org/wiki/Stapelspeicher" target="_blank">Returnstack</a>. Mit <code>RETURN</code> kann man an die aufrufende Stelle zurückspringen. Durch die Verwendung eines Stacks können <code>GOSUB</code>-Befehle verschachtelt werden. Wie bei <code>GOTO</code> ist es auch bei <code>GOSUB</code> möglich das Sprungziel als Variable oder Berechnungsausdruck anzugeben.</p>
+<div>
+<br>
+</div>
+<div>
+<div><code>profil = "I100"</code></div>
+<div><code>GOSUB profil</code></div>
+<div><code>END</code></div>
+<div><code><br>
+</code></div>
+<div><code>"I100":</code></div>
+<div><code>PRINT "PROFIL I100"</code></div>
+<div><code>RETURN</code></div>
+<div><code>"I110":</code></div>
+<div>
+<div><code>PRINT "PROFIL I110"</code></div>
+<div><code>RETURN</code></div>
+</div>
+</div>
+<div><code>"I120":</code></div>
+<div><code>PRINT "PROFIL I120"</code></div>
+<div><code>RETURN</code></div>
+<h2>
+<a name="TOC-RETURN"></a>RETURN</h2>
+<div>Nimmt die oberste Rücksprungadresse vom Returnstack und sprint an den Aufrufpunkt zurück. Ab hier ist der Absprungpunkt des vorangegangenen GOSUB-Befehls die oberste Adresse auf dem Returnstack.</div>
+<div>
+<br>
+</div>
+<div><code>GOSUB "Setup"</code></div>
+<div><code>GOSUB "Main"</code></div>
+<div><code>GOSUB "CleanUp"</code></div>
+<div><code>END</code></div>
+<div>
+<br>
+</div>
+<div><code>"Setup":</code></div>
+<div><code>...</code></div>
+<div><code>RETURN</code></div>
+<div><code><br>
+</code></div>
+<div><code>"Main":</code></div>
+<div><code>...</code></div>
+<div><code>GOSUB "SubRoutine"</code></div>
+<div><code>...</code></div>
+<div><code>RETURN</code></div>
+<div><code><br>
+</code></div>
+<div><code>"CleanUp":</code></div>
+<div><code>...</code></div>
+<div><code>RETURN</code></div>
+<div><code><br>
+</code></div>
+<div><code>"SubRoutine":</code></div>
+<div><code>...</code></div>
+<div><code>RETURN</code></div>
+<h2>
+<a name="TOC-IF-...-THEN-...-ELSE-...-ENDIF"></a>IF ... THEN ... ELSE ... ENDIF</h2>
+<div>Die Programausführung ist abhängig von <code>condition</code>, ist <code>condition</code> wahr wird der <code>THEN</code>-Block aufgeführt, sonst der <code>ELSE</code>-Block.</div>
+<div>
+<br>
+</div>
+<div><code>IF condition THEN</code></div>
+<div><code>...</code></div>
+<div><code>ELSE</code></div>
+<div><code>...</code></div>
+<div><code>ENDIF</code></div>
+<div><code><br>
+</code></div>
+<div><code><span style="color:rgb(206,219,223);font-family:Helvetica,Arial,Verdana,sans-serif">Für das bedingte  Verzweigen im Programmablauf gibt es 2 Spezialfälle:</span></code></div>
+<div><code><span style="color:rgb(206,219,223);font-family:Helvetica,Arial,Verdana,sans-serif"><br>
+</span></code></div>
+<div><span style="color:rgb(206,219,223);font-family:Helvetica,Arial,Verdana,sans-serif"><code>IF condition GOTO target</code></span></div>
+<div>
+<br>
+</div>
+<div><span style="color:rgb(206,219,223);font-family:Helvetica,Arial,Verdana,sans-serif"><code>IF condition GOSUB target</code></span></div>
+<h2>
+<a name="TOC-Vergleichsoperatoren"></a>Vergleichsoperatoren</h2>
+<div>siehe <a href="vergleichsoperatoren.html">Vergleichsoperatoren</a>
+</div>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

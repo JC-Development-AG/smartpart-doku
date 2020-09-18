@@ -1,0 +1,58 @@
+---
+layout: default
+title: Sonstige Kontrollbefehle
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Sonstige Kontrollbefehle</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<h2>
+<a name="TOC-END"></a>END</h2>
+<div>Mit <code>END [expr1, ..., exprn]</code> wird das aktuelle Script beendet und verlassen, die eventuell angegeben Argumente werden an das aufrufende Script zurück gegeben.</div>
+<h2>
+<a name="TOC-EXIT"></a>EXIT</h2>
+<div>
+<code>EXIT</code> ist ein Synonym für <code>END</code>.</div>
+<h2>
+<a name="TOC-PRINT"></a>PRINT</h2>
+<div>
+<code>PRINT expr1 [ , ..., exprn]</code> funktionert nur im SmatPart-Editor, öffnet ein Dialogfenster und gibt die angegebene Argumente aus. Hilfreich bei der Fehlersuche.</div>
+<h2>
+<a name="TOC-BREAKPOINT"></a>BREAKPOINT</h2>
+<div>
+<code>BREAKPOINT expr</code> funktionert nur im SmatPart-Editor und unterbricht die Scriptausführung, wenn der angegebene Ausdruck "wahr" ist.</div>
+<h2>
+<a name="TOC-CALL"></a>CALL</h2>
+<p>Ruft ein weiteres SmartPart-Objekt, als Unterprogramm auf. Dem Unterprogramm können beim Aufruf Parameter übergeben werden.</p>
+<p>
+</p>
+<p><code>CALL subscript_name [,parameter_list]</code></p>
+<p><code>CALL subscript_name PARAMETERS [name1=value1 , ... namen=valuen]</code></p>
+<p><code>CALL subscript_name PARAMETERS ALL</code></p>
+<p><b>Folgende Randbedingungen sind zu beachten:</b></p>
+<ul>
+<li>Das aufzurufenden SmartPart-Objekt muss sich in einem der folgenden Ordner befinden, die Verwendung von Unterordnern ist möglich, diese müssen aber vorangestellt werden ( z.B. "test\mySmartPart" für die Datei "&lt;STD&gt;\test\mySmartPart.smt"). Die Suchreihenfolge entspricht der Reihenfolge in der Liste: 
+<br>
+<br>
+<ul>
+<li>"PRJ\&lt;Projektname&gt;\SmartParts"</li>
+<li>"STD\SmartParts"</li>
+<li>"ETC\SmartParts"</li>
+</ul>
+<p>Wird das SmartPart-Objekt im Ordner "STD\SmartParts" oder "ETC\SmartParts" gefunden, wird es nach "PRJ\&lt;Projektname&gt;\SmartParts" kopiert.</p>
+</li>
+<li>Der Dateiname muss ohne Dateiendung (".smt") angegeben werden.</li>
+<li>Das Unterprogramm startet mit dem aktuellen lokalen Koordinatensystem des aufrufenden Programms</li>
+<li>Alle aktuellen Einstellungen von Direktiven (MODEL, RESOL, MATERIAL, ...) werden übernommen</li>
+<li>Transformationen das Koordiantensystems und Direktiven im Unterprogramm wirken sich nur auf dieses aus</li>
+</ul>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

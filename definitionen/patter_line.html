@@ -1,0 +1,37 @@
+---
+layout: default
+title: PATTER_LINE - Musterlinien
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">PATTER_LINE - Musterlinien</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p><code>
+DEFINE PATTERN_LINE name, id [, width, height, align, type, ref_line, mirror, lock_corner, scale_dependent]
+</code></p>
+<h3>
+<a name="TOC-Parameter"></a>Parameter</h3>
+<p>
+<code>name:</code> Name der Musterlinie<br>
+<code>id:</code> Allplannummer der Basismusterlinie<br>
+<code>width:</code> Breite des Musters (Standard: 0.1)<br>
+<code>height:</code> Höhe des Musters (Standard: 0.1)<br>
+<code>align:</code> Ausrichtung 0|1|2 = links|mittig|rechts<br>
+<code>type:</code> Verschneidung 0|1|2|3 = keine|miter|join|seamless <span style="color:rgb(255,0,0);font-family:monospace">???</span><br>
+<code>ref_line:</code> Darstellung der Referenzlinie 0|1 = aus|ein
+<code>mirror:</code> Muster ist 0|1 = nicht gespiegelt|gespiegelt<br>
+<code>lock_corner:</code> corner locking of the pattern 0|1 = not locked|locked <code><font color="#ff0000">???</font></code><br>
+<code>scale_dependent:</code> 0|1 = maßstabs<b>un</b>abhängige|maßstabsabhängige Darstellung<br>
+</p>
+<p> Mit <code>PATTERN_LINE name</code> wird die aktuelle Musterlinie gesetzt.</p>
+<p> Mit <code>PATTERN_LINE -1</code> wird <b>keine</b> Musterlinie gesetzt.</p>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

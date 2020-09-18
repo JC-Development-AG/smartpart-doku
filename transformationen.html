@@ -1,0 +1,52 @@
+---
+layout: default
+title: Transformationen
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Transformationen</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p>Fast alle formgebenden Befehle erstellen die gewünschte Geometrie in einer fest vorgegebenen Beziehung zum aktuellen Koodinatensystem, z.B. kann eine Kugel nur im Koordinatenursprung erstellt werden, um eine Kugel nun an einem beliebigen Ort zu Erstellen muss das Koordinatensystem zu diesem Punkt verschoben werden (<code>TRANS x, y, z</code>). Transformationen werden nacheinander ausgeführt und auf einem <a href="http://de.wikipedia.org/wiki/Stapelspeicher" target="_blank">Stack</a> gespeichert, sie können einzeln oder als Block zurückgesetzt werden. 2D und 3D Befehle arbeiten mit getrennten Koordinatensystemen und -stacks und beeinflussen sich nicht gegenseitig.</p>
+<h2>
+<a name="TOC-2D-Transformationen"></a>2D Transformationen</h2>
+<p><code>TRANS2 x, y:</code> verschiebt das Koordinatensystem</p>
+<p><code>ROT2 alpha:</code> rotiert das Koordinatensystem um <code>alpha</code> Grad.</p>
+<p><code>SCALE2 x, y:</code> skaliert das Koordinatensystem, die Koordinaten der nachfolgenden Befehle werden mit dem aktuellen Skalierungsfaktor multipliziert, negative Werte führen zu gespiegelten Koordinaten. z.B. <code>SCALE -1, 1: P(2, 0) -&gt; P'(-2, 0)</code>, Spiegelung um die Y-Achse</p>
+<h2>
+<a name="TOC-3D-Transformationen"></a>3D Transformationen</h2>
+<p><code>TRANS x, y, z:</code> verschiebt das Koordinatensystem entlang der X-, Y- und Z-Achse.</p>
+<p><code>TRANSX x:</code> verschiebt das Koordinatensystem entlang der X-Achse.</p>
+<p><code>TRANSY y:</code> verschiebt das Koordinatensystem entlang der Y-Achse.</p>
+<p><code>TRANSZ z:</code> verschiebt das Koordinatensystem entlang der Z-Achse.</p>
+<p><code>ROT x, y, z, alpha:</code> freie Rotation um <code>alpha</code> Grad, Rotationsachse ist der Vektor <code>(x, y, z)</code>.</p>
+<p><code>ROTX alpha:</code> rotiere das Koordinatensystem <code>alpha</code> Grad um die X-Achse.</p>
+<p><code>ROTY alpha:</code> rotiere das Koordinatensystem <code>alpha</code> Grad um die Y-Achse.</p>
+<p><code>ROTZ alpha:</code> rotiere das Koordinatensystem <code>alpha</code> Grad um die Z-Achse.</p>
+<p><code>SCALE x, y, z:</code> skaliert die X-, Y- und Z-Koordinate, Werte &lt; 1 stauchen das Koordinatensystem, Werte &gt; 1 strecken das Koordinatensystem, negative Werte ergeben gespiegelte Koordinaten.</p>
+<p><code>SCALEX x:</code> skaliert nur die X-Koordinate.</p>
+<p><code>SCALEY y:</code> skaliert nur die Y-Koordinate.</p>
+<p><code>SCALEZ z:</code> skaliert nur die Z-Koordinate.</p>
+<h2>
+<a name="TOC-Transformations-Stack"></a>Transformations-Stack</h2>
+<p> Soll das Koordinatensystem durch eine Transformation verändert werden, 
+landet das bisher unveränderte Koordinatensystem auf dem 
+<a href="http://de.wikipedia.org/wiki/Stapelspeicher" target="_blank">Stack</a>, 
+erst danach wird die Transformation des Koordinatensystems durchgeführt. 
+Dadurch kann das Koordinatensystem in einen vorangegangenen Zustand 
+zurückgesetzt werden.</p>
+<p><code>RESTORE n [, s]:</code> Geht <code>n</code> Schritte zurück, 
+wenn <code>s</code> angegeben wird beginnt das Zurücksetzen mit 
+<code>s</code>-ten gespeicherten Zustand.
+</p>
+<p><code>RESTORE ALL:</code> setzt alle Transformationen zurück</p>
+<p><code>NUM_TR()</code><code>:</code> liefert die Anzahl der derzeit gepeicherten Zustände.</p>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

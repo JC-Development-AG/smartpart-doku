@@ -1,0 +1,54 @@
+---
+layout: default
+title: Verlegung
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Verlegung</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<h2>
+<a name="TOC-REINF_PLACE"></a>REINF_PLACE</h2>
+<p>Verlegt die aktuelle Biegeform einmalig an der aktuellen <code>0, 0, 0</code> Position des lokalen Koordinatensystems.</p>
+<div><code>REINF_PLACE rot_x, rot_y, rot_z</code></div>
+<p>
+<code>rot_x, rot_y, rot_z:</code> Rotationswinkel der Biegeform<br>
+</p>
+<h2>
+<a name="TOC-REINF_PLACE_L"></a>REINF_PLACE_L</h2>
+<p>Verlegt die aktuelle Biegeform entlang einer Verlegegeraden. Es kann sowohl der Stababstand, als auch die Stabanzahl angegeben werden, ist einer der beiden Werte <code>0</code>, wird der Stab über die gesamte Länge verlegt. Die Rotation bezieht sich nur auf den Stab, die Verlegegerade verläuft immer von <code>(0, 0, 0)</code> in der X-Achse.</p>
+<div><code>REINF_PLACE_L length, rot_x, rot_y, rot_z, spacing, align, offset, rebar_count</code></div>
+<p>
+<code>length:</code> Länge des Verlegebereichs. Der Verlegebereich beginnt im Koordinatenursprung des aktuellen lokalen Koordinatensystems und verläuft in der X-Richtung.<br>
+<code>rot_x, rot_y, rot_z:</code> Rotationswinkel der Biegeform<br>
+<code>spacing:</code> Stababstand, <code>rebar_count=0</code> setzen, für eine Verlegung über die gesamte Länge, die zugehörige Stabanzahl wird automatisch berechnet.<br>
+<code>align:</code> Ausrichtung der Verlegung <code>1</code>=Start, <code>2</code>=Mitte, <code>3</code>=Ende<br>
+<code>offset:</code> Abstand zum Verlegestart (durch <code>align</code> definiert)<br>
+<code>rebar_count:</code> Anzahl der zu verlegenden Stäbe, <code>spacing=0</code> um die angegeben Anzahl an Stäben über die gesamte Länge zu verteilen, der Stababstand ergibt sich automatisch.<br>
+</p>
+<h2>
+<a name="TOC-REINF_PLACE_C"></a>REINF_PLACE_C</h2>
+<p>Offiziell nicht dokumentiert, daher Verwendung auf eigene Gefahr, es könnte sich die Aufrufsyntax ändern, oder der gesamte Befehl entfernt werden.</p>
+<p>Verlegt die aktuelle Biegeform entlang eines Kreisbogens. Es werden über den gesamten Verlegebereich Stäbe mit einem Deltawinkel <code>delta_angle</code> zueinander verlegt. Ist der Verlegebereich 0° (<code>angle=0</code>), werden <code>rebar_count</code> Stäbe mit einem Deltawinkel <code>delta_angle</code> verlegt. Bei meinen Versuchen hat eine Verlegung aber nur mit der Biegeform <code>REINF_BAR_L</code> funktioniert.</p>
+<div><code>REINF_PLACE_C radius, angle, rot_x, rot_y, rot_z, align, start_angle, rebar_count, delta_angle</code></div>
+<p>
+<code>radius:</code> Radius der Verlegebogens.<br>
+<code>angle:</code> Winkel beschreibt die "Länge" des Verlegebereichs, wenn dieser Winkel <code>0</code> ist, werden <code>rebar_count</code> Stäbe verlegt.<br>
+<code>rot_x, rot_y, rot_z:</code> Rotationswinkel der Biegeform.<br>
+<code>align:</code> Ausrichtung der Verlegung <code>1</code>=Start, <code>2</code>=Mitte, <code>3</code>=Ende<br>
+<code>start_angle:</code> Startwinkel des Verlegebogens, gemessen zur X-Achse.<br>
+<code>rebar_count:</code> Anzahl der zu verlegenden Stäbe, wird nur berücksichtigt wenn <code>angle=0</code> ist.<br>
+<code>delta_angle:</code> Deltawinkel zwischen den einzelnen Stäben.<br>
+</p>
+<h2>
+<a name="TOC-REINF_PLACE_P"></a>REINF_PLACE_P</h2>
+<p>P wie polygonal? Wird noch(?) nicht unterstützt, scheint aber reserviert zu sein, da sich die angezeigte Fehlermeldung, von Fehlermeldungen von falsch geschriebenen Befehlen unterscheidet.</p>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

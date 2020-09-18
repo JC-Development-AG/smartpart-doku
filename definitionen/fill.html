@@ -1,0 +1,77 @@
+---
+layout: default
+title: FILL - Füllfarbe
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">FILL - Füllfarbe</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p> Füllfarben werden von gefüllten 2D Polygonen und 2D Kurven verwendet. </p>
+<h2>
+<a name="TOC-Einfache-F-llfarbe"></a>Einfache Füllfarbe</h2>
+<p><code>DEFINE FILL name, 0, color_id [, alpha1]</code>
+</p>
+<h2>
+<a name="TOC-Einfacher-Farbverlauf-mit-Schattierung"></a>Einfacher Farbverlauf mit Schattierung</h2>
+<p><code>
+DEFINE FILL name, 1, <br>
+red1, green1, blue1, alpha1<br>
+[, shading ,variant, angle]<br>
+</code></p>
+<h2>
+<a name="TOC-Farbverlauf-mit-zwei-Farben-und-Schattierung"></a>Farbverlauf mit zwei Farben und Schattierung</h2>
+<p><code>
+DEFINE FILL name, 2, <br>
+red1, green1, blue1, alpha1, <br>
+shading ,variant, angle, <br>
+red2, green2, blue2, alpha2 <br>
+</code></p>
+<h3>
+<a name="TOC-Parameter"></a>Parameter</h3>
+<p>
+<code>name:</code> Name der Füllfarbe <br>
+<code>color_id</code>: (0..255) Nummer der Allplanfarbe <br>
+<code>red1, green1, blue1:</code> (0..255) Farbwerte der ersten Farbe<br>
+<code>alpha1</code>: (0..100) Transparenzwert der ersten Farbe<br>
+<code>red2, green2, blue2:</code> (0..255) Farbwerte der zweiten Farbe<br>
+<code>alpha1</code>: (0..100) Transparenzwert der zweiten Farbe<br>
+</p>
+<code>shading</code>: Art der Schattierung<br>
+<ul>
+<li>
+<code>0:</code> Linearer Übergang </li>
+<li>
+<code>1:</code> Übergang von Ecke </li>
+<li>
+<code>2:</code> Übergang vom Zentrum </li>
+<li>
+<code>3:</code> Radialübergang </li>
+</ul>
+<p>
+<code>variant:</code> Art des Farbverlaufs
+</p>
+<ul>
+<li>
+<code>0:</code> Farbverlauf von Farbe 1 zu Farbe 2</li>
+<li>
+<code>1:</code> Farbverlauf von Farbe 2 zu Farbe 1</li>
+<li>
+<code>2:</code> Farbverlauf von Farbe 1 zu Farbe 2 und Schwarz</li>
+<li>
+<code>3:</code> Farbverlauf von Farbe 2 zu Farbe 1 und Schwarz</li>
+</ul>
+<p>
+<code>angle:</code> Winkel der Schattierung oder des Farbverlaufs
+</p>
+<p>Mit <code>FILL name</code> wird die aktuelle Füllfarbe gesetzt.</p>
+<p>Mit <code>FILL -1</code> wird <b>keine</b> Füllfarbe gesetzt.</p>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

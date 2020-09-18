@@ -1,0 +1,108 @@
+---
+layout: default
+title: Statuscodes
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Statuscodes</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p>Statuscodes steuern die Erzeugung von Polygonen.</p>
+<h4>
+<a name="TOC-0:-Absoluter-Endpunkt"></a>0: Absoluter Endpunkt</h4>
+<p>Endpunkt als absolute Koordinaten.</p>
+<p><code>x, y, 0</code></p>
+<p><code>x, y:</code> X- und Y-Koordinate des Endpunktes</p>
+<h4>
+<a name="TOC-100:-Relativer-Endpunkt"></a>100: Relativer Endpunkt</h4>
+<p>Die Koordinaten sind relative Koordinaten der Ecke, bezogen auf den letzten Eckpunkt</p>
+<p><code>dx, dy, 100</code></p>
+<p><code>dx, dy:</code> Abstand des Endpunktes vom Startpunkt in X- und Y-Richtung</p>
+<h4>
+<a name="TOC-200:-Segment-ber-L-nge-und-Richtung"></a>200: Segment über Länge und Richtung</h4>
+<p>Ausgehend vom letzten Eckpunkt ergibt sich der nächste Eckpunkt aus der Richtung des Winkels <code>alpha</code> zur X-Achse des lokalen Koordinatensystems und der Entfernung <code>l</code>.</p>
+<p><code>l, alpha, 200</code></p>
+<p>
+<code>l:</code> Länge des Segments<br>
+<code>alpha:</code> Richtungswinkel, immer zur X-Achse gemessen.
+</p>
+<h4>
+<a name="TOC-300:-Tangentiales-Segment-ber-L-nge"></a>300: Tangentiales Segment über Länge</h4>
+<p>Der Eckpunkt liegt in der tangentialen Richtung des letzten Segments mit dem Abstand <code>l</code>.
+</p>
+<p><code>l, 0, 300</code></p>
+<h4>
+<a name="TOC-600:-Startpunkt-definieren"></a>600: Startpunkt definieren</h4>
+<p>Die Koordinaten sind der Startpunkt eines Polygonzuges. Dieser Wert ist zu Beginn nicht notwendig, jedoch in manchen Fällen sinnvoll.
+</p>
+<p><code>x, y, 600</code></p>
+<p><code>x, y:</code> X- und Y-Koordinate des neuen Startpunktes</p>
+<h4>
+<a name="TOC-700:-Polygon-schlie-en"></a>700: Polygon schließen</h4>
+<p> Schließt den bisherigen Polygonzug zum Startpunkt.</p>
+<p><code>0, 0, 700</code></p>
+<h4>
+<a name="TOC-800:-Tangente-definieren"></a>800: Tangente definieren</h4>
+<p>Erzeugt keine Linie/Segment oder Punkt, sondern definiert eine neue Tangentenrichtung unabhängig vom bisherigen Polygonverlauf.
+</p>
+<p><code>tx, ty, 800</code></p>
+<p><code>tx, ty:</code> die Tangente wird als Vektor <code>tx, ty</code> definiert, 45° = +1, +1; 90° = 0, +1</p>
+<h4>
+<a name="TOC-900:-Mittelpunkt-definieren"></a>900: Mittelpunkt definieren</h4>
+<p>Setzt den Mittelpunkt <code>M(mx/my)</code> für alle nachfolgenden Bogenstücke. Der Mittelpunkt ist solange gültig,
+ bis ein neuer definiert wird.</p>
+<p><code>mx, my, 900</code></p>
+<p><code>mx, my:</code> X- und Y-Koordinate des Mittelpunkt</p>
+<h4>
+<a name="TOC-1000:-Segment-als-tangentialer-Bogen-zum-Endpunkt"></a>1000: Segment als tangentialer Bogen zum Endpunkt</h4>
+<p>Erzeugt ein tangentiales Bogenstück zum letzten Segment, mit dem Endpunkt <code>(x/y)</code>. 
+Radius und Mittelpunkt ergeben sich automatisch. 
+Zuvor eingestellte Mittelpunkte (<code>status = 900</code>) haben keine Auswirkung, bleiben aber gültig.
+</p>
+<p><code>x, y, 1000</code></p>
+<p><code>x, y:</code> X- und Y-Koordinate des Endpunktes</p>
+<h4>
+<a name="TOC-2000:-Tangentialer-Bogen-definiert-durch-Radius-und-Winkel"></a>2000: Tangentialer Bogen definiert durch Radius und Winkel</h4>
+<p>Erzeugt ein tangentiales Bogenstück zum letzten Segment, mit vorgegebenem Radius <code>r</code> und Winkel <code>alpha</code>. Zuvor eingestellte Mittelpunkte (<code>status = 900</code>) haben keine Auswirkung, bleiben aber gültig.
+</p>
+<p><code>r, alpha, 2000</code>
+</p>
+<p><code>r:</code> Radius</p>
+<p><code>alpha:</code> Winkel</p>
+<h4>
+<a name="TOC-3000:-Bogen-definiert-durch-Mittelpunkt-und-Bogenendpunkt"></a>3000: Bogen definiert durch Mittelpunkt und Bogenendpunkt</h4>
+<p>
+Erzeugt ein Bogenstück, mit dem zuvor definierten Mittelpunkt <code>M(mx/my)</code>,
+den letzten Eckpunkt des letzten Segments als Startpunkt und den Schnittpunkt der 
+Kreislinie mit der (gedachten) Gerade durch Mittelpunkt und Koordinatenpunkt (<code>x/y</code>). 
+Der Koordinatenpunkt (<code>x/y</code>) muss nicht auf der Kreislinie liegen, er definiert 
+lediglich die Schnittgerade.</p>
+<p><code>x, y, 3000</code></p>
+<p><code>x, y:</code> X- und Y-Koordinate des Bogenendpunktes</p>
+<h4>
+<a name="TOC-4000:-Bogen-definiert-durch-Mittelpunkt-und-Winkel"></a>4000: Bogen definiert durch Mittelpunkt und Winkel</h4>
+<p>Erzeugt ein Bogenstück mit dem zuvor definierten Mittelpunkt <code>M(mx/my)</code> und den angegebenen Winkel <code>alpha</code>.
+</p>
+<p><code>0, alpha, 4000</code></p>
+<p><code>alpha:</code> Bogenwinkel</p>
+<h4>
+<a name="TOC-4000:-Vollkreis-definiert-durch-Mittelpunkt-und-Radius"></a>4000: Vollkreis definiert durch Mittelpunkt und Radius</h4>
+<p>Vollkreis durch den zuvor definierten Mittelpunkt <code>M(mx/my)</code> mit Radius <code>r</code>.</p>
+<p>
+</p>
+<p><code>r, 360, 4000</code><br></p>
+<p><code>r:</code> Kreisradius</p>
+<h2>
+<a name="TOC-ffnungen-in-Polygonen"></a>Öffnungen in Polygonen</h2>
+<p>
+Mit dem Statuscode = <code>-1</code> können Öffnungen in Polygonen definiert werden. Ein Punkt mit Statuscode = <code>-1</code> beendet das Basispolygon und muss lagegleich mit dem 1. Punkt des Polygons sein. Alle nachfolgenden Punkte stellen eine polygonale Durchdringung des Basispolygons dar. Die Eckpunkte dieser Öffnung müssen innerhalb der Fläche des Basispolygons liegen. Auch das Durchdringungspolygon muss mit einem Statuscode = <code>-1</code> abgeschlossen werden.
+</p>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

@@ -1,0 +1,90 @@
+---
+layout: default
+title: Prismen
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Prismen</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<div class="sites-layout-name-right-sidebar-hf sites-layout-vbox"><table cellspacing="0" class="sites-layout-hbox"><tbody><tr>
+<td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p>Die Grundfläche aller Prismen liegt in der XY-Ebene und das Basispolygon wird in Z-Richtung extrudiert.<br>
+</p>
+<h2>
+<a name="TOC-PRISM"></a>PRISM</h2>
+<p><code>PRISM</code> erstellt ein gerades <a href="http://de.wikipedia.org/wiki/Prisma_(Geometrie)" target="_blank">Prisma</a>.
+</p>
+<p><code>PRISM n, h, x1, y1, ... xn, yn</code></p>
+<p>
+<code>n:</code> Anzahl der Polygonpunkte der Grundfläche<br>
+<code>h:</code> Höhe des Prismas in Richtung der Z-Achse<br>
+<code>xi:</code> X-Koordinate des i-ten Polygonpunktes<br>
+<code>yi:</code> Y-Koordinate des i-ten Polygonpunktes<br>
+</p>
+<h2>
+<a name="TOC-PRISM_"></a>PRISM_</h2>
+<p>Wie <code>PRISM</code>, es können aber zusätzliche <a href="../statuscodes.html">Statuscodes</a> angegeben werden. Die Anzahl von Eckpunkten wird von Allplan selbst anhand der Parameter ermittelt, <code>n</code> muss zwar angegeben werden, muss aber nicht korrekt sein.</p>
+<p><code>PRISM_ n, h, x1, y1, s1, ... xn, yn, sn</code></p>
+<h2>
+<a name="TOC-PRISM_C"></a>PRISM_C</h2>
+<p>Wie <code>PRISM_</code>, es können aber zusätzliche Oberflächenmaterialien angegeben werden, wobei von Allplan grundsätzlich nur <code>top_mat</code> verwendet wird.</p>
+<p><code>PRISM_C top_mat, bottom_mat, side_mat, n, h, x1, y1, s1, ... xn, yn, sn</code></p>
+<p>
+<code>top_mat:</code> Materialname oder -index für den gesamten 3D Körper und auch für neu entstehende Schnittflächen.<br>
+<code>bottom_mat:</code> wird von Allplan ignoriert<br>
+<code>side_mat:</code> wird von Allplan ignoriert<br>
+</p>
+<h2>
+<a name="TOC-PRISM_B"></a>PRISM_B</h2>
+<p><code>PRISM_B</code> ist ähnlich <code>PRISM_C</code> mit zusätzlicher Krümmung in negativer Z-Richtung.
+</p>
+<p><code>PRISM_B top_mat, bottom_mat, side_mat, n, h, radius, x1, y1, s1, ... xn, yn, sn</code></p>
+<p><code>radius:</code> Biegeradius</p>
+<h2>
+<a name="TOC-PRISM_F"></a>PRISM_F</h2>
+<p>Wie <code>PRISM_C</code>, zusätzlich lassen sich die oberen Kanten brechen oder abrunden.</p>
+<p><code>PRISM_F top_mat, bottom_mat, side_mat, hill_mat, n, h, angle, hill_height, x1, y1, s1, ... xn, yn, sn</code></p>
+<p>
+<code>hill_mat:</code> Material der Fase oder Abrundung, wird von Allplan ignoriert<br>
+<code>angle:</code> Winkel der Fase, wenn <code>angle = 0</code> ist, wird statt einer Fase eine Abrundung mit einem Viertelkreisprofil erzeugt. Der Radius beträgt dann <code>hill_height</code>.<br>
+<code>hill_height:</code> Höhe der Abschrägung oder -Rundung, wird von der Gesamthöhe <code>h</code> heruntergerechnet.<br>
+</p>
+<h2>
+<a name="TOC-PRISM_S"></a>PRISM_S</h2>
+<p>Wie <code>PRISM_C</code>, aber die Neigung der oberen Abschlussfläche kann verändert werden.</p>
+<p><code>PRISM_S top_mat, bottom_mat, side_mat, n, xb, yb, xe, ye, h, angle, x1, y1, s1, ..., xn, yn, sn</code> </p>
+<p>
+Zusätzliche Parameter zum <code>PRISM_C</code>:
+</p>
+<p>
+<code>xb, yb, xe, ye:</code> Start- und Endkoordinaten der Drehachse<br>
+<code>angle:</code> Der Drehwinkel der Deckfläche um die Drehachse<br>
+<code>h</code>: Höhenlage der Drehachse<br>
+</p>
+</div></td>
+<td class="sites-layout-tile sites-tile-name-content-2 sites-canvas-sidebar"><div>
+<code>PRISM</code><div><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/prismen/PRISMe97a.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/prismen/PRISMe97a.png" width="200"></a></div>
+<br></code></div>
+<div><code>PRISM_</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/prismen/PRISM_bb72.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/prismen/PRISM_bb72.png" width="200"></a></div>
+<br></code></div>
+<div><code>PRISM_B</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/prismen/PRISM_Bb551.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/prismen/PRISM_Bb551.png" width="200"></a></div>
+<br></code></div>
+<div><code><br></code></div>
+<div><code>PRISM_F</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/prismen/PRISM_F0679.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/prismen/PRISM_F0679.png" width="200"></a></div>
+<br></code></div>
+<div><code>PRISM_S</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/prismen/PRISM_Sc4a1.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/prismen/PRISM_Sc4a1.png" width="200"></a></div>
+<br></code></div>
+</div></td>
+</tr></tbody></table></div>
+</div> 
+</div> 
+
+</div>

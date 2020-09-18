@@ -1,0 +1,133 @@
+---
+layout: default
+title: Flächen und Linien
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Flächen und Linien</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<div class="sites-layout-name-right-sidebar-hf sites-layout-vbox"><table cellspacing="0" class="sites-layout-hbox"><tbody><tr>
+<td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p>
+Hier werden all jene Objekte beschrieben, die keinen Volumenkörper beschreiben, also 3D Linien und Flächen im Raum. Sofern keine Z-Koordinaten angegeben werden liegen die Objekte in der aktuellen XY-Ebene.
+</p>
+<h2>
+<a name="TOC-LINE"></a>LINE</h2>
+<p>
+<code>LINE x1, y1, z1, x2, y2, z2</code> erstellt eine 3D Linie von <code>(x1, y1, z1)</code> bis <code>(x2, y2, z2)</code>.
+</p>
+<h2>
+<a name="TOC-RECT"></a>RECT</h2>
+<p>
+<code>RECT a, b</code> erstellt ein Rechteck in der XY-Ebene, beginnend im Koordinatenursprung und den Seitenlängen <code>a</code> und <code>b</code>.
+</p>
+<p>
+<code>a:</code> Länge in X-Richtung<br>
+<code>b:</code> Länge in Y-Richtung<br>
+</p>
+<h2>
+<a name="TOC-CIRCLE"></a>CIRCLE</h2>
+<p>
+<code>CIRCLE r</code> erstellt einen Kreis mit dem Radius <code>r</code> in der XY-Ebene, der Mittelpunkt liegt im Koordinatenursprung.
+</p>
+<h2>
+<a name="TOC-ARC"></a>ARC</h2>
+<p><code>ARC r, alpha, beta</code> erstellt einen Kreisbogen in der XY-Ebene, der Mittelpunkt liegt im Koordinatenursprung.</p>
+<p>
+<code>r:</code> Radius des Kreisbogens<br>
+<code>alpha:</code> Startwinkel des Bogens<br>
+<code>beta:</code> Endwinkel des Bogens<br>
+</p>
+<h2>
+<a name="TOC-POLY"></a>POLY</h2>
+<p>
+<code>POLY</code> erstellt ein Polygon in der XY-Ebene.
+</p>
+<p><code>POLY n , x1, y1, ..., xn, yn</code></p>
+<p>
+<code>n:</code> Anzahl der Eckpunkte<br>
+<code>xi, yi:</code> Koordinaten des i-ten Eckpunktes<br>
+</p>
+<h2>
+<a name="TOC-POLY_"></a>POLY_</h2>
+<p>
+Wie <code>POLY</code>, aber mit der Möglichkeit Bögen und verschiedene Arten der Segmentdefinition zu verwenden.
+</p>
+<p>
+<code>POLY_ n, x1, y1, s1, ..., xn, yn, sn</code>
+</p>
+<p>
+<code>si:</code> siehe <a href="../statuscodes.html">Statuscodes</a><br>
+</p>
+<h2>
+<a name="TOC-POLYPLANE"></a>POLYPLANE</h2>
+<p>
+Mit <code>POLYPLANE n, x1, y1, z1, ..., xn, yn, zn</code> kann ein Polygon in einer beliebigen Ebene erzeugt werden. Die Eckpunkte des Polygons müssen in einer Ebene liegen, damit der Befehl korrekt ausgeführt wird, diese Voraussetzung wird vom Script-Interpreter nicht überprüft.
+</p>
+<p>
+<code>n:</code> Anzahl der Polygonknoten<br>
+<code>xi, yi, zi:</code> Koordinaten der Eckpunkte<br>
+</p>
+<h2>
+<a name="TOC-POLYPLANE_"></a>POLYPLANE_</h2>
+<p>Wie <code>POLYPLANE</code>, aber zusätzlich können <a href="../statuscodes.html">Statuscodes</a> verwendet werden.
+</p>
+<p><code>POLYPLANE_ n, x1, y1, z1, s1 ..., xn, yn, zn, sn</code></p>
+<h2>
+<a name="TOC-CURVE_B"></a>CURVE_B</h2>
+<p>
+Mit <code>CURVE_B</code> kann eine <a href="http://de.wikipedia.org/wiki/B%C3%A9zierkurve" rel="nofollow" target="_blank">3D Bezierkurve</a> erzeugt werden.
+</p>
+<p>
+<code>CURVE_B n, status,</code>
+</p>
+<p>
+<code>
+x1, y1, z1, t_next_x1, t_next_y1, t_next_z1,<br>
+...<br>
+t_prev_xn, t_prev_yn, t_prev_zn,<br>
+xn, yn, zn, t_next_xn, t_next_yn, t_next_zn<br>
+</code>
+</p>
+<p>
+<code>n:</code> Anzahl der Kontrollpunkte<br>
+<code>status:</code> definiert die Sichtbarkeit der Kurve, <code>0</code> - Standard<br>
+<code>xi, yi, zi:</code> Koordinten des Kontrollpunkts<br>
+<code>t_prev_xi, t_prev_yi, t_prev_zi:</code> vorangehende Tangente des Kontrollpunkts<br>
+<code>t_next_xi, t_next_yi, t_next_zi:</code> nachfolgende Tangente des Kontrollpunkts<br>
+</p>
+<p>Der erste Kontrollpunkt hat keine vorangehende Tangente.</p>
+<h2>
+<a name="TOC-CURVE_N"></a>CURVE_N</h2>
+<p>Mit <code>CURVE_N</code> erstellt man eine <a href="http://de.wikipedia.org/wiki/NURBS" rel="nofollow" target="_blank">3D NURBS Kurve</a>.
+</p>
+<p>
+<code>CURVE_N n, status, x1, y1, z1, ... xn, yn, zn</code><br>
+<br>
+<code>n:</code> Anzahl der Kontrollpunkte<br>
+<code>status: 0</code> - Standard, <code>1</code> - der letzte und der erste Knoten der Kurve werden verbunden um die Kurve zu schließen.<br>
+<code>xi, yi, zi:</code> Koordinaten des Kontrollpunkts
+</p>
+<h2>
+<a name="TOC-MESH_B"></a>MESH_B</h2>
+<p><code>MESH_B</code> erzeugt eine Oberfläche aus Dreiecken, die eine Bezierfläche annähert. Ausgangspunkt sind m x n Kontrollpunkte für die Berechnung der Bezierfläche. Es stehen zwei Berechnungsmethoden zur Verfügung:</p>
+<ol>
+<li>
+<b>adaptive Methode:</b> Die Anzahl der Berechnungsabschnitte wird von Allplan berechnet, Randbedingung ist, dass der Abstand der Bezierfläche zum Mittelpunkt der Näherungsfläche kleiner als der Parameter <code>rise</code> ist.</li>
+<li>
+<b>statische Methode:</b> es werden für die m-Richtung <code>m_subdiv</code> und für die n-Richtung <code>n_subdiv</code> Berechungsabschnitte zur Netzgenerierung verwendet.</li>
+</ol>
+<p> Die <b>adaptive Berechnungsmethode</b> wird angewendet, wenn <code>subdiv_m</code> oder <code>subdiv_n</code> ≤ 2 ist.</p>
+</div></td>
+<td class="sites-layout-tile sites-tile-name-content-2 sites-canvas-sidebar"><div>
+<br><div><code><br></code></div>
+</div></td>
+</tr></tbody></table></div>
+</div> 
+</div> 
+
+</div>

@@ -1,0 +1,114 @@
+---
+layout: default
+title: Kurven
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Kurven</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<div class="sites-layout-name-right-sidebar-hf sites-layout-vbox"><table cellspacing="0" class="sites-layout-hbox"><tbody><tr>
+<td class="sites-layout-tile sites-tile-name-content-1"><div>
+<h2>
+<a name="TOC-SPLINE2"></a>SPLINE2</h2>
+<p>Erzeugt einen Spline mit <code>n</code> Kontrollpunkten, die Tangentenwinkel in den Kontrollpunkten müssen angegeben werden. Tangentenwinkel starten in der lokalen X-Achse und laufen gegen den Uhrzeigersinn.</p>
+<p><code>SPLINE2 n, status, x1, y1, angle1, ..., xn, yn, anglen</code>
+</p>
+<p>
+<code>n:</code> Anzahl der Kontrollpunkte<br>
+<code>status: j1 + j2</code> Spline-Eigenschaften<br>
+<code>xi, yi:</code> Koordinaten der Kontrollpunkte<br>
+<code>anglei:</code> Tangentenwinkel des Kurve<br>
+</p>
+<ul>
+<li>
+<code>j1 = 1:</code> Spline ist geschlossen, erster und letzter Kontrollpunkt werden verbunden. Funktioniert in der Version 2013 leider nicht, wird aber in der nächsten Version korrigiert.</li>
+<li>
+<code>j2 = 2:</code> Spline automatisch glätten, angegebene Tangentenwinkel werden ignoriert</li>
+</ul>
+<h2>
+<a name="TOC-SPLINE2_A"></a>SPLINE2_A</h2>
+<p>
+<code>SPLINE2_A</code> ist eine Erweiterung des <code>SPLINE2</code> Befehls und erzeugt Bezier-Splines mit <code>n</code> Kontrollpunkten, Tangentenwinkel und Tangentenlängen müssen angegeben werden.
+</p>
+<p>
+<code>SPLINE2 n, status, x1, y1, angle1, len_prev1, len_next1, ..., xn, yn, anglen, len_prevn, len_nextn</code>
+</p>
+<p>
+<code>len_previ:</code> Länge der Tangente vor dem Kontrollpunkt<br>
+<code>len_nexti:</code> Länge der Tangente nach dem Kontrollpunkt<br>
+<br>
+Restliche Parameter wie <code>SPLINE2</code>.
+</p>
+<h2>
+<a name="TOC-CURVE_B2"></a>CURVE_B2</h2>
+<p>
+<code>CURVE_B2</code> erzeugt eine Bezierkurve mit <code>n</code> Kontrollpunkten, die Form der Bezierkurve wird über Tangentenpunkte gesteuert (Tangentenpunkt = Koordinaten im Bezug zum lokalen Koordinatenursprung). Der erste Punkt hat keinen vorangehenden und der letzte keinen nachfolgenden Tangentenpunkt. Es kann nach dem letzten Kontrollpunkt ein Tangentenpunkt angegeben werden, dieser hat aber keine Funktion, dass liegt an den mathematischen Eigenschaften der Bezierkurve.</p>
+<p>
+<code>
+CURVE_B2 n, status,<br>
+x1, y1, t_next_x1, t_next_y1,<br>
+...<br>
+t_prev_xn, t_prev_yn,<br>
+xn, yn<br>
+</code>
+</p>
+<p>
+<code>n:</code>Anzahl der Kontrollpunkte<br>
+<code>status: j1 + j2</code> Darstellungsoptionen<br>
+<code>xi, yi:</code> Koordinaten der Kontrollpunkte<br>
+<code>t_prev_xi, t_prev_yi:</code>Tangentenpunkt vor dem Kontrollpunkt<br>
+<code>t_next_xi, t_next_yi:</code>Tangentenpunkt nach dem Kontrollpunkt<br>
+</p>
+<ul>
+<li>
+<code>j1 = 1:</code> Umrissline darstellen</li>
+<li>
+<code>j2 = 2:</code> Füllung darstellen</li>
+</ul>
+<h2>
+<a name="TOC-CURVE_N2"></a>CURVE_N2</h2>
+<p><code>CURVE_N2</code> erzeugt eine NURBS-Kurve mit <code>n</code> Kontrollpunkten. Diese Kurve wird von Allplan als Polygon gezeichnet, die Anzahl der berechneten Punkte kann über die Direktiven <code>RESOL</code> und <code>RISE</code> gesteuert werden.
+</p>
+<p>
+<code>CURVE_N2 n, status, x1, y1, ..., xn, yn</code><br>
+<br>
+<code>n:</code> Anzahl der Kontrollpunkte<br>
+<code>status: j1 + j2 + j3</code> Darstellungsoptionen<br>
+<code>xi, yi:</code> Koordinaten der Kontrollpunkte<br>
+</p>
+<ul>
+<li>
+<code>j1 = 1:</code> Umrissline darstellen</li>
+<li>
+<code>j2 = 2:</code> Füllung darstellen</li>
+<li>
+<code>j3 = 4:</code> geschlossene Kurve, erster und letzter Punkt wird verbunden.</li>
+</ul>
+</div></td>
+<td class="sites-layout-tile sites-tile-name-content-2 sites-canvas-sidebar"><div>
+<code>SPLINE2 mit Automatik</code><div>
+<div style="display:block;text-align:left"><a href="/assets/2d-scripting/curves/spline2_auto9954.png" imageanchor="1"><img border="0" height="154" src="/assets/2d-scripting/curves/spline2_auto9954.png" width="200"></a></div>
+<br>
+</div>
+<div><code>SPLINE2 ohne Automatik</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/2d-scripting/curves/spline2b07f.png" imageanchor="1"><img border="0" height="154" src="/assets/2d-scripting/curves/spline2b07f.png" width="200"></a></div>
+<br></code></div>
+<div><code>SPLINE2_A</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/2d-scripting/curves/spline2_A1b70.png" imageanchor="1"><img border="0" height="154" src="/assets/2d-scripting/curves/spline2_A1b70.png" width="200"></a></div>
+<br></code></div>
+<div><code>CURVE_B2</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/2d-scripting/curves/curve_b2fc4b.png" imageanchor="1"><img border="0" height="154" src="/assets/2d-scripting/curves/curve_b2fc4b.png" width="200"></a></div>
+<br></code></div>
+<div><code>CURVE_N2</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/2d-scripting/curves/curve_n26fcf.png" imageanchor="1"><img border="0" height="154" src="/assets/2d-scripting/curves/curve_n26fcf.png" width="200"></a></div>
+<br></code></div>
+</div></td>
+</tr></tbody></table></div>
+</div> 
+</div> 
+
+</div>

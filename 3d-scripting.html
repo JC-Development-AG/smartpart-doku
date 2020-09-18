@@ -1,0 +1,62 @@
+---
+layout: default
+title: 3D Scripting
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">3D Scripting</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>Im 3D-Script werden die 3D Objekte erstellt. In den untergeordneten Seiten werden jene Befehle beschrieben, die zur Erzeugung von 3D Objekten benötigt werden:<br>
+<ul>
+<li>
+<a href="3d-scripting/flaechen-und-linien.html">Flächen und Linien</a> im Raum</li>
+<li>
+<a href="3d-scripting/einfache-volumenkoerper.html">Einfache Volumenkörper</a> sind geometrische Grundformen wie Quader oder Kugeln</li>
+<li>
+<a href="3d-scripting/prismen.html">Prismen</a> sind extrudierte Polygone, Prismen sind Volumenkörper</li>
+<li>
+<a href="3d-scripting/oberflaechen-aus-polygonen.html">Oberflächen aus Polygonen</a> sind geometrische Objekte die aus einem Basispolygon und einer Konstruktionsvorschrift (zB. Rotation um eine Achse) erzeugt werden. Geschlossene Oberflächen erzeugen einen Volumenkörper.</li>
+<li>unter <a href="3d-scripting/gruppen.html">Gruppen</a> werden sogenannte Solid-Operationen beschrieben, mit diesen Befehlen kann man mit 3D-Objekten "rechnen", 3D-Objekte können <i>addiert</i> (vereinen, verschmelzen) und <i>subtrahiert</i> (abziehen, ausstanzen, ausfräsen) werden oder die <i>Differenz</i> aus mehreren Objekten (Schnittmenge) gebildet werden.</li>
+</ul>
+<h2>
+<a name="TOC-Model"></a>Model</h2>
+<p><code>MODEL type</code> bestimmt den Typ des 3D Körpers:</p>
+<p><code>type: "wire"|"surface"|"solid"</code> Modelltype</p>
+<ul>
+<li>
+<code>wire:</code> Drahtmodell, es werden nur die Kanten des Körpers dargestellt, es gibt keine Flächen</li>
+<li>
+<code>surface:</code> Oberflächenmodell, der 3D Körper besteht nur aus einer Hülle, wird der Körper geschnitten, blickt man in das Innere des Körpers.
+</li>
+<li>
+<code>solid:</code> Volumenkörper, den Unterschied zum Oberflächenmodell sieht man erst, wenn der Körper geschnitten wird, für die Schnittfläche wird eine neue Fläche erzeugt und man kann nicht in das Innere des Körpers blicken.</li>
+</ul>
+<h2>
+<a name="TOC-Oberfl-chenmaterial"></a>Oberflächenmaterial</h2>
+<p>Für die Darstellung der 3D Körper in der Animationsansicht ist das Oberflächenmaterial zuständig. Sofern das Oberflächenmaterial nicht direkt im Befehl definiert wird (z.B. <code>PRISM_C</code>), wird das aktuelle mit <code>MATERIAL</code> gesetzte Oberflächenmaterial verwendet. Ist kein Material gesetzt worden, wird jenes Oberflächenmaterial verwendet, dass der aktuellen Objektfarbe (<code>COLOR</code>) zugeordnet ist. Mit <code>MATERIAL 0</code> wird die Materialauswahl auf "Material durch Farbe" zurückgesetzt. <b>Allplan kann für jeden 3D Körper nur ein Oberflächenmaterial verwenden.</b></p>
+<h2>
+<a name="TOC-Schnittfl-chen-in-2D-Schnittdarstellungen"></a>Schnittflächen in 2D Schnittdarstellungen</h2>
+<p>Die Flächendarstellung von 3D Körpern in Architekturschnitten bzw. assoziativen Schnitten wird mit den Direktiven <code>SECT_...</code> gesteuert. Die einzelnen Definitionen können <b>nicht</b> kombiniert werden, die letzte <code>SECT_...</code> Direktive wird verwendet. Diese Schnittflächeneinstellung hat eine höhere Priorität als die Einstellungen "Schnittflächenelemente für 3D Körper" im Schnittdialog von Allplan. Anscheinend kann Schnittflächeneinstellung nicht mehr auf den Ausgangszustand (Eigenschaften aus dem Schnitteinstellungsdialog von Allplan) zurückgesetzt werden.</p>
+<p>
+</p>
+<ul>
+<li>
+<code>SECT_FILL color_index</code> - Allplan Farbindex</li>
+<li>
+<code>SECT_HATCHING hatch_index</code> - Allplan Schraffurindex</li>
+<li>
+<code>SECT_PATTERN pattern_index</code> - Allplan Musterindex</li>
+<li>
+<code>SECT_FACESTYLE facestyle_index</code> - Allplan Flächenstilindex</li>
+<li>
+<code>SECT_BITMAP "filename.ext"</code> - Name der Bilddatei inklusive Erweiterung - das Bild muss im Verzeichnis <code>"PRJ\&lt;projektname&gt;\design"</code> liegen</li>
+</ul>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

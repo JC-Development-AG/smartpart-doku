@@ -1,0 +1,209 @@
+---
+layout: default
+title: Funktionen
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Funktionen</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<h2>
+<a name="TOC-Stringfunktionen"></a>Stringfunktionen</h2>
+<h3>
+<a name="TOC-STRLEN-"></a>STRLEN()</h3>
+<p><code>STRLEN (string) </code> liefert die Zeichenanzahl von <code>string</code>.</p>
+<h3>
+<a name="TOC-STR-"></a>STR()</h3>
+<p> Konvertiert einen numerischen Wert oder Ausdruck in einen String, Es gibt 2 Varianten des <code>STR()</code> Befehls:
+</p>
+<ol>
+<li> man gibt die Gesamtanzahl an Zeichen und dieFlags  Anzahl an Zeichen nach dem Dezimalpunkt an</li>
+<li> ein Format-String steuert die Konvertierung, mit mehr Einstellungsmöglichkeiten und einer möglichen automatischen Einheitenumrechnung</li>
+</ol>
+<p><code>STR (numeric_expression, length, fractions)</code><br>
+<br>
+oder<br>
+<br>
+<code>STR (format_string, numeric_expr)</code>
+</p>
+<div>
+<code>numeric_expr:</code> numerischer Ausdruck.</div>
+<div>
+<code>length:</code> Gesamtanzahl Zeichen</div>
+<div>
+<code>fractions:</code> Anzahl Zeichen nach dem Dezimalpunkt</div>
+<div>
+<code>format_string:</code> Format-String mit folgender Syntax:</div>
+<blockquote style="margin:0 0 0 40px;border:none;padding:0px">
+<p><code>%[flags][length][.decimal_place] conv_spec</code></p>
+<div>
+<code>flags:</code> können kombiniert werden</div>
+<ul>
+<li>
+<code>(none)</code>: rechtsbündig (Standard)</li>
+<li>
+<code>-</code>: linkssbündig</li>
+<li>
+<code>+</code>: "+" Zeichen vor positiven Werten</li>
+<li>
+<code>(Leerzeichen&gt;</code>: Leerzeichen statt "+" vor positiven Werten</li>
+<li>
+<code>#</code>: "0" vor dem Dezimalpunkt nicht anzeigen (kein Wirkung bei Bruchzahlen)</li>
+<li>
+<code>0</code>: auch 0 inch zeigen, nur bei inch Einheiten mit Bruchzahlen</li>
+<li>
+<code>~</code>: Nullen am Ende des Dezimalteils nicht anzeigen (kein Wirkung bei Bruchzahlen)</li>
+<li>
+<code>^</code>: unterdrückt den automatischen Tausch von Dezimalpunkt "." und Tausendertrennzeichen "," entsprechend den Lokalisierungseinstellungen</li>
+</ul>
+<div>
+<code>length:</code> Mindestlänge des generierten Strings</div>
+<div>
+<code>decimal_place:</code> Anzahl von Dezimalstellen</div>
+<div>
+<code>conv_spec:</code>Konvertierungsart, <code>numeric_expr</code> wird von der aktuellen Allplaneinheit, in die angegebene Einheit umgerechnet.</div>
+<h4>
+<a name="TOC-L-ngen"></a>Längen</h4>
+<ul>
+<li>
+<code>e</code>: Exponentialformat (Meter)</li>
+<li>
+<code>m</code>: Meter</li>
+<li>
+<code>mm</code>: Millimeter</li>
+<li>
+<code>cm</code>: Zentimeter</li>
+<li>
+<code>ffi</code>: feet und inches als Bruchzahl</li>
+<li>
+<code>fdi</code>: feet und inches als Dezimalzahl</li>
+<li>
+<code>df</code>: feet als Dezimalzahl</li>
+<li>
+<code>fi</code>: inches als Bruchzahl</li>
+<li>
+<code>di</code>: inches als Dezimalzahl</li>
+</ul>
+<h4>
+<a name="TOC-Fl-chen"></a>Flächen</h4>
+<ul>
+<li>
+<code>sqm</code>: Quadratmeter</li>
+<li>
+<code>sqcm</code>: Quadratzentimeter</li>
+<li>
+<code>sqmm</code>: Quadratmillimeter</li>
+<li>
+<code>sqf</code>: square feet</li>
+<li>
+<code>sqi</code>: square inches</li>
+</ul>
+<h4>
+<a name="TOC-Winkel"></a>Winkel</h4>
+<ul>
+<li>
+<code>dd</code>: Dezimal Grad</li>
+<li>
+<code>dms</code>: Grad, Minuten, Sekunden</li>
+<li>
+<code>gr</code>: Neugrad</li>
+<li>
+<code>rad</code>: Bogenmaß</li>
+<li>
+<code>surv</code>: surveyors unit (Vermessereinheit?)</li>
+</ul>
+<h4>
+<a name="TOC-Volumen"></a>Volumen</h4>
+<ul>
+<li>
+<code>cum</code>: Kubikmeter</li>
+<li>
+<code>l</code>: Liter</li>
+<li>
+<code>cucm</code>: Kubikzentimeter</li>
+<li>
+<code>cumm</code>: Kubikmillimeter</li>
+<li>
+<code>cuf</code>: cubic feet</li>
+<li>
+<code>cui</code>: cubic inches</li>
+<li>
+<code>cuy</code>: cubic yards</li>
+<li>
+<code>gal</code>: gallons</li>
+</ul>
+</blockquote>
+<h3>
+<a name="TOC-STRSUB-"></a>STRSUB()</h3>
+<p>
+<code>STRSUB(string, start, num)</code> liefert <code>num</code> Zeichen aus <code>string</code> ab Position <code>start</code> als String zurück.
+</p>
+<h3>
+<a name="TOC-STRSTR-"></a>STRSTR()</h3>
+<p>
+<code>STRSTR(input_string, search_string)</code> liefert die Position des ersten Auftretens von <code>search_string</code> in <code>input_string</code>, oder 0 wenn <code>search_string</code> nicht gefunden wird. Die Suche unterscheidet zwischen Groß- und Kleinschreibung. 
+</p>
+<h3>
+<a name="TOC-SPLIT-"></a>SPLIT()</h3>
+<p><code>SPLIT(string, format, var1[, var2, ...])</code> teilt den Eingabestring in einzelne Teile und weist diese verschiedenen Variablen zu. Die Aufteilung des Strings wird durch einen Formatstring gesteuert. <code>%s</code> steht für ein  Wort begrenzt durch Leerzeichen oder Tabs, <code>%n</code> steht für einen numerischen Wert (Dezimalpunkt='.'), alle nicht durch Platzhalter abgedeckten Teile des Eingabestrings, müssen mit dem Formatstring übereinstimmen, sonst bricht die Verarbeitung ab. Die Funktion liefert als Rückgabewert die Anzahl der erfolgreich ermittelten Werte.
+</p>
+<p>
+<code>n = SPLIT("Entfernung: 5.4 km", "Entfernung: %n %s", value, unit)</code><br>
+<br>
+<code>value = 5.4</code><br>
+<code>unit = "km"</code><br>
+<code>n = 2</code>
+</p>
+<h3>
+<a name="TOC-STW-"></a>STW()</h3>
+<p>Liefert die ungefähre Breite eines Strings, abhängig vom aktuell gesetzten Textstil. Zumindest lt. Dokumentation, in  Wirklichkeit wird einfach die Stringlänge mit der Texthöhe multipliziert, so als ob alle Zeichen gleich breit wären, und diese Zeichenbreite der Zeichenhöhe entsprechen würde, dass ist selbst für nicht proportionale Fonts nur selten richtig, und für proportionale Fonts ist das einfach komplett falsch. 
+</p>
+<div><code>STW (string)</code></div>
+<h2>
+<a name="TOC-Arithmetische-Funktionen"></a>Arithmetische Funktionen</h2>
+<ul>
+<li> <code>ABS (x)</code> liefert den Absolutbetrag von <code>x</code>.</li>
+<li> <code>CEIL (x)</code> liefert den nächst größeren Ganzzahlwert von <code>x</code>.</li>
+<li> <code>INT (x)</code> liefert den Ganzzahlwert von <code>x</code>.</li>
+<li> <code>FRAC (x)</code> liefert den Dezimalteil von <code>x</code>.</li>
+<li> <code>ROUND_INT (x)</code> liefert die gerundete Ganzahl von <code>x</code>.</li>
+<li> <code>SGN (x)</code> liefert -1 für <code>x&lt;0</code>, +1 für <code>x&gt;0</code> sonst 0.</li>
+<li> <code>SQR (x)</code> liefert die Quadratwurzel von <code>x</code>.</li>
+<li> <code>EXP (x)</code> liefert e^<code>x</code>.</li>
+<li> <code>LOG (x)</code> liefert Logarithmus von <code>x</code> (Basis 10).</li>
+<li> <code>LN (x)</code> liefert natürlichen Logarithmus von <code>x</code> (Basis e).</li>
+</ul>
+<h2>
+<a name="TOC-Winkelfunktionen"></a>Winkelfunktionen</h2>
+<p> Alle Winkelparameter und Resultate in Grad (Kreis = 360°).</p>
+<ul>
+<li> <code>SIN (x)</code> liefert den Sinus von <code>x</code>.</li>
+<li> <code>COS (x)</code> liefert den Cosinus von <code>x</code>.</li>
+<li> <code>TAN (x)</code> liefert den Tangens von <code>x</code>.</li>
+<li> <code>ASIN (x)</code> liefert den ArcusSinus von <code>x</code>.</li>
+<li> <code>ACOS (x)</code> liefert den ArcusCosinus von <code>x</code>.</li>
+<li> <code>ATAN (x)</code> liefert den ArcusTangens von <code>x</code>.</li>
+<li> <code>PI</code> liefert die Kreiszahl PI=3.1415....</li>
+</ul>
+<h2>
+<a name="TOC-Statistische-Funktionen"></a>Statistische Funktionen</h2>
+<ul>
+<li> <code>MIN (x1, x2, x3, ...)</code> liefert den kleinsten Wert der Argumente.</li>
+<li> <code>MAX (x1, x2, x3, ...)</code> liefert den größten Wert der Argumente.</li>
+<li> <code>RND (x)</code> liefert einen Zufallswert zwischen 0 und <code>x</code>.</li>
+</ul>
+<h2>
+<a name="TOC-Bitfunktionen"></a>Bitfunktionen</h2>
+<ul>
+<li> <code>BITSET (x, b[, expr])</code> setzt das Bit <code>b</code> von <code>x</code> auf 0 wenn <code>expr</code> = 0 ist, sonst auf 1.</li>
+<li> <code>BITTEST (x, b)</code> liefert 1 wenn das Bit <code>b</code> von <code>x</code> gesetzt ist, sonst 0.</li>
+</ul>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

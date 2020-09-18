@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JC Development optimiert BIM-Planungsprozesse. Mit digitalen Tools planen Sie was früher Tage dauert in Stunden. Wir arbeiten überwiegend mit Allplan und haben für Allplan SmartParts, Python Parts und native Plug-Ins entwickelt.">
+  <title>{{ page.meta_title | default: page.title }} | JC Development Smartpart Dokumentation</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <header>
+    <a href="https://www.jcd.swiss"><img src="/assets/img/logo.png" width="190" alt="JC Development" /></a>
+    <div class="logo-add">Smartpart Dokumentation</div>
+  </header>
+  <div class="wrapper">
+    <nav>
+      {%- assign default_paths = site.pages | map: "path" -%}
+      {%- assign page_paths = site.header_pages | default: default_paths -%}
+      {%- for path in page_paths -%}
+        {%- assign my_page = site.pages | where: "path", path | first -%}
+        {%- if my_page.title -%}
+        <a class="nav-a" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+    <main class="main">
+      {{ content }}
+    </main>
+  </div>
+  <footer>
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a> This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Manfred Moitzi and JC Development AG</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+  </footer>
+</body>
+</html>

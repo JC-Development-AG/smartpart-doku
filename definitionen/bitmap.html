@@ -1,0 +1,63 @@
+---
+layout: default
+title: BITMAP - Pixelfläche
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">BITMAP - Pixelfläche</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p><code>DEFINE BITMAP</code> erzeugt einen Verweis auf eine Bitmap, für die spätere Verwendung als Füllung von 2D Polygonen (Pixelflächen).
+</p>
+<p>
+<code>DEFINE BITMAP name, image [, angle, scale_x, scale_y, ref_x, ref_y, offset_x, offset_y, metric, tile, mask, red, green, blue, toler]</code>
+</p>
+<p>
+<code>name:</code> Name der Bitmapdefinition<br>
+<code>image:</code> Name der Bitmapdatei ohne Erweiterung<br>
+<code>angle:</code> Rotationswinkel<br>
+<code>scale_x, scale_y:</code> Skalierungsfaktor der Bitmap in X- und Y-Richtung<br>
+<code>ref_x, ref_y:</code> X- und Y-Koordinate des Referenzpunktes (Standard: 0.0, 0.0) ??? in Pixel ???<br>
+<code>offset_x, offset_y:</code> X- und Y-Koordinate des Offsetpunktes (Standard: 0.0, 0.0) ??? in Pixel ???<br>
+<code>metric:</code> Justierung der Bitmapgröße<br>
+</p>
+<ul>
+<li>
+<code>0:</code> Größe einpassen</li>
+<li>
+<code>1:</code> ein Pixel entspricht 1.0cm</li>
+</ul>
+<p>
+<code>tile</code>: Anordnung der Bitmap
+</p>
+<ul>
+<li>
+<code>0:</code> einpassen</li>
+<li>
+<code>1:</code> wiederholen</li>
+</ul>
+<p>
+<code>mask:</code> Maskierung von transparenten Bitmapflächen
+</p>
+<ul>
+<li>
+<code>0:</code> keine Transparenz </li>
+<li>
+<code>1:</code> maskiere schwarze Pixel mit definierter Farbe</li>
+</ul>
+<p>
+<code>red, green, blue:</code> (0..255) Frabwerte für Maskierung/Hintergrund (Standard: weiß)<br>
+<code>toler:</code> (0..255) Torenaz der transparenten Farbe
+</p>
+<p>
+Mit <code>BITMAP name</code> wird eine definierte Bitmap zu Verwendung gesetzt.
+</p>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

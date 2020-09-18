@@ -1,0 +1,73 @@
+---
+layout: default
+title: Polygone
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Polygone</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<div class="sites-layout-name-right-sidebar-hf sites-layout-vbox">
+<div class="sites-layout-tile sites-tile-name-header"><div>Im Unterschied zu ArchiCAD können in Allplan einzelnen Polygonkanten nicht ausgeblendet werden.</div></div>
+<table cellspacing="0" class="sites-layout-hbox"><tbody><tr>
+<td class="sites-layout-tile sites-tile-name-content-1"><div>
+<h2>
+<a name="TOC-POLY2"></a>POLY2</h2>
+<p>Erzeugt einen Polygonzug mit <code>n</code> Eckpunkten, wobei Allplan <code>n</code> ignoriert und sich nach der Anzahl der angegebenen Eckpunkte richtet.</p>
+<p>
+<code>POLY2 n, frame_fill, x1, y1, ... xn, yn</code>
+</p>
+<p>
+<code>n:</code> Anzahl der Eckpunkte
+</p>
+<p>
+<code>frame_fill: j1 + j2 + j3</code> steuert die Eigenschaften der Umrisslinie und Polygonfüllung
+</p>
+<ul>
+<li>
+<code>j1 = 0|1:</code> Umrisslinie ist unsichtbar | sichtbar</li>
+<li>
+<code>j2 = 0|2:</code> Füllung ist unsichtbar | sichtbar</li>
+<li>
+<code>j3 = 0|4:</code> Polygon ist offen | geschlossen</li>
+</ul>
+<code>xi, yi:</code> Knotenpunkte des Polygons
+
+<h2>
+<a name="TOC-POLY2_"></a>POLY2_</h2>
+<p>
+wie <code>POLY2</code> aber es können zusätzlich <a href="../statuscodes.html">Statuscodes</a> verwendet werden. Auch hier wird <code>n</code> ignoriert, dies ist hier wirklich hilfreich, da mir nicht ganz klar ist ob alle Koordinaten (z.B. Mittelpunkte) als Eckpunkte zu zählen sind.</p>
+<code>POLY2_ n, frame_fill, x1, y1, s1, ... xn, yn, sn</code>
+<div>
+<code>frame_fill: j1 + j2 + j3 + j5  (j1, j2, j3 wie POLY2)</code>
+</div>
+<ul>
+<li>
+<code>j5 = 0|16:</code> Bögen als echte Kreise (Standardwert) | oder als Polygone zeichnen</li>
+</ul>
+<p>
+<code>xi, yi, si:</code> Koordinaten und Statuscodes der Eckpunkte</p>
+</div></td>
+<td class="sites-layout-tile sites-tile-name-content-2 sites-canvas-sidebar"><div>
+<code>POLY2</code><div><code><div style="display:block;text-align:left"><a href="/assets/2d-scripting/poly2/POLY2731f.png" imageanchor="1"><img border="0" height="154" src="/assets/2d-scripting/poly2/POLY2731f.png" width="200"></a></div>
+<div style="display:block;text-align:left"><br></div>
+<div style="display:block;text-align:left">POLY2_</div>
+<div style="display:block;text-align:left">
+<div style="display:block;text-align:left"><a href="/assets/2d-scripting/poly2/POLY2_2283.png" imageanchor="1"><img border="0" height="154" src="/assets/2d-scripting/poly2/POLY2_2283.png" width="200"></a></div>
+<br>
+</div>POLY2_ mit Schraffur</code></div>
+<div><code><div style="display:block;text-align:left">
+<div style="display:block;text-align:left"><a href="/assets/2d-scripting/poly2/POLY2_with_HATCHING0d51.png" imageanchor="1"><img border="0" height="154" src="/assets/2d-scripting/poly2/POLY2_with_HATCHING0d51.png" width="200"></a></div>
+<br>
+</div>
+<br></code></div>
+</div></td>
+</tr></tbody></table>
+</div>
+</div> 
+</div> 
+
+</div>

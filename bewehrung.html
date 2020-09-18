@@ -1,0 +1,167 @@
+---
+layout: default
+title: Bewehrung
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Bewehrung</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p>Zur Erstellung von Bewehrungsstäben muss zuerst eine Biegeform definiert werden, danach kann diese Biegeform verlegt werden. Eine Biegeform ist solange gültig, bis sie durch eine neue Biegeform ersetzt wird.
+</p>
+<p>
+Die Befehle zur Erzeugung der Biegeformen folgen dem Schema: <code>('REINF_BAR_'|'REINF_STIRRUP_') + form + specialization</code>
+</p>
+<p>
+Für <code>form</code> sind folgende Abkürzungen möglich:
+</p>
+<ul>
+<li> L = gerade (linear)</li>
+<li> R = rechteckig (rectangle)</li>
+<li> Q = viereckig (quadrangular)</li>
+<li> P = polygonal, Schenkel werden über Länge und Winkel definiert</li>
+<li>F = frei (free), Schenkel werden über Koordinaten definiert</li>
+<li> C = rund (circular)</li>
+</ul>
+<p>
+Für <code>specialization</code> sind folgende Abkürzungen möglich:
+</p>
+<ul>
+<li> C = closed, geschlossen</li>
+<li> O = open, offen</li>
+<li> 2 = planar, eben</li>
+<li> D = diamond, rautenförmig</li>
+<li> S = S-shaped, S-förmig</li>
+<li> L = L-shaped, L-förmig</li>
+<li> PL = polyline, Polylinie</li>
+<li> CB = corbel, Konsole</li>
+<li> CN = corner, Ecke??? </li>
+<li> T = Torsion</li>
+<li> SB = Starter Bar, Starteisen???</li>
+<li> HL = horizontal loop, liegende Schlaufe</li>
+<li> SP = spacer, Abstandhalter(Unterstellungsbügel)</li>
+</ul>
+<h2>
+<a name="TOC-REQUEST-f-r-Bewehrungsparameter"></a>REQUEST für Bewehrungsparameter</h2>
+<p>Mit <code>REQUEST</code> können Systemparameter von Allplan erfragt werden, wie z.B. die aktuelle Beton- oder Stahlgüte. Die Anzahl der gefundenen Antworten wird als Rückgabewert (<code>n</code>) geliefert.</p>
+<p><code>n = REQUEST (question, param , var_1 [, var_2,...])</code>
+</p>
+<p>
+</p>
+<div>
+<code>question:</code> Die Anfrage die gestellt wird.</div>
+<div>
+<code>param:</code> zusätzlicher Parameter, der zur Beantwortung der Frage benötigt wird als Text(String) oder numerischer Wert/Index (z.B. der Durchmesser bei Abfrage der Verankerungslänge).</div>
+<div>
+<code>var_i:</code> Antworten der Anfrage werden in den angehängten Variablen gespeichert.</div>
+<p> Die möglichen Anfragen sind in der "Dokumentation" von Nemetschek gelistet, aber leider nicht wie der zugehörige Frageparameter <code>param</code> lauten soll, noch mit welchen Antworten zu rechnen ist. Alle unten diesbezüglichen gemachten Angaben sind entweder aus den mitgelieferten Smartparts entnommen oder durch Versuche ermittelt worden.</p>
+<h4>
+<a name="TOC-Normen-und-Materialg-ten"></a> Normen und Materialgüten</h4>
+<ul>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Default_Norm_ID"</font>, "", norm_id)</code>: Index der aktuelle Betonbaunorm</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Norm"</font>, norm_id, norm_name)</code>: Name der Betonbaunorm <code>norm_id</code>
+</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Default_Conr_Grade_ID"</font>, "", conrete_id)</code>: Index der aktuellen Betongüte</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Conr_Grade"</font>, conrete_id, conrete_name)</code>: Name der Betongüte <code>conrete_id</code>
+</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Default_Steel_Grade_ID"</font>, "", steel_id)</code>: Index der aktuelle Stahlgüte, eigentlich Querschnittsreihe z.B. "Betonstabstahl"</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Steel_Grade"</font>, steel_id, steel_name)</code>: Name der Stahlgüte (Querschnittsreihe) <code>steel_id</code>
+</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Mesh_Group"</font>, mesh_group_id, mesh_goup_name)</code>: Name der Mattengruppe <code>mesh_group_id</code>, die  <code>mesh_group_id</code> erhält man anscheinend nur durch ein entsprechendes Eingabefeld im Eingabedialog oder der Eingabepalette.</li>
+</ul>
+<h4>
+<a name="TOC-Stabstahleigenschaften"></a>Stabstahleigenschaften</h4>
+<p>
+<code> DIM diameters[] ! Zielvariable für Durchmesserabfrage </code><br>
+<code> DIM bending_roll_factors[] ! Zielvariable für Biegerollenabfrage </code>
+</p>
+<div>Abfragen die auf "_List" enden benötigen ein Feld als Zielvariable.</div>
+<div>Wichtig: die Stahlgüte (Querschnittsreihe) wird teilweise als Name und teilweise als Index angegeben!</div>
+<ul>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Bar_Diam_List"</font>, steel_name, diameters)</code>: alle gültigen Stabdurchmesser der Stahlgüte <code>steel_name</code> in der aktuellen Maßeinheit.</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Bend_Roll_List"</font>, steel_name, bending_roll_factors)</code>: alle gültigen Biegerollenfaktoren der Stahlgüte <code>steel_name</code>.</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Min_Bend_Roll"</font>, bar_diameter, bending_roll_factor)</code>: liefert den Mindestbiegerollenfaktor für <code>bar_diameter</code> (in akueller Einheit).</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Bar_Grade"</font>, steel_id, bar_grade_id, bar_grade_name, group_name, yield)</code>: liefert für die Stahlgüte <code>steel_id</code> die aktuelle(?) Stabstahlgüte und zugehörige Werte: 
+<ul>
+<li>
+<code>bar_grade_id:</code> Index der Stabstahlgüte</li>
+<li>
+<code>bar_grade_name:</code> Name der Stabstahlgüte</li>
+<li>
+<code>group_name:</code> Gruppenbezeichnung der Stabstahlgüte z.B. "IV S" bei "BST 550 OENORM"</li>
+<li>
+<code>yield:</code> Streckgrenze z.B. 550 für "BST 550"</li>
+</ul>
+</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Bar_Diam"</font>, bar_diameter, max_length, mass, unknown)</code>: liefert für den Durchmesser <code>bar_diameter</code> (in aktueller Einheit!) folgende Werte: 
+<ul>
+<li>
+<code>max_length:</code> maximale Stablänge, Lieferlänge</li>
+<li>
+<code>mass:</code> Masse des Stabs in [kg/m]</li>
+<li>
+<code>unknown:</code> ???</li>
+</ul>
+</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Default_Hook_Length"</font>, "dm angle 1", default_hook_length, min_hook_length)</code>: z.B. (aktuelle Einheit [m]) <code>"0.010 135 1"</code> liefert für den Durchmesser 10mm und 135° Haken (wofür die 1 steht weiß ich nicht!) folgende Werte: 
+<ul>
+<li>
+<code>default_hook_lenght:</code> Standardhakenlänge = 14ds (bei [m]: 0.014)für die "OENORM" (in aktueller Einheit)</li>
+<li>
+<code>min_hook_length:</code> Mindesthakenlänge (in aktueller Einheit)</li>
+</ul>
+</li>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Mesh"</font>, mesh_name, mesh_length, mesh_width, dm_1, dm_2, unknown_1, unknown_2, spacing_1, spacing_2, overlapping_1, overlapping_2)</code>: <code>mesh_name</code> wie in Allplan benannt z.B. "AQ65" funktionier; "Q188B" und andere haben nicht funktioniert, hängt wahrscheinlich von der Außentemperatur oder dem Luftdruck ab:
+<ul>
+<li>
+<code>mesh_lenght:</code> Mattenlänge</li>
+<li>
+<code>mesh_width:</code> Mattenbreite</li>
+<li>
+<code>dm_1:</code> Stabdurchmesser in Längsrichtung</li>
+<li>
+<code>dm_1:</code> Stabdurchmesser in Querrichtung</li>
+<li>
+<code>unknown_1:</code> ???</li>
+<li>
+<code>unknown_2:</code> ???</li>
+<li>
+<code>spacing_1:</code> Stababstand in Längsrichtung</li>
+<li>
+<code>spacing_2:</code> Stababstand in Querrichtung</li>
+<li>
+<code>overlapping_1:</code> Mindestmattenübergriff in Längsrichtung</li>
+<li>
+<code>overlapping_2:</code> Mindestmattenübergriff in Querrichtung</li>
+</ul>
+</li>
+</ul>
+<h4>
+<a name="TOC-Funktionsweise-nicht-bekannt:"></a>Funktionsweise nicht bekannt:</h4>
+<ul>
+<li>
+<code>n=REQUEST(<font color="#00ff00">"Reinf_Default_Overlapping_Length"</font>, ???, ???, ...)</code> sollte die Standardübergriffslänge liefern, antwortet nicht auf Durchmesser als Zahl oder als String</li>
+</ul>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

@@ -1,0 +1,117 @@
+---
+layout: default
+title: Dateibefehle
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Dateibefehle</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p>Mit <code>OPEN()</code> wird eine existierende Datei geöffnet oder eine neue Datei erzeugt. Der Befehl liefert eine positive Dateinummer (<code>channel</code>) zurück, diese Dateinummer identifiziert die Datei in den restlichen Dateibefehlen. Eine geöffnete Datei muss wieder geschlossen werden.
+</p>
+<p><code>channel = OPEN(filter, filename, parameter_string)</code></p>
+<p><code>CLOSE channel</code> schließt die zuvor geöffnete Datei wieder.</p>
+<p>Mit <code>INPUT()</code> und <code>OUTPUT()</code> liest/schreibt man Daten aus/in eine/r geöffnete/n Datei.</p>
+<h2>
+<a name="TOC-FILTER:-TEXT"></a>FILTER: TEXT</h2>
+<p>Liest und schreibt Datensätze in Textdateien, jede Textzeile ist ein Datensatz, die Datenfelder werden durch spezielle Separatoren getrennt (Voreinstellung=<code>'\t'</code> Tabulator).</p>
+<h3>
+<a name="TOC-OPEN"></a>OPEN</h3>
+<p><code>channel = OPEN("TEXT", filename, "MODE=RO|WA|WO [, SEPARATOR='char'] [, extra]")</code></p>
+<p>
+<code>filename</code>: Dateiname<br>
+<code>MODE</code>: Dateimodus<br>
+</p>
+<ul>
+<li>
+<code>RO</code>: Read Only - Lesemodus </li>
+<li>
+<code>WA</code>: Write After - Schreibmodus, hängt neuen Daten an eine existierende Datei an oder erstellt eine neue Datei</li>
+<li>
+<code>WO</code>: Write Only - Schreibmodus, erstellt eine neue Datei bzw. überschreibt eine existierende Datei. </li>
+</ul>
+<code>SEPARATOR</code>: Trennzeichen der Datenfelder, Voreinstellung=<code>'\t'</code> (Tabulator)<br>
+<code>extra</code>: Zusatzparameter<br>
+<ul>
+<li>
+<code>FULLPATH</code>: Der Parameter <code>filename</code> ist eine absoluter Dateipfad inkl. Laufwerksbuchstaben z.B. "C:\Daten\test.txt"</li>
+<li>
+<code>DIALOG</code>: Öffnet einen Dateiauswahldialog, <code>filename</code> wird als Voreinstellung übernommen</li>
+</ul>
+<h3>
+<a name="TOC-INPUT"></a>INPUT</h3>
+<p><code>result = INPUT(channel, recordID, fieldID, var_1, var_2, ..., var_n</code></p>
+<p>
+<code>result:</code> Anzahl der gelesenen Datenfelder<br>
+<code>channel:</code> Kanalnummer (siehe <code>OPEN</code>)<br>
+<code>recordID:</code> Datensatznummer, 1 = erster Datensatz.<br>
+<code>fieldID:</code>
+</p>
+<ul>
+<li> <code>1</code> erstellt oder modifiziert einen Datensatz</li>
+<li> <code>0</code> löscht einen existierenden Datensatz</li>
+</ul>
+<p>
+<code>var_i:</code> Zielvariablen für die eingelesenen Daten
+</p>
+<h3>
+<a name="TOC-OUTPUT"></a>OUTPUT</h3>
+<p><code>OUTPUT channel, recordID, fieldID, expr_1, expr_2, ..., expr_n</code></p>
+<p>
+<code>channel:</code> Kanalnummer (siehe <code>OPEN</code>)<br>
+<code>recordID:</code> Datensatznummer, 1 = erster Datensatz.<br>
+<code>fieldID:</code>
+</p>
+<ul>
+<li> <code>1</code> erstellt oder modifiziert einen Datensatz</li>
+<li> <code>0</code> löscht einen existierenden Datensatz</li>
+</ul>
+<p>
+<code>expr_i:</code> zu schreibender Datensatz, Ausdrücke werden durch <code>SEPARATOR</code> getrennt.
+</p>
+<h2>
+<a name="TOC-FILTER:-FILEMAN"></a>FILTER: FILEMAN</h2>
+<p> Dient zum Einlesen von Dateiverzeichnissen.</p>
+<h3>
+<a name="TOC-OPEN1"></a>OPEN</h3>
+<p><code>channel = OPEN("FILEMAN", foldername, "FOLDERS|FILES [, DIALOG]")</code></p>
+<p>
+<code>foldername:</code> Dateiverzeichnis als Absolutpfad <br>
+<code>FOLDERS:</code> es werden nur Verzeichnisse eingelesen <br>
+<code>FILES:</code> es werden nur Dateien eingelesen <br>
+<code>DIALOG:</code> öffnet einen Dateiauswahldialog um das einzulesende Verzeichnis auszuwählen.<br>
+</p>
+<h3>
+<a name="TOC-INPUT1"></a>INPUT</h3>
+<p><code>result = INPUT(channel, 0, 0, var_1, var_2, ..., var_n</code></p>
+<p>
+<code>result:</code> Anzahl der gelesenen Dateieinträge<br>
+<code>channel:</code> Kanalnummer (siehe <code>OPEN</code>)<br>
+<code>var_i:</code> Zielvariablen für die Dateinamen
+</p>
+<p>Diese Beispiel liest alle im Verzeichnis <code>"C:\Daten\Allplan\Std\SmartParts"</code> enthaltenen Unterverzeichnisse in das Feld <code>folders[]</code> ein.</p>
+<p>
+<code>
+DIM folders[] <br>
+folder = OPEN("FILEMAN", "C:\Daten\Allplan\Std\SmartParts", "FOLDERS")<br>
+index = 1 <br>
+DO <br>
+  result = INPUT(folder, 0, 0, folders[index]) <br>
+  index = index + result <br>
+WHILE result &gt; 0 <br>
+folder_count = index - 1 <br>
+<br>
+CLOSE folder
+</code></p>
+<h2>
+<a name="TOC-FILTER:-XML"></a>FILTER: XML</h2>
+<p> Dient zum Lesen und Schreiben von XML Dateien.</p>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

@@ -1,0 +1,99 @@
+---
+layout: default
+title: MATERIAL
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">MATERIAL</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p> Mit <code>DEFINE MATERIAL</code> definiert man Oberflächeneigenschaften für 3D Objekte. Farbkomponenten werden als Dezimalzahl im Bereich von <code>0.000</code> bis <code>1.000</code> angegeben (<code>0.000, 0.000, 0.000</code> = Schwarz), Umrechnung von Ganzzahlwerten (<code>i = 0..255</code>) mit <code>f = i / 255</code>.</p>
+<p><code>
+DEFINE MATERIAL name type, <br>
+parameter1, <br>
+parameter2, <br>
+... <br>
+parametern
+</code></p>
+<h3>
+<a name="TOC-Parameter"></a>Parameter</h3>
+<p>
+<code>name:</code> Name des Materials<br>
+<code>type:</code> Materialtyp<br>
+</p>
+<ul>
+<li>0: generelle Definition, <code>n=16</code> </li>
+<li>1: einfache Definition, <code>n=9</code> (zusätzliche Parameter sind konstant oder werden aus den vorhandenen Parametern berechnet) </li>
+<li>2-7: vordefinierte Materialien, <code>n=3</code> (RGB Komponenten der Oberflächenfarbe) weitere Parameter werden aus der Oberflächenfarbe abgeleitet. </li>
+<li>2: matt </li>
+<li>3: Metall </li>
+<li>4: Plastik </li>
+<li>5: Glass </li>
+<li>6: glühend </li>
+<li>7: konstant </li>
+<li>10: generelle Definition mit Füllparameter, <code>n=17</code> </li>
+<li>11: einfache Definition mit Füllparameter, <code>n=10</code> </li>
+<li>12-17: vordefinierte Materialien mit Füllparameter, <code>n=4</code> </li>
+<li>20: generelle Definition with fill, color index of fill and index of texture parameters, <code>n=19</code> </li>
+<li>21: einfache Definition with fill, color index of fill and index of texture parameters, <code>n=12</code> </li>
+<li>22-27: vordefinierte Materialien with fill, color index of fill and index of texture parameters, <code>n=6</code> </li>
+</ul>
+<p>
+Special meanings for types 20-27:
+If the pen number is zero, vectorial hatches will be generated with the active pen. (not supported)
+</p>
+<p>Zero value for a texture index allows you to define materials without a vectorial hatch or texture.
+</p>
+<p><code>parametern:</code> Anzahl der möglichen (<code>n</code>) Parameter abhängig vom Materialtyp
+</p>
+<ol>
+<li>
+<code>red</code> (0..1)</li>
+<li>
+<code>green</code> (0..1)</li>
+<li>
+<code>blue</code> (0..1)</li>
+<li>
+<code>flare</code> (0..1)</li>
+<li>
+<code>diffuse</code> (0..1)</li>
+<li>
+<code>reflection</code> (0..1)</li>
+<li>
+<code>transparency</code> (0..1)</li>
+<li>
+<code>gloss</code> (0..100)</li>
+<li>
+<code>derating_trans</code> (0..4)</li>
+<li>
+<code>reflection_red</code> (0..1)</li>
+<li>
+<code>reflection_green</code> (0..1)</li>
+<li>
+<code>reflection_blue</code> (0..1)</li>
+<li>
+<code>emission_red</code> (0..1)</li>
+<li>
+<code>emission_green</code> (0..1)</li>
+<li>
+<code>emission_blue</code> (0..1)</li>
+<li>
+<code>emission</code> (0..100)</li>
+<li>
+<code>hatching_index</code> Allplanindex</li>
+<li>
+<code>hatching_pen</code> Allplanindex</li>
+<li>
+<code>texture_index</code> Ganzzahl</li>
+</ol>
+<p>Mit <code>MATERIAL name</code> wird das aktuelle Material gesetzt.</p>
+<p>Mit <code>MATERIAL 0</code> wird das der aktuellen Linienfarbe zugeordnete Material verwendet (Standard).</p>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

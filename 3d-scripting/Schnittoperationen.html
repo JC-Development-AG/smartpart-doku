@@ -1,0 +1,238 @@
+---
+layout: default
+title: Schnittoperationen
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Schnittoperationen</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<div class="sites-layout-name-right-sidebar-hf sites-layout-vbox"><table cellspacing="0" class="sites-layout-hbox"><tbody><tr>
+<td class="sites-layout-tile sites-tile-name-content-1"><div>
+<h2>
+<a name="TOC-CUTPLANE"></a>CUTPLANE</h2>
+<p>Mit <code>CUTPLANE</code> wird eine Schnittebene im Raum erzeugt. Alle 3D Objekte die zwischen <code>CUTPLANE</code> und <code>CUTEND</code> erzeugt werden, werden von dieser Schnittebene geteilt sofern die Schnittebene und das 3D Objekt eine gemeinsame Schnittfläche haben. Die Teile des 3D Objekts die auf der "Schnittseite" liegen werden gelöscht. Schnittebenen können verschachtelt werden.
+</p>
+<p><code>
+CUTPLANE [x, y, z [, side]]<br>
+[commands ...]<br>
+CUTEND
+</code></p>
+<p>oder</p>
+<p><code>
+CUTPLANE angle<br>
+[commands ...]<br>
+CUTEND
+</code></p>
+<p>
+<code>x, y, z: </code>Diese drei Werte definieren eine Ebene, maximal ein Wert darf 0 sein.<br>
+<code>side:</code> Definiert welcher Teil des geschnittenen Objekts gelöscht wird, <code>side=0</code> bedeutet, Teile oberhalb der Schnittebene werden gelöscht (Standard), <code>side=1</code> bedeutet, Teile unterhalb der Schnittebene werden gelöscht.<br>
+<code>angle:</code> Rotationswinkel der Schnittebene
+</p>
+<p>Die Anzahl der Parameter definiert das Verhalten der Schnittebene:
+</p>
+<ul>
+<li>
+<code>CUTPLANE</code> : Die Schnittebene entspricht der XY-Ebene, gelöscht werden jene Objektteile, die in +Z Richtung über der Schnittebene liegen.</li>
+<li>
+<code>CUTPLANE angle</code> : Schnittebene liegt in der X-Achse, <code>angle</code> ist der Winkle zwischen XY-Ebene und der Schnittebene. Gelöscht werden jene Objektteile die im Bereich von <code>angle</code>  bis <code>angle + 180</code> liegen. (siehe<a href="Schnittoperationen/example01.html"> Beispiel 1</a>)
+</li>
+<li>
+<code>CUTPLANE x, y</code> : Die Schnittebene ist parallel zur Z-Achse, und schneidet die X- bzw. Y-Achse an den angegeben Werten. Gelöscht werden jene Objektteile die auf der Seite liegen, die <u>nicht</u> den lokalen Ursprung des aktuellen Koordinatensystems enthält.
+</li>
+<li> <code>CUTPLANE x, y, z</code> : Die Schnittebene schneidet die X-, Y- und Z-Achse an den angegeben Werten. Gelöscht werden jene Objektteile die auf der Seite liegen, die <u>nicht</u> den lokalen Ursprung des aktuellen Koordinatensystems enthält.
+</li>
+<li> <code>CUTPLANE x, y, z, side</code> : wenn <code>side=0</code> entspricht das Verhalten genau der mit 3 Parametern, für <code>side=1</code> gilt: gelöscht werden jene Objektteile die auf der Seite liegen, die den lokalen Ursprung des aktuellen Koordinatensystems enthält.
+</li>
+</ul>
+<h2>
+<a name="TOC-CUTSHAPE"></a>CUTSHAPE</h2>
+<p>
+Erzeugt eine U- <code>(d &gt; 0)</code> oder L-förmige <code>(d &lt; 0)</code> Schnittfigur, die erste Schnittfläche ist immer die XY-Ebene, die zweite Schnittebene ist die YZ-Ebene und bei der U-förmigen Schnittform, gibt <span><code>d</code></span> den Abstand der 3. Schnittfläche in +X-Richtung an. 
+</p>
+<p><code>
+CUTSHAPE d<br>
+[commands ...]<br>
+CUTEND
+</code></p>
+<p>
+<code>d: </code> definiert die Schnittfigur
+</p>
+<ul>
+<li>
+<code>d = 0</code> : Schnittebene liegt in der XY-Ebene, Teile über der XY-Ebene werden gelöscht, funktioniert mit Allplan 2013 nicht.</li>
+<li>
+<code>d &lt; 0</code> : L-Schnitt
+<ul>
+<li> 1. Schnittebene liegt in der XY-Ebene</li>
+<li> 2. Schnittebene liegt in der YZ-Ebene</li>
+</ul>
+	Alle Objektteile im +X/+Z Quadranten werden gelöscht.
+</li>
+<li>
+<code>d &gt; 0</code> : U-Schnitt
+<ul>
+<li> 1. Schnittebene liegt in der XY-Ebene</li>
+<li> 2. Schnittebene liegt in der YZ-Ebene</li>
+<li> 3. Schnittebene parallel zur YZ-Ebene mit Abstand <code>d</code> in X-Richtung</li>
+</ul>
+	Objekte über der XY- und zwischen der 2. und 3. Schnittebene werden gelöscht
+</li>
+</ul>
+<h2>
+<a name="TOC-CUTPOLY"></a>CUTPOLY</h2>
+<p>
+Wie der <code>CUTPLANE</code>-Befehl werden alle nachfolgenden 3D-Elemente bis zum zugehörigen <code>CUTEND</code>-Befehl beschnitten. Schnittfigur ist ein, in der XY-Ebene frei definierbarer <b>konvexer</b> Polygonzug, verschoben entlang des Richtungsvektor <code>rx, ry, rz</code>. (Standard = <code>[0, 0, 1]</code>), alle Objektteile innerhalb dieser "Röhre" werden gelöscht.</p>
+<p> Ein Verschiebungsvektor in der XY-Ebene (<code>rz = 0</code>) löscht alle zwischen <code>CUTPOLY</code> und <code>CUTEND</code> definierten Objekte.
+</p>
+<p><code>
+CUTPOLY n, x1, y1, ..., xn, yn [, rx, ry, rz]<br>
+[commands ...]<br>
+CUTEND
+</code></p>
+<p>
+<code>n:</code> Anzahl der Polygonpunkte<br>
+<code>xi, yi:</code> Koordinaten in der XY-Ebene<br>
+<code>rx, ry, rz:</code> Koordinaten des Richtungsvektors<br>
+</p>
+<h2>
+<a name="TOC-CUTPOLYA"></a>CUTPOLYA</h2>
+<p>
+Erzeugt ähnlich wie der <code>CUTPOLY</code>-Befehl eine Schnittröhre, diese wird aber durch zwei Ebene begrenzt. Erstens durch die XY-Ebene und zweitens durch eine zur XY-Ebene parallelen Ebene mit dem Abstand <code>d</code> in Z-Richtung (genauer: Richtung der <code>rz</code> Komponente des Richtungsvektors). Wenn <code>d=0</code> ist, ist  das Ergebnis identisch mit <code>CUTPOLY</code>, da die  Parameter <code>status</code> und <code>mask</code> von Allplan nicht unterstützt werden. Wird eine begrenzte Röhre definiert (<code>d &lt;&gt; 0</code>), so zeigt die Öffnung stets in die Richtung des Richtungsvektors, auch wenn <code>d &lt; 0</code> ist.
+</p>
+<p><code>
+CUTPOLYA n, status, d, x1, y1, mask1, ..., xn, yn, maskn [, rx, ry, rz]<br>
+[commands ...]<br>
+CUTEND
+</code></p>
+<p>
+<code>n:</code> Anzahl der Polygonpunkte<br>
+<code>status:</code> wird nicht unterstützt<br>
+<code>d:</code> Begrenzung der Schnittform, Abstand von der XY-Ebene in Richtung der <code>rz</code> Komponente des Richtungsvektors<br>
+<code>xi, yi:</code> Koordinaten in der XY-Ebene<br>
+<code>maski:</code> wird nicht unterstützt<br>
+<code>rx, ry, rz:</code> Koordinaten des Richtungsvektors<br>
+</p>
+<h2>
+<a name="TOC-CUTFORM"></a>CUTFORM</h2>
+<p>
+<code>CUTFORM </code>ist eine Weiterentwicklung des <code>CUTPOLYA</code>-Befehls, es gibt zwei weitere Schnittformen: Keil und Pyramide.</p>
+<p><code>CUTFORM n, form, status, rx, ry, rz, d, x1, y1, mask1, ..., xn, yn, maskn<br>
+[commands ...]<br>
+CUTEND
+</code>
+</p>
+<p>
+<code>n:</code> Anzahl der Polygonpunkte<br>
+<code>form:</code> 1/2/3 = Prisma/Pyramide/Keil<br>
+<code>status:</code> siehe unten<br>
+<code>rx, ry, rz:</code> Koordinaten des Richtungsvektors<br>
+<code>d:</code> Begrenzung der Schnittform, Abstand von der XY-Ebene in Richtung der <code>rz</code> Komponente des Richtungsvektors<br>
+<code>xi, yi:</code> Koordinaten in der XY-Ebene<br>
+<code>maski:</code> wird nicht unterstützt
+</p>
+<p>
+<code>status = j4/5 + j6</code>
+</p>
+<ul>
+<li>
+<code>j4/5 = 0:</code> Endlicher Schnitt</li>
+<li>
+<code>j4/5 = 16:</code> Einseitig unendlicher Schnitt</li>
+<li>
+<code>j4/5 = 24:</code> Unendlicher Schnitt</li>
+<li>
+<code>j6 = 0|32:</code> Schnittform bildet Boole’sche Differenz | Schnittmenge mit dem Schnittkörper</li>
+</ul>
+<h4>
+<a name="TOC-Schnittform-Prisma"></a> Schnittform Prisma</h4>
+<p>
+ Entspricht, bis auf die Steuerung der Schnittformbegrenzung, <code>CUTPOLYA</code>. Sowohl beim einseitig als auch beim beidseitig unendlichen Schnitt wird der Paramater <code>d</code> ignoriert. Der einseitig unendliche Schnitt beginnt immer in der XY-Ebene.
+ </p>
+<h4>
+<a name="TOC-Schnittform-Pyramide"></a> Schnittform Pyramide</h4>
+<p>
+ Der Richtungsvektor gibt die Koordinate der Pyramidenspitze an. Die Basisfläche liegt in der XY-Ebene. Der Parameter <code>d</code> begrenzt die Pyramide mit einer zur XY-Ebene parallelen Fläche mit dem Abstand <code>d</code>. Einseitig und beidseitig unendliche Schnitte verlängern die Schnittpyramide von der Spitze weg. Negative Richtungsvektoren in Kombination mit unendlichen Schnitten, führen zu seltsamen (falschen?) Ergebnissen.
+</p>
+<h4>
+<a name="TOC-Schnittform-Keil"></a> Schnittform Keil</h4>
+<p>
+ Die obere Keilkante wird durch den Richtungsvektor definiert und ist immer parallel zu Y-Achse, <code>ry</code> Komponente wird ignoriert. Als endlicher Schnitt wird der Keil oben mit einer Ebene parallel zur XY-Ebene mit Abstand <code>d</code> abgeschnitten. Einseitig und beidseitig unendliche Schnitte verlängern den Schnittkeil von der Spitze weg. Negative Richtungsvektoren in Kombination mit unendlichen Schnitten, führen zu seltsamen (falschen?) Ergebnissen.
+ </p>
+<p>
+ Durch das Setzen des Bit <code>j6</code> des <code>status</code> Werts, kann auch eine Schnittmenge mit dem geschnittenen Körper erzeugt werden.
+</p>
+</div></td>
+<td class="sites-layout-tile sites-tile-name-content-2 sites-canvas-sidebar"><div>
+<div><code>CUTPLANE</code></div>
+<div><code>
+<div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/cutplane0978b.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/cutplane0978b.png" width="200"></a></div>
+</code></div>
+<div><code><br>
+</code></div>
+<div><code>CUTPLANE 30</code></div>
+<div><code>
+<div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/cutplane14b6a.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/cutplane14b6a.png" width="200"></a></div>
+<br>
+</code></div>
+<div><code>CUTPLANE 3, 4</code></div>
+<div><code>
+<div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/cutplane23785.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/cutplane23785.png" width="200"></a></div>
+<br>
+</code></div>
+<div><code>CUTPLANE 3, 4, 5</code></div>
+<div><code>
+<div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/cutplane30e19.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/cutplane30e19.png" width="200"></a></div>
+<div style="display:block;text-align:left">
+<br>
+</div>
+<div style="display:block;text-align:left">CUTPLANE 3, 4, 5, 1</div>
+<div style="display:block;text-align:left">
+<div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/cutplane40c95.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/cutplane40c95.png" width="200"></a></div>
+</div>
+<br>
+</code></div>
+<code>CUTSHAPE L-SHAPE</code>
+<div>
+<div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/L_shapeb170.png" imageanchor="1"><img border="0" height="153" src="/assets/3d-scripting/Schnittoperationen/L_shapeb170.png" width="200"></a></div>
+<div>
+<br>
+</div>
+<code>CUTSHAPE U-SHAPE</code>
+</div>
+<div><code>
+<div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/U-shapef9d0.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/U-shapef9d0.png" width="200"></a></div>
+<br>
+</code></div>
+<div><code>CUTPOLY</code></div>
+<div><code>
+<div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/cutpolydb75.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/cutpolydb75.png" width="200"></a></div>
+<br>
+</code></div>
+<div><font color="#ccff66" face="monospace">CUTPOLYA</font></div>
+<div><font color="#ccff66" face="monospace">
+<div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/cutpolya1d4b.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/cutpolya1d4b.png" width="200"></a></div>
+</font></div>
+<div>
+<div style="display:block;text-align:left">
+<br>
+</div>
+<div style="display:block;text-align:left"><code>CUTFORM form=1 d=3 status=16</code></div>
+<div style="display:block;text-align:left"><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/cutform1a550.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/cutform1a550.png" width="200"></a></div>
+<br></code></div>
+<div style="display:block;text-align:left"><code>CUTFORM form=2 status=16</code></div>
+<div style="display:block;text-align:left"><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/cutform233a2.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/cutform233a2.png" width="200"></a></div>
+<br></code></div>
+<div style="display:block;text-align:left"><code>CUTFORM form=3 status=0</code></div>
+<div style="display:block;text-align:left"><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/Schnittoperationen/cutform371a3.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/Schnittoperationen/cutform371a3.png" width="200"></a></div>
+<br></code></div>
+</div>
+</div></td>
+</tr></tbody></table></div>
+</div> 
+</div> 
+
+</div>

@@ -1,0 +1,338 @@
+---
+layout: default
+title: Oberflächen und Körper aus Polygonen
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Oberflächen und Körper aus Polygonen</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<div class="sites-layout-name-right-sidebar-hf sites-layout-vbox"><table cellspacing="0" class="sites-layout-hbox"><tbody><tr>
+<td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p>Diese Oberflächen und Körper werden durch einfache ebene Elemente und einer Konstruktionsregel erstellt, zB. Rotation oder Translation. Sofern durch die Parameter einen geschlossene Oberfläche erzeugt wird, verhält sich dieser Körper wie ein richtiger Volumenkörper, d.h. bei assoziativen Schnitten wird die Schnittfläche entsprechend den Einstellungen (z.B. als Füllfläche) erzeugt und man "sieht" nicht in die hohle Form, sondern die Kanten, die "hinter" der Schnittfläche liegen, werden als verdeckte Kanten gerendert. Wenn man das Smartpart auflöst (mittels "Makro auflösen"), können die 3D Körper mit den Modellierwerkzeugen weiter bearbeitet werden (Körper vereinen oder abziehen, Schnittkörper erzeugen, ...).
+</p>
+<h2>
+<a name="TOC-EXTRUDE"></a>EXTRUDE</h2>
+<p>
+Mit <code>EXTRUDE</code> verschiebt die Grundfläche entlang einer Geraden im Raum und erzeugt damit einen 3D Körper.
+</p>
+<p>
+<code>EXTRUDE n, dx, dy, dz, mask, x1, y1, s1, ... , xn, yn, sn</code>
+</p>
+<p>
+<code>n:</code> Anzahl der Polygonknoten<br>
+<code>dx, dy, dz:</code> Verschiebungsvektor in X, Y und Z-Richtung<br>
+<code>mask = j1 + j2 + j3:</code> Bitmaske, steuert die Erzeugung der Grund-, Deck- und im Fall eines offenen Polygons der Seitenflächen.
+</p>
+<ul>
+<li>
+<code>j1 = 0|1:</code> Grundfläche wird erstellt</li>
+<li>
+<code>j2 = 0|2:</code> Deckfläche wird erzeugt</li>
+<li>
+<code>j3 = 0|4:</code> im Falle eines offenen Basispolygons wird eine schließende Seitenflächen erzeugt</li>
+</ul>
+<code>xi, yi:</code> Koordinaten der Polygonknoten in der XY-Ebene<br>
+<code>si:</code> <a href="../statuscodes.html">Statuscodes</a>
+<h2>
+<a name="TOC-MESH"></a>MESH</h2>
+<p><code>MESH</code> erstellt ein Polygonnetz auf einer rechteckigen Grundfläche mit 
+den Kantenlängen <code>a</code> und <code>b</code>. Der Ausgangspunkt des Netzes liegt im 
+Koordinatenursprung, die Abstände der Knoten werden gleichmäßig in X- 
+und Y-Richtung entsprechend der Parameter <code>m, n</code> ausgeteilt, die Höhe der 
+einzelnen Knotenpunkte kann individuell angegeben werden.
+</p>
+<p>
+<code>MESH a, b, m, n, mask, z11, z12, ... , z1m, z21, z22, ... , z2m, zn1, zn2, ... , znm</code>
+</p>
+<p>
+<code>a:</code> Länge des Basisrechtecks in X-Richtung<br>
+<code>b:</code> Länge des Basisrechtecks in Y-Richtung<br>
+<code>m:</code> m Knoten für die Seite a (X-Achse), muss ≥ 2 sein.<br>
+<code>n:</code> n Knoten für die Seite b (Y-Achse), muss ≥ 2 sein.<br>
+<code>mask: j1 + j2</code>, bestimmt die Existenz der Grund- und Seitenflächen<br>
+</p>
+<ul>
+<li>
+<code>j1 = 1:</code> Grundflächen werden erstellt</li>
+<li>
+<code>j2 = 4:</code> Seitenflächen werden erstellt</li>
+</ul>
+<code>z(i,j):</code> Höhe des korrespondierenden Netzknotens<br>
+<h2>
+<a name="TOC-MESH_B"></a>MESH_B</h2>
+<p><code>MESH_B</code> erzeugt eine Oberfläche aus Dreiecken, die eine Bezierfläche annähert. Ausgangspunkt sind m x n Kontrollpunkte für die Berechnung der Bezierfläche. Es stehen zwei Berechnungsmethoden zur Verfügung:</p>
+<ol>
+<li>
+<b>adaptive Methode:</b> Die Anzahl der Berechnungsabschnitte wird von Allplan angepasst, Randbedingung ist, dass der Abstand der Bezierfläche zum Mittelpunkt der Näherungsfläche kleiner als der Parameter <code>rise</code> ist.</li>
+<li>
+<b>statische Methode:</b> es werden für die m-Richtung <code>m_subdiv</code> und für die n-Richtung <code>n_subdiv</code> Berechnungsabschnitte zur Netzgenerierung verwendet.</li>
+</ol>
+<p> Die <b>adaptive Berechnungsmethode</b> wird angewendet, wenn <code>subdiv_m</code> oder <code>subdiv_n</code> ≤ 2 ist. Die Kontrollpunkte der Definitionskurven sind an keinen fixen Raster gebunden.</p>
+<p><code>
+MESH_B m, n, subdiv_n, subdiv_m, rise, <br>
+x11, y11, z11, x12, y12, z12, ... , <br>
+x1m, y1m, z1m, x21, y21, z21, x22, y22, z22, ... , <br>
+x2m, y2m, z2m, ... , xn1, yn1, zn1, xn2, yn2, zn2, ... , <br>
+xnm, ynm, znm
+</code></p>
+<p>
+<code>m, n:</code> Anzahl Kontrollpumkte für Bezierflächenberechung in m- bzw. n-Richtung<br>
+<code>subdiv_n, subdiv_m:</code> Anzahl der Berechnungsabschnitte in m- und n-Richtung<br>
+<code>rise:</code> max. Abstand zwischen Näherungsfläche und Bezierfläche, muss bei adaptiver Methode &gt; 0 sein <br>
+<code>xij, yij, zij:</code> X-, Y- und Z-Koordinaten der Kontrollpunkte<br>
+</p>
+<h2>
+<a name="TOC-MESH_C"></a>MESH_C</h2>
+<p>Erzeugt eine gekrümmte Freiformfläche (coon's patch). Die Definition 
+erfolgt über die Festlegung von vier umfassenden Polygonzüge.
+</p>
+<p>
+<code>
+MESH_C n, m, mask, x11, y11, z11, ... , x1n, y1n, z1n, x21, y21, z21, 
+... , x2n, y2n, z2n, x31, y31, z31, ... , x3m, y3m, z3m, x41, y41, z41, 
+... x4m, y4m, z4m 
+</code>
+</p>
+<p>
+<code>n:</code> Anzahl Knoten in X-Richtung<br>
+<code>m:</code> Anzahl Knoten in Y-Richtung<br>
+<code>mask:</code> wird von Allplan nicht unterstützt<br>
+<code>xij, yij, zij:</code> Koordinaten der Begrenzungspolygone in der 
+Reihenfolge: 1. Polygon_n, 2. Polygon_n, 1. Polygon_m, 2. Polygon_m<br>
+</p>
+<h2>
+<a name="TOC-MESH_P"></a>MESH_P</h2>
+<p>Erzeugt eine gekrümmte Freiformfläche (coon's patch). Die Definition 
+erfolgt über n x m Kontrollpunkte, für alle Stützpunkte müssen 
+die (<code>x, y, z</code>) Koordinaten angegeben werden.
+</p>
+<p>
+<code>
+MESH_P top_material, bottom_material, side_material, n, m, mask, h, x1, y1, z1, s1, ... , xn, yn, zn, sn, xn+1, yn+1, zn+1, sn+1, ... , xn+m, yn+m, zn+m, sn+m
+</code>
+</p>
+<p>
+<code>top_material:</code> Material für die Darstellung der Oberseite als <code>Integer</code> oder <code>String</code><br>
+<code>bottom_material:</code> Material für die Darstellung der Bodenfläche als <code>Integer</code> oder <code>String</code><br>
+<code>side_material:</code> Material für die Darstellung der Seitenflächen als <code>Integer</code> oder <code>String</code><br>
+<code>n:</code> Anzahl Knoten in X-Richtung<br>
+<code>m:</code> Anzahl Knoten in Y-Richtung<br>
+<code>mask = j1 + j3:</code> steuert die Darstellung der Boden- und Seitenflächen<br>
+</p>
+<ul>
+<li>
+<code>j1 = 0|1:</code> Bodenfläche wird dargestellt</li>
+<li>
+<code>j3 = 0|4:</code> Seitenflächen werden dargestellt</li>
+</ul>
+<code>h:</code> Basishöhe<br>
+<code>xi, yi, zi:</code> Koordinaten der Knotenpunkte<br>
+<code>si:</code> steuert die Darstellung der Liniensegmente<br>
+<ul>
+<li>
+<code>si = 0:</code> das Liniensegment mit dem Startpunkt <code>xi, yi, zi</code> wird nicht dargestellt</li>
+<li>
+<code>si = 1:</code> das Liniensegment mit dem Startpunkt <code>xi, yi, zi</code> wird dargestellt</li>
+<li>
+<code>si = -1:</code> damit werden Aussparungen definiert</li>
+</ul>
+<h2>
+<a name="TOC-PYRAMID"></a>PYRAMID</h2>
+<p>
+Mit <code>PYRAMID</code> können gerade und schiefe Pyramiden erzeugt werden, die Grundfläche liegt in der XY-Ebene, die Spitze der Pyramide liegt bei den Koordinaten <code>(0, 0, h)</code>. Zur Erzeugung des Basispolygon können die üblichen <a href="../statuscodes.html">Statuscodes</a> verwendet werden.
+</p>
+<p>
+<code>PYRAMID n, h, mask, x1, y1, s1, ..., xn, yn, sn</code>
+</p>
+<p>
+<code>n:</code> Anzahl Polygonkonten<br>
+<code>h:</code> Höhe der Pyramide, Z-Koordinate der Pyramidenspitze<br>
+<code>mask = j1 + j3:</code> Bitmaske, steuert die Erzeung der Grund-, und im Falle eines offenen Basispolygons, der Seitenflächen.
+</p>
+<ul>
+<li>
+<code>j1 = 0|1:</code> Grundfläche wird erzeugt</li>
+<li>
+<code>j3 = 0|4:</code> Seitenflächen werden erzeugt</li>
+</ul>
+<code>xi, yi:</code> Koordinaten der Polygonknoten<br>
+<code>si:</code> <a href="../statuscodes.html">Statuscodes</a><br>
+<h2>
+<a name="TOC-REVOLVE"></a>REVOLVE</h2>
+<p>
+Mit <code>REVOLVE</code> erzeugt man Rotationskörper durch rotieren eines Randpolygons um die X-Achse. Das Randpolygon liegt in der XY-Ebene und kann die üblichen <a href="../statuscodes.html">Statuscodes</a> enthalten.
+</p>
+<p>
+<code>REVOLVE n, alpha, mask, x1, y1, s1, ... , xn, yn, sn</code><br>
+</p>
+<p>
+<code>n:</code> Anzahl der Polygonknoten<br>
+<code>alpha:</code> Rotationswinkel<br>
+<code>mask = j1 + j2 + j3 + j4:</code> steuert die Erzeugung der Grund-, Deck- und für den Falle, dass <code>alpha</code> &lt; 360° ist, der Seitenflächen.<br>
+</p>
+<ul>
+<li>
+<code>j1 = 0|1:</code> Grundfläche wird erzeugt</li>
+<li>
+<code>j2 = 0|2:</code> Deckfläche wird erzeugt</li>
+<li>
+<code>j3 = 0|4:</code> Seitenfläche am Startwinkel (<code>0°</code>) wird erzeugt.</li>
+<li>
+<code>j4 = 0|8:</code> Seitenfläche am Endwinkel <code>alpha</code> wird erzeugt.</li>
+</ul>
+<code>xi, yi:</code> Koordinaten des Randpolygons<br>
+<code>si:</code> <a href="../statuscodes.html">Statuscodes</a><br>
+<h2>
+<a name="TOC-RULED"></a>RULED</h2>
+<p>
+<code>RULED</code> Verbindet zwei ebene Polygone mit der selben Anzahl an 
+Eckpunkten zu einem 3D Körper. Das Basispolygon liegt in der XY-Ebene, 
+das 2. Polygon kann frei im Raum liegen. Die Polygonkanten werden mit 
+Dreiecken oder wenn beide Kanten einen ebene Fläche bilden, mit Vierecken verbunden.
+</p>
+<p>
+<code>RULED n, mask, u1, v1, s1, ... , un, vn, sn, x1, y1, z1, ... , xn, yn, zn</code>
+</p>
+<p>
+<code>n:</code> Anzahl der Eckpunkte eines Polygons, beide Polygone müssen gleiche Anzahl an Eckpunkten haben.<br>
+<code>mask = j1 + j2 + j3:</code> steuert die Oberfächenerzeugung und -darstellung.<br>
+</p>
+<ul>
+<li>
+<code>j1 = 0|1:</code> eine Bodenfläche wird erstellt</li>
+<li>
+<code>j2 = 0|2:</code> eine Deckfläche wird erstellt</li>
+<li>
+<code>j3 = 0|4:</code> Seitenflächen werden erstellt</li>
+</ul>
+<code>ui, vi:</code> Koordinaten des 1. ebenen Polygons in der XY-Ebene
+<code>si:</code> die üblichen <a href="../statuscodes.html">Statuscodes</a><br>
+<code>xi, yi, zi:</code> Koordinaten des 2. ebenen Polygons in räumlicher Lage<br>
+<h2>
+<a name="TOC-RULED_2"></a>RULED_2</h2>
+<p>
+<code>RULED_2</code> ist die fehlertolerante Version des <code>RULED</code> Befehls. 
+</p>
+<h2>
+<a name="TOC-SWEEP"></a>SWEEP</h2>
+<p>
+<code>SWEEP</code> erzeugt eine röhrenförmige Oberfläche durch das 
+Verschieben eines Konturpolygons entlang eines räumlichen Pfadpolygons. 
+Um den Röhrenquerschnitt zu verdrehen, verjüngen oder zu erweitern, kann 
+das Konturpolygon während der Verschiebung skaliert und rotiert werden. 
+Die Ebene der Konturlinie folgt dem Pfadpolygon, die Ebene der Konturlinie 
+ist immer normal zu den Kanten des Pfadpolygon.
+</p>
+<p>
+Das Pfadpolygon muss in der XY-Ebene beginnen (<code>z1 = 0</code>), ist 
+diese Voraussetzung nicht erfüllt, wird das Pfadpoylgon entlang der 
+Z-Achse verschoben bis das Polygon in der XY-Ebenen beginnt.
+</p>
+<p>
+<code>SWEEP n, m, alpha, scale, mask, u1, v1, s1, ... , un, vn, sn, x1, y1, z1, ... ,xm, ym, zm</code>
+</p>
+<p>
+<code>n:</code> Anzahl Knoten des Konturpolygons, hier unbedingt notwenig, da der Unterschied zwischen Kontur- und Pfadpolygon nicht durch Allplan bestimmt werden kann. Und Anzahl Knoten = Anzahl der Zahlentripel (also auch Mittelpunkt- und Tangentendefinitionen)<br>
+<code>m:</code> Anzahl Knoten des Pfadpolygons<br>
+<code>alpha:</code> inkrementeller Rotationswinkel des Konturpolygons, wird bei jedem durchlaufen des Konturpolygons durch einen Knoten des Pfadpolygons hinzu addiert.<br>
+<code>scale:</code> inkremeteller Skalierungsfaktor des Kontupolygons, wird bei jedem durchlaufen des Konturpolygons durch einen Knoten des Pfadpolygons angewendet.<br>
+<code>mask = j1 + j2 + j3:</code> steuert die Darstellung der Deck-, Boden- und Seitenflächen<br>
+</p>
+<ul>
+<li>
+<code>j1 = 0|1:</code> Bodenflächen werden dargestellt</li>
+<li>
+<code>j2 = 0|2:</code> Deckflächen werden dargestellt</li>
+<li>
+<code>j3 = 0|4:</code> Seitenflächen werden dargestellt</li>
+</ul>
+<code>ui, vi:</code> X- und Y-Koordinaten des Konturpolygons<br>
+<code>si:</code> die üblichen <a href="../statuscodes.html">Statuscodes</a><br>
+<code>xi, yi, zi:</code> X-, Y- und Z-Koordinaten des Pfadpolygons<br>
+<h2>
+<a name="TOC-TUBE"></a>TUBE</h2>
+<p>
+Mit <code>TUBE</code> erzeugt man röhrenförmige Objekte durch verschieben 
+eines geschlossenen Konturpolygons entlang eines zweiten räumlichen 
+Pfadpolygons. In jedem Pfadknoten wird das formgebende Polygon in der 
+Schnittfläche der benachbarten Segmente platziert. In der Mitte des 
+Pfadsegments ist die Röhrenkontur identisch mit dem original Konturpolygon. 
+Im Konturpolygon können die üblichen <a href="../statuscodes.html">
+Statuscodes</a> verwendet werden um Bögen oder relative Segmente zu erzeugen.
+</p>
+<p><code>TUBE n, m, mask, u1, w1, s1, 
+... , un, vn, sn, x1, y1, z1, angle1, 
+... , xm, ym, zm, anglem</code>
+</p>
+<p>
+<code>n:</code> Anzahl Konten des Konturpolygons<br>
+<code>m:</code> Anzahl Konten des Pfadpolygons <br>
+<code>mask = j1 + j2:</code> steuert ob Flächen am  Anfang und Ende der Röhre erzeugt werden.
+</p>
+<ul>
+<li>
+<code>j1 = 0|1:</code> Fläche am Anfang der Röhre wird erzeugt</li>
+<li>
+<code>j2 = 0|2:</code> Fläche am Ende der Röhre wird erzeugt</li>
+</ul>
+<code>ui, vi:</code> Koordinaten des Konturpolygons in der aktuellen XY-Ebene, das Konturpolygon wird entlang des Pfadpolygons verschoben.<br>
+<code>si:</code> steuert die Sichtbarkeit der vom Eckpunkt ausgehenden Kanten, <code>= 1|0</code> Kanten sind sichtbar | nicht sichtbar<br>
+<code>xi, yi, zi:</code> Koordinaten des Pfadpolygons<br>
+<p>
+<b>Wichtig:</b> Das Pfadpolygon erfordert zwei zusätzliche Knoten. Der 
+ erste und der letzte Knoten beeinflussen die Generierung des ersten und 
+ des letzten Segments der Röhre. Die Ausrichtung dieser Flächen ist so als
+ ob die Röhre in Richtung dieser Kontrollknoten verlängert werden würde. 
+ Dies ist wahrscheinlich nicht verständlich, das liegt daran, dass ich 
+ es wirklich nicht verstehe, zumindest nicht vollständig, Versuche und 
+ Tests zu dieser Funktion sind geplant.
+</p>
+<p>
+<code>anglei:</code> Rotationswinkel des erzeugten Form-Polygon<br>
+</p>
+<h2>
+<a name="TOC-TUBE_A"></a>TUBE_A</h2>
+<p>
+Wie <code>TUBE, </code>nur im Unterschied zu <code>TUBE,</code> kann das 
+erzeugte Konturpolygon in der Mitte eines Pfad-Segments vom ursprünglichen 
+Konturpolygon abweichen, des weiteren muss das Konturpolygon nicht 
+geschlossen sein, in diesem Fall werden die Flächen bis zur XY-Ebene 
+verlängert. Und es wird kein Rotationswinkel für das erzeugte 
+Konturolygon angegeben.
+</p>
+<p>
+<code>TUBE_A n, m, mask, u1, v1, s1, ... , un, vn, sn, x1, y1, z1, ... 
+, xm, ym, zm</code>
+</p>
+</div></td>
+<td class="sites-layout-tile sites-tile-name-content-2 sites-canvas-sidebar"><div>
+<code>EXTRUDE ohne Deckfläche</code><div><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/oberflaechen-aus-polygonen/extrudef872.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/oberflaechen-aus-polygonen/extrudef872.png" width="200"></a></div>
+<br></code></div>
+<div><code>MESH mit Zufallshöhen</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/oberflaechen-aus-polygonen/MESH4030.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/oberflaechen-aus-polygonen/MESH4030.png" width="200"></a></div>
+<br></code></div>
+<div><code>MESH_B mit Zufallswerten</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/oberflaechen-aus-polygonen/MESH_B1c36.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/oberflaechen-aus-polygonen/MESH_B1c36.png" width="200"></a></div>
+<br></code></div>
+<div><code>MESH_C mit Zufallswerten</code></div>
+<div><code><div style="display:block;text-align:left"><a href="/assets/3d-scripting/oberflaechen-aus-polygonen/MESH_C2e5d.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/oberflaechen-aus-polygonen/MESH_C2e5d.png" width="200"></a></div>
+<br></code></div>
+<div><font color="#ccff66" face="monospace">PYRAMID</font></div>
+<div><font color="#ccff66" face="monospace"><div style="display:block;text-align:left"><a href="/assets/3d-scripting/oberflaechen-aus-polygonen/PYRAMIDc334.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/oberflaechen-aus-polygonen/PYRAMIDc334.png" width="200"></a></div>
+<br></font></div>
+<div><font color="#ccff66" face="monospace">REVOLVE</font></div>
+<div><font color="#ccff66" face="monospace"><div style="display:block;text-align:left"><a href="/assets/3d-scripting/oberflaechen-aus-polygonen/REVOLVE271b.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/oberflaechen-aus-polygonen/REVOLVE271b.png" width="200"></a></div>
+<br></font></div>
+<div><font color="#ccff66" face="monospace">SWEEP</font></div>
+<div><font color="#ccff66" face="monospace"><div style="display:block;text-align:left"><a href="/assets/3d-scripting/oberflaechen-aus-polygonen/SWEEPa98d.png" imageanchor="1"><img border="0" height="154" src="/assets/3d-scripting/oberflaechen-aus-polygonen/SWEEPa98d.png" width="200"></a></div>
+<br></font></div>
+</div></td>
+</tr></tbody></table></div>
+</div> 
+</div> 
+
+</div>

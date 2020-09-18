@@ -1,0 +1,219 @@
+---
+layout: default
+title: Biegeform
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Biegeform</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<div class="sites-layout-name-right-sidebar-hf sites-layout-vbox"><table cellspacing="0" class="sites-layout-hbox"><tbody><tr>
+<td class="sites-layout-tile sites-tile-name-content-1"><div>
+<br><div>
+<h2>
+<a name="TOC-Allgemeine-Parameter-f-r-alle-Biegeformbefehle"></a>Allgemeine Parameter für alle Biegeformbefehle</h2>
+<p>
+<code>dm:</code> Stabdurchmesser <br>
+<code>norm_id:</code> ID der Betonbaunorm<br>
+<code>conrete_id:</code> ID der Betongüte<br>
+<code>steel_id:</code> ID der Stahlgüte <br>
+<code>start_hook_length, start_hook_angle:</code> Länge und Winkel des Hakens am Stabanfang<br>
+<code>end_hook_length, end_hook_angle:</code> Länge und Winkel des Hakens am Stabende<br>
+</p>
+<p>Die aktuellen Grundeinstellungen können wie folgt ermittelt werden:<br>
+<code>n = REQUEST("Reinf_Default_Norm_ID", "", norm_id) ! Index der aktuellen Betonbaunorm</code><br>
+<code>n = REQUEST("Reinf_Default_Conr_Grade_ID", "", conrete_id) ! Index der aktuellen Betongüte</code><br>
+<code>n = REQUEST("Reinf_Default_Steel_Grade_ID", "", steel_id) ! Index der aktuellen Stahlgüte (Querschnittsreihe)</code>
+</p>
+<h2>
+<a name="TOC-Allgemeine-Eigenschaften"></a>Allgemeine Eigenschaften</h2>
+<ul>
+<li>alle Stäbe beginnen im Ursprung <code>(0, 0, 0)</code> des lokalen Koordinatensystems </li>
+<li>ebene Biegeformen werden in der YZ-Ebene erzeugt (und mit <code>REINF_PLACE_L</code> in X-Richtung verlegt)</li>
+<li>Alle Maße beziehen sich auf die Stabachse, zB. bei Bügel: Außenmaß = <code>form_width</code> + <code>dm</code>
+</li>
+</ul>
+<p>Anmerkung: Noch müssen bei der Biegeformerzeugung Norm, Betongüte und Stahlgüte angegeben werden, da es dafür aber auch Direktiven <code>REINF_NORM, REINF_BAR_GRADE, REINF_CONCR_GRADE</code> gibt, könnte ich mir vorstellen, dass das in Zukunft nicht mehr notwendig sein wird. Dies würde aber eine Änderung der Befehlssyntax bedeuten, und da die Bewehrungsbefehle allgemein noch ein wenig wie eine Baustelle wirken, ist das vielleicht auch der Grund, warum die derzeitige Dokumentation der Bewehrungsbefehle so lückenhaft ist. Denn ohne vernünftige Dokumentation wird es wahrscheinlich nicht viele SmartPart-Entwickler geben, die die Bewehrungsbefehle überhaupt verwenden können, und damit bei einer Änderung der Syntax Probleme bekommen werden.
+</p>
+<h2>
+<a name="TOC-REINF_BAR_L"></a>REINF_BAR_L</h2>
+<p> Erzeugt eine geraden Stab (form=L). Der Stab beginnt ibei (0, 0, 0) und verläuft in X-Richtung.</p>
+<p>
+</p>
+<p>
+<code> REINF_BAR_L dm, norm_id, conrete_id, steel_id, rebar_length,</code><br>
+<code> start_hook_length, start_hook_angle,</code><br>
+<code> end_hook_length, end_hook_angle</code>
+</p>
+<p>
+<code>rebar_length:</code> Stablänge, negative Werte sind erlaubt (-X-Richtung)</p>
+<h2>
+<a name="TOC-REINF_BAR_P2"></a>REINF_BAR_P2</h2>
+<p> Erzeugt eine polygonale (form=P) und ebene (spec=2) Biegeform. Da keine Schenkelanzahl angegeben wird, nehme ich an, dass soviele Schenkel erzeugt werden, wie Schenkel-Parameter vorhanden sind. Aufgrund der Schenkel Parameter (nur Länge und Winkel), können natürlich nur gerade Schenkel erzeugt werden. Der erste Schenkel verläuft bei 0° in +Y-Richtung).</p>
+<p>
+<code> REINF_BAR_P2 dm, norm_id, conrete_id, steel_id,</code><br>
+<code> start_hook_length, start_hook_angle,</code><br>
+<code> end_hook_length, end_hook_angle,</code><br>
+<code> length_1, delta_angle_1, bending_roll_factor_1, </code><br>
+<code> length_2, delta_angle_2, bending_roll_factor_2, </code><br>
+<code> ... </code><br>
+<code> length_n, delta_angle_n, bending_roll_factor_n</code>
+</p>
+<p>
+<code> length_i </code> Länge des i-ten Schenkels, negative Werte können angegeben werden, erzeugen aber nicht immer ein sinnvolles Eisen, und können Allplan, beim späteren Verlegen des Eisens, auch abstüzen lassen!<br>
+<code>delta_angle_i:</code> Deltawinkel des i-ten Schenkels<br>
+<code>bending_roll_factor_i:</code> Biegerollenfaktor &gt;= 2<br>
+</p>
+<h2>
+<a name="TOC-REINF_BAR_F2"></a>REINF_BAR_F2</h2>
+<p> Erzeugt eine freie (form=F) und ebene (spec=2) Biegeform. Anders als bei der P-Formen, werden bei den F-Formen die Schenkel nicht über Länge und Winkel, sondern über Koordinaten definiert, es können aber auch nur gerade Schenkel erzeugt werden. Das erste Koordinatenpaar bestimmt den Ausgangspunkt der Biegeform, jeder weitere Punkt definiert einen Schenkel. Die Biegeform wird in der YZ-Ebene erzeugt.</p>
+<p>
+</p>
+<p>
+<code> REINF_BAR_F2 dm, norm_id, conrete_id, steel_id,</code><br>
+<code> start_hook_length, start_hook_angle,</code><br>
+<code> end_hook_length, end_hook_angle,</code><br>
+<code> y_1, z_1, bending_roll_factor_1, </code><br>
+<code> y_2, z_2, bending_roll_factor_2, </code><br>
+<code> ... </code><br>
+<code> y_n, z_n, bending_roll_factor_n</code>
+</p>
+<p>
+<code> y_i, z_i:</code> Koordinaten des i-ten Schenkels<br>
+<code>bending_roll_factor_i:</code> Biegerollenfaktor &gt;= 2<br>
+</p>
+<h2>
+<a name="TOC-REINF_BAR_PCB"></a>REINF_BAR_PCB</h2>
+<p>Erzeugt ein polygonales (form=P) Konsoleneisen (spec=CB). Ein räumlich gebogenes, 5 schenkeliges Konsoleneisen. Die horizontale Schlaufe liegt in der XY-Ebene, die vertikalen Schenkel laufen in -Z-Richtung.</p>
+<p><code> REINF_BAR_PCB dm, norm_id, concrete_id, steel_id, <code><br>
+<code> length_1, length_2, length_3, length_4, length_5,</code><br>
+<code> bending_roll_factor</code></code></code></p>
+<p>
+<code> length_1, length_2, length_3, length_4, length_5:</code> die einzelnen Schenkellängen, 1=vertikal; 2, 3, 4=horizontal; 5=vertikal; negative Werte werden nicht akzeptiert;<br>
+<code> bending_roll_factor:</code> Biegerollenfaktor &gt;=2
+</p>
+<h2>
+<a name="TOC-REINF_STIRRUP_RC"></a> REINF_STIRRUP_RC</h2>
+<p> Erzeugt einen rechtwinkeligen (form=R) geschlossenen (spec=C) Bügel. Der Bügel wird in der XY-Ebene erzeugt, Breite = Y-Richtung, Höhe = Z-Richtung. Hakenposition rechts-unten = (0, 0, 0).</p>
+<p>
+<code>REINF_STIRRUP_RC dm, norm_id, concrete_id, steel_id, </code><br>
+<code>form_width, form_height,</code><br>
+<code>hook_length, hook_angle,</code><br>
+<code>hook_position, bending_roll_factor</code>
+</p>
+<p>
+<code>form_width, form_height:</code> Bügelbreite und -höhe, negative Werte sind möglich, und ergeben eine Bügelausdehnung in negative Achsenrichtung.<br>
+<code>hook_length, hook_angle:</code> Hakenlänge und -winkel<br>
+<code>hook_position:</code> Hakenposition 
+</p>
+<ul>
+<li>1 = unten, links</li>
+<li>2 = unten, rechts</li>
+<li>3 = oben, rechts</li>
+<li>4 = oben, links</li>
+</ul>
+<code>bending_roll_factor:</code> Biegerollenfaktor &gt;= 2
+
+<h2>
+<a name="TOC-REINF_STIRRUP_RO"></a>REINF_STIRRUP_RO</h2>
+<p> Erzeugt einen rechtwinkeligen (form=R) offenen (spec=C) Bügel. Im Prinzip wie <code>REINF_STIRRUP_RC</code>, nur mit einer offenen Seite, die durch den Parameter <code>gap_position</code> definiert wird.
+</p>
+<p>
+<code>REINF_STIRRUP_RO dm, norm_id, concrete_id, steel_id, </code><br>
+<code>form_width, form_height,</code><br>
+<code>hook_length, hook_angle,</code><br>
+<code>gap_position, bending_roll_factor</code>
+</p>
+<p>
+<code>gap_position:</code> Position der offenen Seite:
+</p>
+<ul>
+<li>1 = oben</li>
+<li>2 = rechts, Haken zeigen in +Y-Achse</li>
+<li>3 = unten</li>
+<li>4 = links, Haken zeigen in -Y-Achse</li>
+</ul>
+<h2>
+<a name="TOC-REINF_STIRRUP_QC"></a> REINF_STIRRUP_QC</h2>
+<p>Erzeugt eine geschlossenen viereckigen Bügel (form=Q, spec=C). Die Grundform ist ein Rechteck mit der angegeben Breite und Höhe, die restlichen <code>dy</code> und <code>dz</code> Werte verschieben die Eckpunkte, <code>+dz</code> in +Z-Richtung aber <code><font color="#ff0000">+dy</font></code> in -Y-Richtung!. Vorsicht bei ungültigen Biegeformen kann Allplan abstürzen!.
+</p>
+<p>
+<code>REINF_STIRRUP_QC dm, norm_id, concrete_id, steel_id, </code><br>
+<code>form_width, form_height,</code><br>
+<code>hook_length, hook_angle,</code><br>
+<code>hook_position, bending_roll_factor,</code><br>
+<code>dy_1, dz_1,</code><br>
+<code>dy_2, dz_2,</code><br>
+<code>dy_3, dz_3,</code><br>
+<code>dy_4, dz_4</code><br>
+</p>
+<p>
+<code>hook_position:</code> bei "unverschobenen" Eckpositionen wie bei <code>REINF_STIRRUP_RC</code><br>
+<code>dy_i, dz_i:</code> Verschiebung der Eckpositionen, gegenüber der Rechtecksform. Achtung <code>+dy = -Y-Richtung</code>
+</p>
+<h2>
+<a name="TOC-REINF_STIRRUP_QO"></a> REINF_STIRRUP_QO</h2>
+<p>Erzeugt eine offenen viereckigen Bügel (form=Q, spec=O). Parameter wie <code>REINF_STIRRUP_QC</code>.</p>
+<p>
+<code>REINF_STIRRUP_QC dm, norm_id, concrete_id, steel_id, </code><br>
+<code>form_width, form_height,</code><br>
+<code>hook_length, hook_angle,</code><br>
+<code>gap_position, bending_roll_factor,</code><br>
+<code>dy_1, dz_1,</code><br>
+<code>dy_2, dz_2,</code><br>
+<code>dy_3, dz_3,</code><br>
+<code>dy_4, dz_4</code><br>
+</p>
+<p>
+<code>gap_position:</code> bei "unverschobenen" Eckpositionen wie bei <code>REINF_STIRRUP_RO</code>
+</p>
+<h2>
+<a name="TOC-REINF_STIRRUP_CC"></a> REINF_STIRRUP_CC</h2>
+<p>Erzeugt einen geschlossenen Kreisbügel (form=C, spec=C). Der Bügel wird in der YZ-Ebene erzeugt, der Mittelpunkt liegt in <code>(0, 0)</code>.</p>
+<p>
+<code>REINF_STIRRUP_CC dm, norm_id, concrete_id, steel_id, </code><br>
+<code>radius, overlapping,</code><br>
+<code>hook_length_1, hook_length_2,</code><br>
+<code>hook_angle_1, hook_angle_2</code><br>
+</p>
+<p>
+<code>radius:</code> Bügelradius in der Stabachse<br>
+<code>overlapping:</code> Übergreifungslänge<br>
+<code>hook_length_1, hook_length_2:</code> Hakenlängen<br>
+<code>hook_angle_1, hook_angle_2:</code> Hakenwinkel<br>
+</p>
+</div>
+<div><br></div>
+</div></td>
+<td class="sites-layout-tile sites-tile-name-content-2 sites-canvas-sidebar"><div>
+<div style="display:block;text-align:left"><code>REINF_BAR_L  dm, norm_id, conrete_id, steel_id, 
+1.7, 0.14, 135, 0.14, 90<div style="display:block;text-align:left"><a href="/assets/bewehrung/biegeform/reinf_bar_l7c30.PNG" imageanchor="1"><img border="0" height="150" src="/assets/bewehrung/biegeform/reinf_bar_l7c30.PNG" width="200"></a></div>
+</code></div>
+<div style="display:block;text-align:left"></div>
+<div style="display:block;text-align:left">
+<br>
+<code>REINF_BAR_P2 dm, norm_id, conrete_id, steel_id,
+0.14, 135, 0.14, 90, 1, 0, 4, 1, 45, 4, 1, -45, 4<div style="display:block;text-align:left"><a href="/assets/bewehrung/biegeform/reinf_bar_p2a561.PNG" imageanchor="1"><img border="0" height="177" src="/assets/bewehrung/biegeform/reinf_bar_p2a561.PNG" width="200"></a></div>
+</code>
+</div>
+<div style="display:block;text-align:left">
+<br>
+<code>REINF_BAR_F2 dm, norm_id, conrete_id, steel_id, 
+0.14, 135, 0.14, 90,
+0.3, 0.3, 4,
+0.9, 0.7, 4,
+0.45, 0.9, 4<div style="display:block;text-align:left"><a href="/assets/bewehrung/biegeform/reinf_bar_f281d8.PNG" imageanchor="1"><img border="0" height="200" src="/assets/bewehrung/biegeform/reinf_bar_f281d8.PNG" width="176"></a></div></code>
+</div>
+<br>
+<code>REINF_BAR_PCB dm, norm_id, conrete_id, steel_id, 
+0.5, 0.3, 0.4, 0.3, 0.5, 4<div style="display:block;text-align:left"><a href="/assets/bewehrung/biegeform/reinf_bar_pcb2d5c.PNG" imageanchor="1"><img border="0" height="200" src="/assets/bewehrung/biegeform/reinf_bar_pcb2d5c.PNG" width="183"></a></div>
+</code>
+</div></td>
+</tr></tbody></table></div>
+</div> 
+</div> 
+
+</div>

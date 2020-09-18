@@ -1,0 +1,37 @@
+---
+layout: default
+title: FOIL - Folien
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">FOIL - Folien</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p><code>DEFINE FOIL</code> definiert Folien, entsprechend den Folien der Allplanmakros.</p>
+<p><code>
+DEFINE FOIL name visible2D, visible3D, from_scale, to_scale, refPnt1X, refPnt1y, refPnt1z, refPnt2X, refPnt2y, refPnt2z, layerA, layerB, layerC, scaleX, scaleY, scaleZ
+</code>
+</p>
+<h3>
+<a name="TOC-Parameter"></a>Parameter</h3>
+<p>
+<code>name:</code> Name der Folie <br>
+<code>visible2D, visible3D:</code> 0|1 = unsichtbar|sichtbar in der 2D oder 3D Darstellung<br>
+<code>from_scale:</code> Inhalt dieser Folie ist nur sichtbar, wenn der aktuelle Maßstab größer als der Maßstab <code>from_scale</code> ist<br>
+<code>to_scale:</code> Inhalt dieser Folie ist nur sichtbar, wenn der aktuelle Maßstab kleiner oder gleich als der Maßstab <code>to_scale</code> ist<br>
+<code>refPnt1x, refPnt1y, refPnt1z:</code> X-, Y- und Z-Koordinate von Referenzpunkt1 <br>
+<code>refPnt2x, refPnt2y, refPnt2z:</code> X-, Y- und Z-Koordinate von Referenzpunkt2 <br>
+<code>layerA, layerB, layerC:</code> Layer ist 0|1 = unsichtbar|sichtbar<br>
+<code>scaleX, scaleY, scaleZ:</code> scale dependency for direction X, Y, Z 0=X , 1=Y, 2=Z (Was soll der Sch... heißen?)<br>
+</p>
+<p>Mit <code>FOIL name</code> setzt die entsprechende Folie als aktuelle Folie, alle danach erstellten Objekten werden dieser Folie zugeordnet.</p>
+<p>Mit <code>FOIL 0</code> wird auf die automatische Folienerstellung von Allplan zurückgeschaltet werden.</p>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

@@ -1,0 +1,72 @@
+---
+layout: default
+title: Variablen
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Variablen</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>Es gibt numerische Variablen und Textvariablen, die im weitern wie allgemein üblich als "Strings" bezeichnet werden. Ein Wertzuweisung erfolgt mit dem "<code>=</code>" Operator. Einer Wertzuweisung kann Befehl <code>LET </code>vorangestellt werden, ist aber nicht üblich. Variablennamen müssen mit einem Buchstaben oder einen "_" (Underline) beginnen und dürfen weiters nur Buchstaben, Ziffern und "_"  enthalten. Als Konvention wird in der Dokumentation vorgeschlagen Variablennamen in Kleinbuchstaben und BASIC Konstrukte in Großbuchstaben zu schreiben. Leider hält sich der Allplan eigene Scripteditor nicht an diese Konvention und konvertiert die Referenzparameter <code>ref_x</code>, <code>ref_y</code> und <code>ref_z</code> bei jeder Syntaxprüfung in Großbuchstaben.
+<div>
+<div>
+<br>
+</div>
+<div>Variablen müssen vor ihrer ersten Verwendung NICHT deklariert oder initialisiert werden, das ist ein häufiger Grund für Programmierfehler, da ein falsch geschriebener Variablenname zu keiner Fehlermeldung führt. Meiner Meinung nach sollte dieses Verhalten des Scriptinterpreters von Nemetschek dahin geändert werden, dass uninitialisierte Variablen in Zukunft zu einer Fehlermeldung führen.</div>
+<div>
+<br>
+</div>
+<div><code>myPI = 3.1415</code></div>
+<div><code>Radius8574645 = 12.0</code></div>
+<div><code>Umfang = 2 * Radius8574645 * myPl ! Umfang ist immer 0 da myPl per Voreinstellung 0. ist</code></div>
+<div><code><br>
+</code></div>
+Der Typ einer Variable ergibt sich ausschließlich aus der Wertzuweisung, z.B.:
+<div><code>a = 1.0 ! in Fließkommazahlen immer den Dezimalpunkt "." verwenden</code></div>
+<div><code>a = `Text` ! wichtig: Backticks "`" verwenden, um ein einfaches Übersetzen in andere Sprachen zu ermöglichen.</code></div>
+<div>
+<br>
+</div>
+<h3>
+<a name="TOC-Mehrzeiliger-Text"></a>Mehrzeiliger Text</h3>
+<div>Manche Befehle akzeptieren auch mehrzeiligen Text, diese Strings sind in der Form:</div>
+<div><code>"1. Zeile</code></div>
+<div><code>2. Zeile"</code></div>
+<div>einzugeben.</div>
+<h2>
+<a name="TOC-Arrays"></a>Arrays</h2>
+<div>Mit <code>DIM</code> kann man Variablenfelder (im weiteren Arrays genannt) erstellen, wobei die exakte Größe des Arrays nicht angegeben werden muss, alle Arrays ohne Größenangabe sind dynamisch, und immer so groß wie der größte verwendete Index im Script, alle nicht initialisierten Felder haben automatischen numerischen Wert 0. Die Zählung beginnt mit Index <code>1</code>, und nicht wie in den meisten anderen Programmiersprachen mit <code>0</code>. Man kann Arrays auch keine Initialwerte bei der Erstellung mitgeben, somit funktioniert folgendes leider NICHT: <span style="font-family:monospace"><font color="#ff0000">DIM a = [1, 12, 45, 23, 45]</font></span>
+</div>
+<div>
+<br>
+</div>
+<div>Arrays könne ein- oder zweidimensional (<code>DIM a[ ][ ]</code>)sein.</div>
+<h3>
+<a name="TOC-Beispiele"></a>Beispiele</h3>
+<div><code>DIM a [ 5 ] ! Array mit fixer Größe</code></div>
+<div><code>a[6] = 666 ! out of range error</code></div>
+<div><code><br>
+</code></div>
+<div><code>DIM b [] ! dynamisches Array</code></div>
+<div><code>b [5] = 1.0</code></div>
+<div><code>b [6] = `Text` ! mischen von Typen ist möglich</code></div>
+<h2>
+<a name="TOC-VARDIM1"></a>VARDIM1</h2>
+<div>Mit <code>VARDIM1(varname)</code> kann man den größten Index der 1. Dimension abfragen. Dynamische Arrays ohne Inhalt liefern den Wert 0.</div>
+<h2>
+<a name="TOC-VARDIM2"></a>VARDIM2</h2>
+<div>
+<div>Mit <code>VARDIM2(varname)</code> kann man den größten Index der 2. Dimension abfragen. Eindimensionale Arrays liefern den Wert 0.</div>
+</div>
+<h2>
+<a name="TOC-VARTYPE"></a>VARTYPE</h2>
+</div>
+<div>Mit <code>VARTYPE(varname)</code> kann Typ einer Variable abgefragt werden, das Ergebnis ist <code>1</code> für eine numerische Variable, und <code>2</code> für eine String-Variable.</div>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

@@ -1,0 +1,104 @@
+---
+layout: default
+title: Handles
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Handles</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>Handles (Griffe) sind grafischen Eingabepunkte, die mit der Maus bewegt werden können. Diese Eingabepunkte sind mit <a href="parameter.html">Objektparametern</a> verknüpft und sind somit eine einfache Art Smartparts zu ändern, ohne numerische Werte eingeben zu müssen. Es können einfache Wertparameter als auch Winkelparameter mit Handles verknüpft werden.
+<h2>
+<a name="TOC-HANDLE2"></a>HANDLE2</h2>
+<p>Erzeugt einen 2D Handle (Griff) um einen Objektparameter zu modifizieren.</p>
+<p><code>HANDLE2 x, y [, ID [, parameter, flags]]</code></p>
+<div>
+<code>x:</code> X-Koordinate des Griffs</div>
+<div>
+<code>y:</code> Y-Koordinate des Griffs</div>
+<div>
+<code>ID:</code> eindeutige Kennzahl des Griffs.</div>
+<div>
+<code>parameter:</code> Parameter der durch diesen Griff beeinflusst wird, zB: <code>REF_X</code> aber auch Feldvariablen wie <code>A[1]</code>
+</div>
+<div>
+<code>flags:</code> bestimmt die Art des Griffs, wobei ein Griff aus mehreren Definitionen besteht.</div>
+<ul>
+<li>
+<code>1:</code> linear beweglicher Griff, Basispunkt = Punkt an dem der zugehörige Parameter=0 ist.</li>
+<li>
+<code>2:</code> linear beweglicher Griff, der bewegliche Griff = Abstand zum Basispunkt definiert den Wert des zugehörigen Parameters.</li>
+<li>
+<code>3:</code> linear beweglicher Griff, Referenzpunkt = gibt die negative Richtung des Parameters an, zB. <code>(-1, 0)</code> für eine Wert der in +X Richtung größer wird und dessen Basispunkt <code>(0, 0)</code> ist</li>
+<li>
+<code>4:</code> Griff für Winkelparameter, Basispunkt am Kreis = Punkt an dem der zugehörige Winkelparameter=0 ist.</li>
+<li>
+<code>5:</code> Griff für Winkelparameter, beweglicher Punkt am Kreis = Parameter ist gleich der Winkel zwischen den Geraden (Mittelpunkt-&gt;Basispunkt) und (Mittelpunkt-&gt;beweglicher Punkt).</li>
+<li>
+<code>6:</code> Griff für Winkelparameter, Kreismittelpunkt.</li>
+</ul>
+<h3>
+<a name="TOC-Linear-beweglicher-Griff"></a>Linear beweglicher Griff</h3>
+<p> Ein Linear beweglicher Griff setzt sich aus 3 Definitionen zusammen, den Basispunkt, den beweglichen Punkt und den Referenzpunkt, <em>alle drei Definitionen</em> müssen dieselbe <code>ID</code> haben. Der Parameterwert ergibt sich aus dem Abstand vom Basispunkt zum beweglichen Griff, der Referenzpunkt gibt die Richtung an, in der der Parameterwert kleiner wird z.B. ein Parameter der in -X Richtung größer wird, hat die Referenzpunkt <code>(1, 0)</code>, wenn der Basispunkt <code>(0, 0)</code> ist. Die Linie Basispunkt -&gt; Referenzpunkt bestimmt die Referenzrichtung.</p>
+<h3>
+<a name="TOC-Griff-f-r-Winkelparameter"></a>Griff für Winkelparameter</h3>
+<p> Ein Griff für Winkelparameter setzt sich ebenfalls aus 3 Definitionen (2D!) zusammen und auch für diesen Griff gilt, <em>alle drei Definitionen</em> müssen dieselbe <code>ID</code> haben. Wenn man sich den Winkel als Kreisbogen vorstellt, ist die 1. Definition der Startpunkt, die 2. Definition der Endpunkt und die 3. Definition der Mittelpunkt des Kreisbogens. Die positive Richtung des Winkels ist entgegen den Uhrzeigersinn, das kann man ändern, indem man <code>512</code> zu <code>flags</code> hinzu addiert.</p>
+<h3>
+<a name="TOC-Kombinierter-Griff"></a>Kombinierter Griff</h3>
+<p>Es können 2 oder 3 linear bewegliche Griffe kombiniert werden, um mehrere Parameter gleichzeitig mit der Bewegung eines Griffs zu bearbeiten z.B. die X, Y und Z-Koordinate eines Punktes, wobei sich nicht wirklich alle drei Werte gleichzeitig ändern, sondern nur die X/Y-Werte und getrennt davon, aber mit dem selben Griff (Umschalt-Klick für alternative Griff-Funktion) der Z-Wert. Wichtig ist auch hier, dass <em>alle<em> am Kombinationsgriff beteiligten Definitionen die selbe <code>ID</code> haben.</em></em></p>
+<p>Kombinierter X/Y Griff an der Position <code>(ref_x, ref_y)</code></p>
+<p>
+<code> id = 1 ! alle Griffen mit derselben ID</code><br>
+<code> loc_y = ref_y ! nur zur Unterscheidung</code><br>
+<code>HANDLE2 0, loc_y, id, ref_x, 1 ! Basis X-Handle</code><br>
+<code>HANDLE2 ref_x, loc_y, id, ref_x, 2 ! linear beweglicher X-Handle</code><br>
+<code>HANDLE2 -1, loc_y, id, ref_x, 3 ! Referenz X-Handle</code><br>
+<code> loc_x = ref_x ! nur zur Unterscheidung</code><br>
+<code>HANDLE2 loc_x, 0, id, ref_y, 1 ! Basis Y-Handle</code><br>
+<code>HANDLE2 loc_x, ref_y, id, ref_y, 2 ! linear beweglicher Y-Handle</code><br>
+<code>HANDLE2 loc_x, -1, id, ref_y, 3 ! Referenz Y-Handle</code><br>
+<code> id = id + 1 ! nächster Griff mit neuer ID</code><br>
+</p>
+<h2>
+<a name="TOC-HANDLE"></a>HANDLE</h2>
+<p>Erzeugt einen 3D Handle (Griff) um einen Objektparameter zu modifizieren.</p>
+<p><code>HANDLE2 x, y, z [, ID [, parameter, flags]]</code></p>
+<p> Parameter grundsätzlich wie für <code>HANDLE2</code>, plus der zusätzlichen Z-Koordinate.</p>
+<div>
+<code>z:</code> Z-Koordinate des Griffs</div>
+<p> Der 3D Griff für Winkelparameter benötigt die Angabe der räumliche Drehachse durch einen zusätzlichen Referenzpunkt, die Drehachse läuft durch den Kreismittelpunkt (<code>6</code>) und diesen Referenzpunkt (<code>7</code>).</p>
+<p><code>flags:</code></p>
+<ul>
+<li>
+<code>7:</code> Griff für Winkelparameter, Referenzpunkt, 3D Drehachse = Kreismittelpunkt -&gt; Referenzpunkt.</li>
+</ul>
+<h2>
+<a name="TOC-HANDLEFACTOR"></a>HANDLEFACTOR</h2>
+<p><code>HANDLEFACTOR expr</code> setzt einen Faktor, mit dem die Griffdistanz multipliziert wird, um den endgültigen Parameterwert zu berechnen. Der gesetzte Wert bleibt gültig, bis ein neuer Wert gesetzt wird.</p>
+<h2>
+<a name="TOC-REF_HANDLES"></a>REF_HANDLES</h2>
+<p>Erstellt für die drei Standardparameter <code>ref_x</code>, <code>ref_y</code> und <code>ref_z</code> einen Griff, der Basisgriff aller drei Parameter liegt im Ursprung des Koordinatensystems <code>(0, 0, 0)</code>, der Bewegungsgriff in der jeweiligen Achse, und alle Werte vergrößern sich in positiver Achsenrichtung.</p>
+<h2>
+<a name="TOC-REF_HANDLES2"></a>REF_HANDLES2</h2>
+<p>Wie <code>REF_HANDLES</code> aber im 2D-Script und natürlich nur für die Parameter <code>ref_x</code> und <code>ref_y</code>.</p>
+<h2>
+<a name="TOC-PREV_LINE2"></a>PREV_LINE2</h2>
+<p> ... funktioniert wie <a href="2d-scripting/grundformen.html">LINE2</a>, wird aber nur im Vorschaumodus dargestellt, derselbe Effekt kann durch <code> IF PREV_MODE THEN LINE2 ...</code> erzielt werden.</p>
+<p>
+</p>
+<h2>
+<a name="TOC-PREV_LINE"></a>PREV_LINE</h2>
+<p> ... funktioniert wie <a href="3d-scripting/flaechen-und-linien.html">LINE</a>, wird aber nur im Vorschaumodus dargestellt.</p>
+<p>
+</p>
+<h2>
+<a name="TOC-PREV_ARC2"></a>PREV_ARC2</h2>
+<p> ... funktioniert wie <a href="2d-scripting/grundformen.html">ARC2</a>, wird aber nur im Vorschaumodus dargestellt.</p>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

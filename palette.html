@@ -1,0 +1,148 @@
+---
+layout: default
+title: Eingabepalette
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Eingabepalette</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<div class="sites-layout-name-right-sidebar-hf sites-layout-vbox"><table cellspacing="0" class="sites-layout-hbox"><tbody><tr>
+<td class="sites-layout-tile sites-tile-name-content-1"><div>
+<p>
+Smartparts sind parametrische Objekte, d.h. ein Smartpart kann seine Form in Abhängigkeit von einem oder mehreren Parametern ändern, diese Parameter können in einer Eingabepalette dargestellt und bearbeitet werden. Es gibt auch Eingabedialogfenster, diese sind aber umständlicher als die Palette zu erstellen, da die Elemente in einem Dialogfenster vom Programmierer platziert werden müssen, bei der Eingabepalette übernimmt diese Arbeit ein automatischer "Layoutmanager". Die Parameter können aber auch durch das Bewegen grafischer <a href="handles.html">Handles</a> modifiziert werden. 
+</p>
+<p>
+Die Nutzung der Eingabepalette durch Smartparts in Allplan ab der Version 2013 möglich. In der Palette wird das Platzieren der Eingabefelder von einem "Layoutmanager" übernommen, d.h. die Felder können nicht mehr willkürlich platziert werden, das hat aber auch den Vorteil, dass Dialoge viel einfacher und schneller gestaltet werden können. Jedes <code>I_INFIELD</code> wird in einer eigene Zeile der Palette angeordnet. Die erste Spalte zeigt die dem Parameter zugeordnete Beschreibung, die zweite Spalte enthält das Eingbefeld. Die angegebene Position und Breite wird dabei ignoriert.
+</p>
+<h2>
+<a name="TOC-I_PALETTE"></a>I_PALETTE</h2>
+<p>Mit <code>I_PALETTE</code> wird die Eingabepalette initialisiert.</p>
+<p><code>I_PALETTE title [, flag[, str1, str2, str3, str4, str5, str6]]</code></p>
+<div>
+<code>title:</code> Bezeichnung der Palette</div>
+<div><code>flags: j1 + j2 + j3</code></div>
+<ul>
+<li>
+<code>j1 = 0|1</code> Palette hat einen Infodialog</li>
+<li>
+<code>j2 = 0|2</code> zeige den Standard Nemetschek Infodialog, aber nur wenn <code>j1=0</code> ist</li>
+<li>
+<code>j3 = 0|4</code> "OK" und "Abbrechen" Buttons anzeigen, hat aber keine Wirkung, beide Buttons werden immer angezeigt</li>
+</ul>
+<div>
+<code>str1 ... str6:</code> Zeichenketten die in den "Zellen" des Infodialogs angezeigt werden. <code>"pict=..."</code> referenziertes Bild anzeigen; mit <code>"link=http://www.tzbm.at TZBM"</code> wird ein Button, der mit "TZBM" beschriftet ist und beim Anklicken den Link "http://www.tzbm.at" im Webbrowser öffnet, erzeugt. Der Dialog zeigt 3 Zeilen mit jeweils 2 Spalten, <code>str1</code> + <code>str2</code> bilden dabei die 1. Zeile usw., auch mehrzeiliger Text ist möglich:</div>
+<p>
+<code> I_PALETTE "Titel" , 1, "Feld 1 mit </code><br>
+<code> einer 2. Zeile", "Feld 2"</code>
+</p>
+<h2>
+<a name="TOC-I_PAGE"></a>I_PAGE</h2>
+<p><code>I_PAGE name</code> erstellt eine neu Unterseite, anwählbar durch die seitlich angebrachten Karteireiter, das erste <code>I_PAGE</code> vor der ersten Eingabefelddefinition, bestimmt den Namen der ersten Unterseite. <code>I_CURRENT_PAGE index</code> funktioniert in der Palette anscheinend nicht, damit kann in Dialogen die aktuell anzuzeigende Unterseite bestimmt werden.
+</p>
+<h2>
+<a name="TOC-I_SECTION"></a>I_SECTION</h2>
+<p><code>I_SECTION name</code> erstellt eine ein- und ausklappbaren Abschnitt innerhalb einer Palettenseite. Ein Abschnitt wird durch <code>I_SECTION_END</code> oder <code>I_SECTION ""</code> abgeschlossen.
+</p>
+<h2>
+<a name="TOC-I_ROW"></a>I_ROW</h2>
+<p><code>I_ROW name, flags</code> definiert eine Zeile innerhalb der Palette. Alle nachfolgenden Eingabefelder werden innerhalb dieser Zeile platziert, bis die Zeile mit <code>I_ROW_END</code> oder <code>I_ROW ""</code> geschlossen wird. Wenn mehr als ein Eingabefeld angegeben wird, wird der Platz proportional zu den Eingabefeldbreiten aufgeteilt. Die Standard Zeilenhöhe in Allplan 2013 beträgt "geschätzt" 22 Pixel.
+</p>
+<div>
+<code>name:</code> Name der Zeile, wird als erstes Feld angezeigt</div>
+<div>
+<code>flags:</code> 0 = [Name | Feld1, Feld2,...] 1 = [Feld1, Feld2, ...]</div>
+<h2>
+<a name="TOC-I_INFIELD"></a>I_INFIELD</h2>
+<p><code>I_INFIELD</code> definiert eine Eingabefeld.</p>
+<p><code>I_INFIELD "name", x, y, width, height [I_TOOLTIP "text"]</code>
+</p>
+<div>
+<code>name:</code> ist der zugehörige Parametername in <b>Anführungszeichen</b>, also als String, als Feldname wird die Parameterbeschreibung verwendet.</div>
+<div>
+<code>x, y:</code> haben in der Palette keine Funktion, da das Layout automatisch erstellt wird. </div>
+<div>
+<code>width:</code> Feldbreite, funktioniert aber nur innerhalb von <code>I_ROW</code>
+</div>
+<div>
+<code>height:</code> Feldhöhe, funktioniert aber nur innerhalb von <code>I_ROW</code>
+</div>
+<div>
+<code>[I_TOOLTIP "text"]</code> wird angezeigt, wenn sich der Mauszeiger über dem Eingabefeld befindet.</div>
+<p>Obwohl <code>x, y, width, height</code> praktisch keine Bedeutung haben, müssen aber alle 4 Werte angegeben werden z.B.: <code>I_INFIELD "ref_x", 0, 0, 0, 0 I_TOOLTIP "Objektlänge in Metern eingeben"</code></p>
+<h2>
+<a name="TOC-I_INFIELD_2"></a>I_INFIELD_2</h2>
+<p><code>I_INFIELD_2</code> funktioniert gleich wie <code>I_INFIELD</code>, nur das der Parameter nicht in Anführungszeichen angegeben wird, braucht man wenn einzelne Feldelemente als Parameter genutzt werden sollen z.B.:</p>
+<p><code>I_INFIELD_2 A[1], 0, 0, 0, 0 I_TOOLTIP "Das 1. Element des Feldes A[]"</code>
+</p>
+<h2>
+<a name="TOC-I_PICT"></a>I_PICT</h2>
+<p><code>I_PICT</code> fügt eine Grafik ein, entweder eine als Ressource angefügte Datei oder als "abhängige Datei", wobei ich eine Einbindung per "abhängiger Datei" nicht zusammengebracht habe. Eingefügte Ressource sind für die Weitergabe der Smartparts auch der sicherste und einfachste Weg, da alles in der *.smt Datei gespeichert wird. Man kann aber auf die Grafiken, die mit Allplan ausgeliefert werden zurückgreifen, zB. "param01.png" ... "param13.png" = Zahl im Kreis. <code>I_PICT</code> funktioniert nur innerhalb von <code>I_ROW</code>.</p>
+<p><code>I_PICT expression, x, y [,width, height [,mask]] [I_TOOLTIP tooltiptext]</code></p>
+<div>
+<code>expression:</code> Name oder Index der Bildressource</div>
+<div>
+<code>x, y:</code> haben in der Palette keine Funktion, da das Layout automatisch erstellt wird, müssen aber angegeben werden.</div>
+<div>
+<code>width, height:</code> Bildbreite, Bildhöhe skaliert das Bild, wenn <code>width</code> oder <code>height</code> größer als der original Wert ist, Werte kleiner als die original Werte haben kein Auswirkung, beide Werte können weggelassen werden.</div>
+<div>
+<code>mask:</code> ist laut Dokumentation immer <code>0</code>, original Bildgröße und Seitenverhältnis wird ignoriert? Egal hat sowieso keine Auswirkung.</div>
+<div>
+<code>[I_TOOLTIP "text"]</code> wird angezeigt, wenn sich der Mauszeiger über dem Eingabefeld befindet.</div>
+<div>
+<br>
+</div>
+<p>Die einfachste Form lautet also <code>I_PICT "name.png", 0, 0</code>. Bilder können mit vorangestellten <code>I_INFIELD</code> verwendet werden, um zB. eine Hinweisgrafik wie in den Allplan Smartparts, eine Zahl im Kreis, darzustellen oder ohne <code>I_INFIELD</code> zB. um einfach nur erklärende Grafiken einzubinden.
+</p>
+<p>Beispiel: Eingabefeld mit Hinweisgrafik (Zahl 1 im Kreis)</p>
+<p>
+</p>
+<div><code>I_ROW "Bauteillänge", 0</code></div>
+<div><code>I_INFIELD "ref_x", 0, 0, 50, 22</code></div>
+<div><code>I_PICT "param01.png", 0, 0</code></div>
+<div><code>I_ROW_END</code></div>
+<p>Beispiel: ohne Eingabefeld, nur Grafik</p>
+<p>
+</p>
+<div><code>I_ROW "Die große EINS", 1 ! flags = 1 : nur die Grafik wird angezeigt</code></div>
+<div><code>I_PICT "param01.png", 0, 0, 100, 100 ! skaliert auf 100x100</code></div>
+<div><code>I_ROW_END</code></div>
+<h2>
+<a name="TOC-I_RADIOBUTTON"></a>I_RADIOBUTTON</h2>
+<p>Mit <code>I_RADIOBUTTON</code> kann man für einen Parameter mehrere Werte als auswählbare Punkte + Bescheibung anzeigen.</p>
+<p><code>I_RADIOBUTTON name, value, text, x, y, width, height</code>
+</p>
+<div>
+<code>name:</code> Name des Parameters als Text, zB. <code>"ref_x"</code>
+</div>
+<div>
+<code>value:</code> Werte der dem Parameter zugewiesen wird, wenn dieser Punkt ausgewählt wird</div>
+<div>
+<code>text:</code> Beschreibung des Punktes</div>
+<div>
+<code>x, y:</code> haben keine Auswikung in der Palette, müssen aber angegeben werden</div>
+<div>
+<code>width, heigth:</code> Breite und Höhe, haben nur innerhalb von <code>I_ROW</code> einen Auswirkung</div>
+<p> Normalerweise werden die einzelnen Punkte untereinander dargestellt, man kann mehrere Punkte aber auch in eine <code>I_ROW</code> packen, dort werden die Punkte nebeneinander angezeigt, dafür müssen die Argumente <code>width</code> und <code>height</code> zwingend mit gültigen Werten belegt werden.
+</p>
+<h2>
+<a name="TOC-I_BUTTON"></a>I_BUTTON</h2>
+<p>Der Typ <code>I_FUNCTION</code> funktioniert, aber nur innerhalb von <code>I_ROW</code>...</p>
+<h2>
+<a name="TOC-I_PICT_BUTTON"></a>I_PICT_BUTTON</h2>
+<p>Der Typ <code>I_FUNCTION</code> funktioniert, aber nur innerhalb von <code>I_ROW</code>...</p>
+</div></td>
+<td class="sites-layout-tile sites-tile-name-content-2 sites-canvas-sidebar"><div>
+<div style="display:block;text-align:right;margin-left:auto"><a href="../7918e6c3-a-706b9da4-s-sites.googlegroups.com/a/tzb-moitzi.at/smartparts/palette/Palette_Spline25a82.PNG" imageanchor="1"><img alt="Palette des Smartparts Spline2" border="0" height="400" src="../7918e6c3-a-706b9da4-s-sites.googlegroups.com/a/tzb-moitzi.at/smartparts/palette/Palette_Spline25a82.PNG" width="211"></a></div>
+<div style="text-align:right">Abbildung 1</div>
+<div style="text-align:right">Palette von  <a href="http://7918e6c3-a-706b9da4-s-sites.googlegroups.com/a/tzb-moitzi.at/smartparts/downloads/Spline2.smt?attachauth=ANoY7cq9CztygiIkJuALeJMxPODRoIJIx1yq2wFcVmu8xM0FbH-45mWPOfK_8ZDKUwrQmdhAysFKDe8061NAkOnqEXmnO2JTXJgYLBWv0fv9AR78Oo0Ibh_JkOmlaGHyHK5ikBEUDsDXgoCJTyzuvcf0_ls-5UCRhhiHcSq5BwjLfYJF15s802kHiuKmfoXHm_HfBNU6zcv3PUb1t89RYrRMV165lxSZBjJBJ2B_Zxq7UEvRKYdEf_I%3D&amp;attredirects=0">Spline2.smt</a>
+</div>
+</div></td>
+</tr></tbody></table></div>
+</div> 
+</div> 
+
+</div>

@@ -1,0 +1,62 @@
+---
+layout: default
+title: Beispiel 1 für CUTPLANE
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Beispiel 1 für CUTPLANE</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<code>b = 4.0 ! Kantenlänge<br>
+t = 0.5 ! Blechstärke<br>
+alpha_top = -14.0 ! Winkel der oberen Schnittebene<br>
+alpha_bottom = 30.0 ! Winkel der unteren Schnittebene<br>
+<br>
+! Objekt oben um top_cut_extension und unten um bottom_cut_extension verlängern, </code><div>
+<code>! um die Objekthöhe = REF_Z in der Objektachse zu erzielen.<br>
+top_cut_extension = ABS ( TAN ( alpha_top ) * b ) <br>
+bottom_cut_extension = ABS ( TAN ( alpha_bottom ) * b ) <br>
+<br>
+! Objekt in die Mitte des Arbeitsplatzes schieben<br>
+TRANS REF_X / 2 , REF_Y / 2 , 0 <br>
+<br>
+! Schnittebene oben:<br>
+TRANSZ REF_Z ! Schnittebene an das obere Ende des Objekts verschieben<br>
+CUTPLANE alpha_top ! Schnittebene erzeugen<br>
+RESTORE 1 ! vorhergehendes K-System wiederherstellen<br>
+<br>
+! Schnittebene unten:<br>
+! Schnittebene um 180 Grad drehen um die unteren Objektteile zu entfernen<br>
+CUTPLANE alpha_bottom + 180 <br>
+<br>
+! K-System in die Objektachse verschieben<br>
+TRANS -b / 2 , -b / 2 , 0 <br>
+<br>
+! K-System um bottom_cut_extension nach unten verschieben = Schnittverlängerung unten<br>
+TRANSZ -bottom_cut_extension <br>
+<br>
+! L-förmiges Objekt erzeugen, Schnittverlängerungen hinzuaddieren<br>
+PRISM 6 , REF_Z + bottom_cut_extension + top_cut_extension , <br>
+0 , 0 , b , 0 , b , t , t , t , t , b , 0 , b <br>
+<br>
+CUTEND ! Schnittebene unten<br>
+CUTEND ! Schnittebene oben<br>
+END</code><div>
+<code><br>
+</code>
+<div style="display:inline;float:left"><a href="..//assets/3d-scripting/Schnittoperationen/example01/CutPlane01-side5244.PNG" imageanchor="1"><img border="0" height="200" src="..//assets/3d-scripting/Schnittoperationen/example01/CutPlane01-side5244.PNG" width="200"></a></div>
+<div style="display:block;text-align:left">
+<div style="display:block;text-align:left"><a href="..//assets/3d-scripting/Schnittoperationen/example01/CutPlane01-3d0e39.PNG" imageanchor="1"><img border="0" height="200" src="..//assets/3d-scripting/Schnittoperationen/example01/CutPlane01-3d0e39.PNG" width="200"></a></div>
+<br>
+</div>
+</div>
+</div>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>

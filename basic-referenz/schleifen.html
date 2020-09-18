@@ -1,0 +1,80 @@
+---
+layout: default
+title: Schleifen
+---
+<div id="sites-canvas">
+
+
+<h1 id="sites-page-title-header" style="">
+<span id="sites-page-title">Schleifen</span>
+</h1>
+<div id="sites-canvas-main" class="sites-canvas-main">
+<div id="sites-canvas-main-content">
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox"><tbody><tr><td class="sites-layout-tile sites-tile-name-content-1"><div>
+<h2>
+<a name="TOC-FOR-...-NEXT"></a>FOR ... NEXT</h2>
+<div>Die <code>FOR</code>-Schleife zählt die Schleifenvaiable <code>i</code> von <code>start</code> bis <code>end</code> mit der Schrittweite <code>s</code>.</div>
+<div><span style="color:rgb(51,153,255);font-family:monospace"><br></span></div>
+<div><span style="color:rgb(51,153,255);font-family:monospace"><code>FOR i = start TO end [STEP s]</code></span></div>
+<div><code>...</code></div>
+<div><code>NEXT [i]</code></div>
+<h2>
+<a name="TOC-WHILE-...-DO-...-ENDWHILE"></a>WHILE ... DO ... ENDWHILE</h2>
+<div>Wiederholt die Befehle im Schleifenkörper solange die Vergleichoperation <code>condition</code> erfüllt ist. Diese Schleifenform ist eine abweisende Schleifenform, da der Schleifenkörper bei entsprechenden Bedingungen auch übersprungen werden kann.</div>
+<div><span style="color:rgb(51,153,255);font-family:monospace"><br></span></div>
+<div><span style="color:rgb(51,153,255);font-family:monospace"><code>WHILE condition DO</code></span></div>
+<div><code>...</code></div>
+<div><code>ENDWHILE</code></div>
+<h2>
+<a name="TOC-DO-...-WHILE"></a>DO ... WHILE</h2>
+<div>
+<div>Wiederholt die Befehle im Schleifenkörper solange die Vergleichoperation <code>condition</code> erfüllt ist. Diese Schleifenform ist eine nicht abweisende Schleifenform, da der Schleifenkörper mindestens 1x ausgeführt wird.</div>
+<div><br></div>
+<div><code>DO</code></div>
+<div><code>...</code></div>
+<div>
+<code>WHILE </code><span style="color:rgb(51,153,255);font-family:monospace"><code>condition</code></span>
+</div>
+</div>
+<div>
+<span style="color:rgb(51,153,255);font-family:monospace"><span style="color:rgb(255,255,255);font-family:Lucida Grande,Lucida Sans Unicode,sans-serif"><h2>
+<a name="TOC-REPEAT-...-UNTIL"></a>REPEAT ... UNTIL</h2></span></span><div>
+<div>Wiederholt die Befehle im Schleifenkörper solange die Vergleichoperation <code>condition</code> nicht erfüllt ist. Diese Schleifenform ist eine nicht abweisende Schleifenform, da der Schleifenkörper mindestens 1x ausgeführt wird.</div>
+<div><br></div>
+<div>
+<code>REPEAT</code><br><code>...</code><br><code>UNTIL condition</code>
+</div>
+<div>
+<font color="#ccff66" face="monospace"><br></font><span style="color:rgb(204,220,232);font-family:Trebuchet MS,arial,sans-serif;font-size:20px;font-weight:bold;line-height:25px">Vergleichsoperatoren</span>
+</div>
+</div>
+<div>siehe <a href="vergleichsoperatoren.html">Vergleichsoperatoren</a>
+</div>
+<h2>
+<a name="TOC-BREAK"></a>BREAK</h2>
+<div>Bricht die aktuelle, innerste Schleife ab, und setzt mit dem ersten Befehl nach dem Schleifenende die Programausführung fort.</div>
+<div><br></div>
+<div><code>DO</code></div>
+<div><code>...</code></div>
+<div><code>IF condition THEN BREAK</code></div>
+<div><code>...</code></div>
+<div><code>WHILE 1 ! Endlosschleife, jeder Wert &lt;&gt; 0 ist 'wahr'</code></div>
+<div><code><br></code></div>
+<div><code><span style="color:rgb(255,255,255);font-family:Lucida Grande,Lucida Sans Unicode,sans-serif"><h2>
+<a name="TOC-CONTINUE"></a>CONTINUE</h2>
+<div>Bricht den aktuellen Schleifendurchlauf ab, und springt zur Überprüfung der Abbruchbedingung.</div>
+<div><br></div></span></code></div>
+<div>
+<div><code>FOR i = 1 TO 10</code></div>
+<div><code>IF i=5 THEN CONTINUE ! die '5' wird übersprungen</code></div>
+<div><code>...</code></div>
+<div><code>NEXT i</code></div>
+</div>
+<div><code><br></code></div>
+<div></div>
+</div>
+</div></td></tr></tbody></table>
+</div> 
+</div> 
+
+</div>
