@@ -20,7 +20,7 @@ title: Willkommen
 </script>
 <script src="/assets/js/object-fit-videos.min.js" defer async onload="objectFitVideos();"></script>
 
-# Willkommen
+# Smartpart Dokumentation
 
 Smartparts sind parametrische Bauteile die in Allplan Version 2012 eingeführt wurden. Diese Bauteile müssen in der Programmiersprache SmartPart-Script programmiert werden.
 
