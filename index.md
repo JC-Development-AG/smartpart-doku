@@ -41,4 +41,10 @@ Diese Dokumentation wurde ursprünglich von Manfred Moitzi, selbstständiger Kon
       </a>
     {% endif %}
   {% endfor %}
+  <a class="apps__app" href="https://www.jcd.swiss" data-aos="fade-up">
+    <div class="apps__app__inner">
+      <img src="/assets/img/JCD.jpg" class="apps__app__img">
+    </div>
+    <div class="apps__app__label">JCD</div>
+  </a>
 </div>

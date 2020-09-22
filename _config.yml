@@ -24,12 +24,72 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 sass:
     sass_dir: assets/css/
 
+beispiele:
+  - title: CAVIC2
+    file: CAVIC2.smt
+  - title: CircularRebars
+    file: CircularRebars.smt
+  - title: CoordArrows
+    file: CoordArrows.smt
+  - title: Curved3DText
+    file: Curved3DText.smt
+  - title: CurvedText
+    file: CurvedText.smt
+  - title: Curve_N2
+    file: Curve_N2.smt
+  - title: dowels
+    file: dowels.smt
+  - title: dowels2
+    file: dowels2.smt
+  - title: Fertigteilabdeckung
+    file: Fertigteilabdeckung.smt
+  - title: HE-A
+    file: HE-A.smt
+  - title: HE-B
+    file: HE-B.smt
+  - title: HE-M
+    file: HE-M.smt
+  - title: I-Reihe
+    file: I-Reihe.smt
+  - title: I
+    file: I.smt
+  - title: IPE
+    file: IPE.smt
+  - title: Klothoide
+    file: Klothoide.smt
+  - title: Köcherfundament
+    file: Köcherfundament.smt
+  - title: ÖBB Geländer 1
+    file: oebb-railing-1.smt
+  - title: ÖBB Geländer 2
+    file: oebb-railing-2.smt
+  - title: ÖBB Geländer 3
+    file: oebb-railing-3.smt
+  - title: ÖBB Geländer 4
+    file: oebb-railing-4.smt
+  - title: PlayGround
+    file: PlayGround.smt
+  - title: PlayGround2D
+    file: PlayGround2D.smt
+  - title: RangingRebars
+    file: RangingRebars.smt
+  - title: Spline2
+    file: Spline2.smt
+  - title: SplineRebars
+    file: SplineRebars.smt
+  - title: Waterstop Corner
+    file: waterstop-corner.smt
+  - title: Waterstop Parallel Shift
+    file: waterstop-parallel-shift.smt
+  - title: Waterstop Straight
+    file: waterstop-straight.smt
+
 nav:
   - title: Willkommen
     url: /
   - title: BASIC Referenz
     url: /basic-referenz.html
-    app: /assets/img/test.jpg
+    app: /assets/img/basic.jpg
     subnav:
     - title: Funktionen
       url: /basic-referenz/funktionen.html
@@ -49,7 +109,7 @@ nav:
       url: /basic-referenz/verzweigungen.html
   - title: 2D Scripting
     url: /2d-scripting.html
-    app: /assets/img/test.jpg
+    app: /assets/img/2D Script.jpg
     subnav:
     - title: Grundformen
       url: "/2d-scripting/grundformen.html"
@@ -61,7 +121,7 @@ nav:
       url: "/2d-scripting/poly2.html"
   - title: 3D Scripting
     url: "/3d-scripting.html"
-    app: /assets/img/test.jpg
+    app: /assets/img/3D Script.jpg
     subnav:
     - title: Einfache Volumenkörper
       url: "/3d-scripting/einfache-volumenkoerper.html"
@@ -77,6 +137,7 @@ nav:
       url: "/3d-scripting/prismen.html"
   - title: Bewehrung
     url: "/bewehrung.html"
+    app: /assets/img/Bewehrung.jpg
     subnav:
     - title: Biegeform
       url: "/bewehrung/biegeform.html"
@@ -84,12 +145,16 @@ nav:
       url: "/bewehrung/verlegung.html"
   - title: Transformationen
     url: "/transformationen.html"
+    app: /assets/img/Transformationen.jpg
   - title: Parameter
     url: "/parameter.html"
+    app: /assets/img/Parameter.jpg
   - title: Handles
     url: "/handles.html"
+    app: /assets/img/Handles.jpg
   - title: Definitionen
     url: "/definitionen.html"
+    app: /assets/img/Definitionen.jpg
     subnav:
     - title: BITMAP - Pixelfläche
       url: "/definitionen/bitmap.html"
@@ -113,12 +178,20 @@ nav:
       url: "/definitionen/texture.html"
   - title: Objekteigenschaften
     url: "/objekteigenschaften.html"
+    app: /assets/img/Objekteigenschaften.jpg
   - title: Statuscodes
     url: "/statuscodes.html"
+    app: /assets/img/Statuscodes.jpg
   - title: Eingabepalette
     url: "/palette.html"
+    app: /assets/img/Eingabepalette.jpg
   - title: Ressourcen
     url: "/ressourcen.html"
+    app: /assets/img/Ressourcen.jpg
   - title: Dateibefehle
     url: "/dateibefehle.html"
+    app: /assets/img/Dateibefehle.jpg
+  - title: Beispiele
+    url: "/beispiele/index.html"
+    app: /assets/img/Dateibefehle.jpg
 
