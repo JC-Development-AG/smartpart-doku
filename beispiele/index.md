@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Beispiele
 ---
 
 # Beispiele
@@ -7,8 +8,10 @@ layout: default
 Hier bieten wir Beispiel-Smartparts zum Download an, die den Einstieg in die
 Smartpart-Programmierung erleichtern:
 
+<div class="samples">
 {% for item in site.beispiele %}
-  <p>
+  <div>
     <a href="{{ item.file }}">{{ item.title }}</a>
-  </p>
+  </div>
 {% endfor %}
+</div>
