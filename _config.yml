@@ -29,47 +29,50 @@ nav:
     url: /
   - title: BASIC Referenz
     url: /basic-referenz.html
+    app: /assets/img/test.jpg
     subnav:
-    - title: Variablen
-      url: /basic-referenz/variablen.html
-    - title: Parameter-Buffer
-      url: /basic-referenz/parameter-stack.html
-    - title: Vergleichsoperatoren
-      url: /basic-referenz/vergleichsoperatoren.html
-    - title: Schleifen
-      url: /basic-referenz/Schleifen.html
-    - title: Verzweigungen
-      url: /basic-referenz/verzweigungen.html
-    - title: Sonstige Kontrollbefehle
-      url: /basic-referenz/sonstige-kontrollbefehle.html
     - title: Funktionen
       url: /basic-referenz/funktionen.html
     - title: Globale Variablen
       url: /basic-referenz/globale-variablen.html
+    - title: Parameter-Buffer
+      url: /basic-referenz/parameter-stack.html
+    - title: Schleifen
+      url: /basic-referenz/Schleifen.html
+    - title: Sonstige Kontrollbefehle
+      url: /basic-referenz/sonstige-kontrollbefehle.html
+    - title: Variablen
+      url: /basic-referenz/variablen.html
+    - title: Vergleichsoperatoren
+      url: /basic-referenz/vergleichsoperatoren.html
+    - title: Verzweigungen
+      url: /basic-referenz/verzweigungen.html
   - title: 2D Scripting
     url: /2d-scripting.html
+    app: /assets/img/test.jpg
     subnav:
-    - title: Polygone
-      url: "/2d-scripting/poly2.html"
-    - title: Pixelbilder
-      url: "/2d-scripting/rect_pict2.html"
     - title: Grundformen
       url: "/2d-scripting/grundformen.html"
     - title: Kurven
       url: "/2d-scripting/curves.html"
+    - title: Pixelbilder
+      url: "/2d-scripting/rect_pict2.html"
+    - title: Polygone
+      url: "/2d-scripting/poly2.html"
   - title: 3D Scripting
     url: "/3d-scripting.html"
+    app: /assets/img/test.jpg
     subnav:
+    - title: Einfache Volumenkörper
+      url: "/3d-scripting/einfache-volumenkoerper.html"
+    - title: Flächen und Linien
+      url: "/3d-scripting/flaechen-und-linien.html"
     - title: Gruppen
       url: "/3d-scripting/gruppen.html"
     - title: Schnittoperationen
       url: "/3d-scripting/Schnittoperationen.html"
     - title: Oberflächen und Körper aus Polygonen
       url: "/3d-scripting/oberflaechen-aus-polygonen.html"
-    - title: Flächen und Linien
-      url: "/3d-scripting/flaechen-und-linien.html"
-    - title: Einfache Volumenkörper
-      url: "/3d-scripting/einfache-volumenkoerper.html"
     - title: Prismen
       url: "/3d-scripting/prismen.html"
   - title: Bewehrung
@@ -88,26 +91,26 @@ nav:
   - title: Definitionen
     url: "/definitionen.html"
     subnav:
-    - title: PATTER_LINE - Musterlinien
-      url: "/definitionen/patter_line.html"
-    - title: HATCHING - Schraffuren
-      url: "/definitionen/hatching.html"
-    - title: FILL - Füllfarbe
-      url: "/definitionen/fill.html"
-    - title: TEXTURE
-      url: "/definitionen/texture.html"
-    - title: FOIL - Folien
-      url: "/definitionen/foil.html"
-    - title: MATERIAL
-      url: "/definitionen/material.html"
-    - title: PATTERN - Musterflächen
-      url: "/definitionen/pattern.html"
-    - title: FACE_STYLE
-      url: "/definitionen/face_style.html"
-    - title: STYLE - Textstil
-      url: "/definitionen/style.html"
     - title: BITMAP - Pixelfläche
       url: "/definitionen/bitmap.html"
+    - title: FACE_STYLE
+      url: "/definitionen/face_style.html"
+    - title: FILL - Füllfarbe
+      url: "/definitionen/fill.html"
+    - title: FOIL - Folien
+      url: "/definitionen/foil.html"
+    - title: HATCHING - Schraffuren
+      url: "/definitionen/hatching.html"
+    - title: MATERIAL
+      url: "/definitionen/material.html"
+    - title: PATTER_LINE - Musterlinien
+      url: "/definitionen/patter_line.html"
+    - title: PATTERN - Musterflächen
+      url: "/definitionen/pattern.html"
+    - title: STYLE - Textstil
+      url: "/definitionen/style.html"
+    - title: TEXTURE
+      url: "/definitionen/texture.html"
   - title: Objekteigenschaften
     url: "/objekteigenschaften.html"
   - title: Statuscodes
