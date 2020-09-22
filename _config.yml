@@ -25,64 +25,81 @@ sass:
     sass_dir: assets/css/
 
 beispiele:
-  - title: CAVIC2
-    file: CAVIC2.smt
-  - title: CircularRebars
-    file: CircularRebars.smt
-  - title: CoordArrows
-    file: CoordArrows.smt
-  - title: Curved3DText
-    file: Curved3DText.smt
-  - title: CurvedText
-    file: CurvedText.smt
-  - title: Curve_N2
-    file: Curve_N2.smt
-  - title: dowels
-    file: dowels.smt
-  - title: dowels2
-    file: dowels2.smt
-  - title: Fertigteilabdeckung
-    file: Fertigteilabdeckung.smt
-  - title: HE-A
-    file: HE-A.smt
-  - title: HE-B
-    file: HE-B.smt
-  - title: HE-M
-    file: HE-M.smt
-  - title: I-Reihe
-    file: I-Reihe.smt
-  - title: I
-    file: I.smt
-  - title: IPE
-    file: IPE.smt
-  - title: Klothoide
-    file: Klothoide.smt
-  - title: Köcherfundament
-    file: Köcherfundament.smt
-  - title: ÖBB Geländer 1
-    file: oebb-railing-1.smt
-  - title: ÖBB Geländer 2
-    file: oebb-railing-2.smt
-  - title: ÖBB Geländer 3
-    file: oebb-railing-3.smt
-  - title: ÖBB Geländer 4
-    file: oebb-railing-4.smt
-  - title: PlayGround
-    file: PlayGround.smt
-  - title: PlayGround2D
-    file: PlayGround2D.smt
-  - title: RangingRebars
-    file: RangingRebars.smt
-  - title: Spline2
-    file: Spline2.smt
-  - title: SplineRebars
-    file: SplineRebars.smt
-  - title: Waterstop Corner
-    file: waterstop-corner.smt
-  - title: Waterstop Parallel Shift
-    file: waterstop-parallel-shift.smt
-  - title: Waterstop Straight
-    file: waterstop-straight.smt
+  - category: Stahlbau
+    items:
+    - title: HE-A
+      file: HE-A.smt
+    - title: HE-B
+      file: HE-B.smt
+    - title: HE-M
+      file: HE-M.smt
+    - title: I-Reihe
+      file: I-Reihe.smt
+    - title: I
+      file: I.smt
+    - title: IPE
+      file: IPE.smt
+    - title: Klothoide
+      file: Klothoide.smt
+
+  - category: Bauteil
+    items:
+    - title: dowels
+      file: dowels.smt
+    - title: dowels2
+      file: dowels2.smt
+    - title: Fertigteilabdeckung
+      file: Fertigteilabdeckung.smt
+    - title: Köcherfundament
+      file: Köcherfundament.smt
+    - title: ÖBB Geländer 1
+      file: oebb-railing-1.smt
+    - title: ÖBB Geländer 2
+      file: oebb-railing-2.smt
+    - title: ÖBB Geländer 3
+      file: oebb-railing-3.smt
+    - title: ÖBB Geländer 4
+      file: oebb-railing-4.smt
+    - title: Waterstop Corner
+      file: waterstop-corner.smt
+    - title: Waterstop Parallel Shift
+      file: waterstop-parallel-shift.smt
+    - title: Waterstop Straight
+      file: waterstop-straight.smt
+
+  - category: Linien
+    items:
+    - title: Spline2
+      file: Spline2.smt
+    - title: Curve_N2
+      file: Curve_N2.smt
+
+  - category: Bewehrung
+    items:
+    - title: CircularRebars
+      file: CircularRebars.smt
+    - title: RangingRebars
+      file: RangingRebars.smt
+    - title: SplineRebars
+      file: SplineRebars.smt
+
+  - category: Text
+    items:
+    - title: Curved3DText
+      file: Curved3DText.smt
+    - title: CurvedText
+      file: CurvedText.smt
+    
+  - category: Weitere Beispiele
+    items:
+    - title: CAVIC2
+      file: CAVIC2.smt
+    - title: CoordArrows
+      file: CoordArrows.smt
+    - title: PlayGround
+      file: PlayGround.smt
+    - title: PlayGround2D
+      file: PlayGround2D.smt
 
 nav:
   - title: Willkommen
